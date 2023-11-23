@@ -145,7 +145,7 @@ class MainUrl {
 
     public function __construct() {
         // $this->url = "http://localhost/MAGRENT"; // localhost
-        $this->url = "https://mikit.online"; // webhost
+        $this->url = "https://trackeme.website"; // webhost
     }
 
     public function getUrl() {
