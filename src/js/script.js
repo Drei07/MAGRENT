@@ -672,6 +672,26 @@
 		enableMasonry();
 	});
 
+	// Signout
+	$('.btn-signout').on('click', function (e) {
+	e.preventDefault();
+	const href = $(this).attr('href')
+
+	swal({
+		title: "Signout?",
+		text: "Are you sure do you want to signout?",
+		icon: "warning",
+		buttons: true,
+		dangerMode: true,
+	})
+		.then((willSignout) => {
+			if (willSignout) {
+				document.location.href = href;
+			}
+		});
+	})
+
+
 	
 
 })(window.jQuery);

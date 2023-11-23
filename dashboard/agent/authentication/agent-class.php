@@ -8,7 +8,7 @@ include_once __DIR__.'/../../../configuration/settings-configuration.php';
 require_once __DIR__. '/../../vendor/autoload.php';
 
 
-class USER
+class AGENT
 {
 
  private $conn;
@@ -74,23 +74,22 @@ public function systemLogo(){
   return $stmt;
  }
  
- public function register($first_name, $middle_name, $last_name, $email, $hash_password, $tokencode, $user_type, $user_status,)
+ public function register($first_name, $middle_name, $last_name, $email, $valid_id, $hash_password, $tokencode, $user_type)
  {
   try
   {       
    $password = md5($hash_password);
-   $stmt = $this->conn->prepare("INSERT INTO users(first_name, middle_name, last_name, email, password, tokencode, user_type, status) 
-                                        VALUES(:first_name, :middle_name, :last_name, :email, :password, :tokencode, :user_type, :status)");
+   $stmt = $this->conn->prepare("INSERT INTO users(first_name, middle_name, last_name, email, password, valid_id, tokencode, user_type) 
+                                        VALUES(:first_name, :middle_name, :last_name, :email, :password, :valid_id, :tokencode, :user_type)");
    
    $stmt->bindparam(":first_name",$first_name);
    $stmt->bindparam(":middle_name",$middle_name);
    $stmt->bindparam(":last_name",$last_name);
    $stmt->bindparam(":email",$email);
    $stmt->bindparam(":password",$password);
+   $stmt->bindparam(":valid_id",$valid_id);
    $stmt->bindparam(":tokencode",$tokencode);
    $stmt->bindparam(":user_type",$user_type);
-   $stmt->bindparam(":status",$user_status);
-
    $stmt->execute(); 
    return $stmt;
   }
@@ -105,7 +104,7 @@ public function systemLogo(){
   try
   {
    $stmt = $this->conn->prepare("SELECT * FROM users WHERE email=:email_id AND account_status = :account_status AND user_type = :user_type");
-   $stmt->execute(array(":email_id"=>$email , ":account_status" => "active", "user_type" => 3));
+   $stmt->execute(array(":email_id"=>$email , ":account_status" => "active", "user_type" => 2));
    $userRow=$stmt->fetch(PDO::FETCH_ASSOC);
    
 
@@ -122,7 +121,7 @@ public function systemLogo(){
   
       $stmt = $this->conn->prepare("INSERT INTO logs (user_id, activity) VALUES (:user_id, :activity)");
       $stmt->execute(array(":user_id"=>$user_id,":activity"=>$activity));
-      $_SESSION['user_session'] = $userRow['id'];
+      $_SESSION['agent_session'] = $userRow['id'];
       return true;
      }
      else
@@ -139,7 +138,7 @@ public function systemLogo(){
     else
     {
       $_SESSION['status_title'] = "Sorry !";
-      $_SESSION['status'] = "Entered email is not verify, please go to your email and verify it. Thank you !";
+      $_SESSION['status'] = "Your account is still pending verification. Please be patient as our admin reviews your account.";
       $_SESSION['status_code'] = "error";
       $_SESSION['status_timer'] = 10000000;
      header("Location: ../../../signin");
@@ -165,7 +164,7 @@ public function systemLogo(){
  
  public function isUserLoggedIn()
  {
-  if(isset($_SESSION['user_session']))
+  if(isset($_SESSION['agent_session']))
   {
    return true;
   }
@@ -178,7 +177,7 @@ public function systemLogo(){
  
  public function logout()
  {
-  unset($_SESSION['user_session']);
+  unset($_SESSION['agent_session']);
 
   $_SESSION['status_title'] = 'Logout!';
   $_SESSION['status'] = 'Thank you for using MAGRENT';

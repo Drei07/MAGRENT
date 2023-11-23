@@ -13,13 +13,14 @@ if(isset($_POST['btn-forgot-password']))
 {
  $email = $_POST['email'];
  
- $stmt = $user->runQuery("SELECT id, tokencode FROM users WHERE email=:email AND user_type = :user_type");
- $stmt->execute(array(":email"=>$email, ":user_type" => 3));
+ $stmt = $user->runQuery("SELECT id, tokencode FROM users WHERE email=:email");
+ $stmt->execute(array(":email"=>$email));
  $row = $stmt->fetch(PDO::FETCH_ASSOC); 
  if($stmt->rowCount() == 1)
  {
   $id = base64_encode($row['id']);
   $code = ($row['tokencode']);
+
   
   
   $message= "

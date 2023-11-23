@@ -1540,14 +1540,14 @@ div#mCSB_1_container{
   background-size: cover;
   background-repeat: no-repeat;
   background-position: bottom center;
-  padding-top: 150px;
-  padding-bottom: 60px;
+  padding-top: 200px;
+  padding-bottom: 200px;
 }
 
 .banner-section:before{
   position: absolute;
   content: '';
-  background-color: #1d2534;
+  background-color: #475d50b6;
   width: 100%;
   height: 100%;
   left: 0px;
@@ -9831,3 +9831,4 @@ div#mCSB_1_container{
 .search-field .top-search .search-btn button i{
   margin-right: 8px;
 }
+

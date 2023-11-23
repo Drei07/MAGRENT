@@ -1,17 +1,11 @@
 <?php
-include_once 'dashboard/user/authentication/user-signup.php';
-
-if ($_SESSION['OTP'] === NULL) {
-    header('Location: signin');
-    exit;
-}
-
+include_once 'header.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <?php include_once 'configuration/header.php'; ?>
-    <title>MAGRENT | Verify OTP</title>
+    <?php include_once '../../configuration/header2.php'; ?>
+    <title>MAGRENT | About Us</title>
 </head>
 <!-- page wrapper -->
 <body>
@@ -63,11 +57,10 @@ if ($_SESSION['OTP'] === NULL) {
                     </div>
                     <div class="right-column pull-right">
                         <ul class="social-links clearfix">
-                            <li><a href="<?php echo $config->getSystemFacebook() ?>"><i class="fab fa-facebook-f"></i></a></li>
-                            <li><a href="<?php echo $config->getSystemInstagram() ?>"><i class="fab fa-instagram"></i></a></li>
+                            <li><a href="profile"><i class="fas fa-user"></i>&nbsp;&nbsp;<?php echo $user_email ?></a></li>
                         </ul>
                         <div class="sign-box">
-                            <a href="signin"><i class="fas fa-user"></i>Sign In</a>
+                        <a href="authentication/user-signout" class="btn-signout"><i class="fa fa-sign-out"></i>Sign out</a>
                         </div>
                     </div>
                 </div>
@@ -77,7 +70,7 @@ if ($_SESSION['OTP'] === NULL) {
                 <div class="outer-box">
                     <div class="main-box">
                         <div class="logo-box">
-                            <figure class="logo"><a href="./"><img src="src/images/main_logo/<?php echo $config->getSystemLogo() ?>" alt=""></a></figure>
+                            <figure class="logo"><a href="./"><img src="../../src/images/main_logo/<?php echo $config->getSystemLogo() ?>" alt=""></a></figure>
                         </div>
                         <div class="menu-area clearfix">
                             <!--Mobile Navigation Toggler-->
@@ -91,8 +84,9 @@ if ($_SESSION['OTP'] === NULL) {
                                     <ul class="navigation clearfix">
                                         <li class=""><a href="./"><span>Home</span></a></li>
                                         <li class=""><a href="find-home"><span>Find A Home</span></a></li>
-                                        <li class=""><a href="about-us"><span>About Us</span></a></li>
-                                        <li><a href="contact-us"><span>Contact Us</span></a></li>
+                                        <li class="current"><a href="about-us"><span>About Us</span></a></li>
+                                        <li class=""><a href="contact-us"><span>Contact Us</span></a></li>
+                                        <li class=""><a href="settings"><span>Settings</span></a></li>
                                     </ul>
                                 </div>
                             </nav>
@@ -106,7 +100,7 @@ if ($_SESSION['OTP'] === NULL) {
                 <div class="outer-box">
                     <div class="main-box">
                         <div class="logo-box">
-                            <figure class="logo"><a href="./"><img src="src/images/main_logo/<?php echo $config->getSystemLogo() ?>" alt=""></a></figure>
+                            <figure class="logo"><a href="./"><img src="../../src/images/main_logo/<?php echo $config->getSystemLogo() ?>" alt=""></a></figure>
                         </div>
                         <div class="menu-area clearfix">
                             <nav class="main-menu clearfix">
@@ -125,7 +119,7 @@ if ($_SESSION['OTP'] === NULL) {
             <div class="close-btn"><i class="fas fa-times"></i></div>
 
             <nav class="menu-box">
-                <div class="nav-logo"><a href=""><img src="src/images/main_logo/<?php echo $config->getSystemLogo() ?>" alt="" title=""></a></div>
+                <div class="nav-logo"><a href=""><img src="../../src/images/main_logo/<?php echo $config->getSystemLogo() ?>" alt="" title=""></a></div>
                 <div class="menu-outer"><!--Here Menu Will Come Automatically Via Javascript / Same Menu as in Header--></div>
                 <div class="contact-info">
                     <h4>Contact Info</h4>
@@ -149,54 +143,21 @@ if ($_SESSION['OTP'] === NULL) {
         <!--Page Title-->
         <section class="page-title-two bg-color-1 centred">
             <div class="pattern-layer">
-                <div class="pattern-1" style="background-image: url(src/images/shape/shape-9.png);"></div>
-                <div class="pattern-2" style="background-image: url(src/images/shape/shape-10.png);"></div>
+                <div class="pattern-1" style="background-image: url(../../src/images/shape/shape-9.png);"></div>
+                <div class="pattern-2" style="background-image: url(../../src/images/shape/shape-10.png);"></div>
             </div>
             <div class="auto-container">
                 <div class="content-box clearfix">
-                    <h1>Verify OTP</h1>
+                    <h1>About Us</h1>
                     <ul class="bread-crumb clearfix">
                         <li><a href="./">Home</a></li>
-                        <li>Verify OTP</li>
+                        <li>About Us</li>
                     </ul>
                 </div>
             </div>
         </section>
         <!--End Page Title-->
 
-        <!-- ragister-section -->
-        <section class="ragister-section centred sec-pad">
-            <div class="auto-container">
-                <div class="row clearfix">
-                    <div class="col-xl-8 col-lg-12 col-md-12 offset-xl-2 big-column">
-                        <div class="sec-title">
-                        </div>
-                        <div class="tabs-box">
-                            <div class="tabs-content">
-                                <div class="tab active-tab" id="tab-1">
-                                    <div class="inner-box">
-                                        <h4>Verify OTP</h4>
-                                        <p>Please enter the 6 digit One-Time Password (OTP) that has been sent to <?php echo $_SESSION['not_verify_email'] ?> in order to complete the registration process. To resend please wait for ( <span id="timer" style="font-weight: bold;"> </span>) <a href="dashboard/user/authentication/user-signup.php?btn-resend-otp=1" id="resent" style="text-decoration: none; color:#2dbe6c;"></a></p>
-                                        <form action="dashboard/user/authentication/user-signup.php" method="post" class="default-form">
-                                            <div class="form-group">
-                                                <input type="text" class="numbers" inputmode="numeric" name="verify_otp" minlength="6" maxlength="6" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" required placeholder="ex. 088123">
-                                            </div>
-                                            <div class="form-group message-btn">
-                                                <button type="submit" class="theme-btn btn-one" name="btn-verify-otp">Submit</button>
-                                            </div>
-                                        </form>
-                                        <div class="othre-text">
-                                            <p>Back to <a href="signin">Sign In</a></p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- ragister-section end -->
 
         <!-- main-footer -->
         <footer class="main-footer">
@@ -223,7 +184,7 @@ if ($_SESSION['OTP'] === NULL) {
                                     <ul class="links-list class">
                                         <li><a href="about-us">About Us</a></li>
                                         <li><a href="find-home">Find Home</a></li>
-                                        <li><a href="contact-us">Contact Us</a></li>ef="">Contact Us</a></li>
+                                        <li><a href="contact-us">Contact Us</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -268,31 +229,8 @@ if ($_SESSION['OTP'] === NULL) {
     </div>
 
     <!-- script -->
-    <?php include_once 'configuration/footer.php'; ?>
-    <script>
-        //30 seconds timer----------------------------------------------------------------------------------------------------->
-        var timeLeft = 20;
-        var elem = document.getElementById('timer');
-
-        var timerId = setInterval(countdown, 1000);
-
-        function countdown() {
-            if (timeLeft == -1) {
-                clearTimeout(timerId);
-                doSomething();
-            } else {
-                elem.innerHTML = timeLeft + ' seconds. ';
-                timeLeft--;
-            }
-        }
-        //resent OTP----------------------------------------------------------------------------------------------------->
-        const myTimeout = setTimeout(myGreeting, 20800);
-
-        function myGreeting() {
-            document.getElementById("resent").innerHTML = "Resend"
-        }
-    </script>
-    <?php include_once 'configuration/sweetalert.php'; ?>
+    <?php include_once '../../configuration/footer2.php'; ?>
+    <?php include_once '../../configuration/sweetalert.php'; ?>
 
 </body><!-- End of .page_wrapper -->
 

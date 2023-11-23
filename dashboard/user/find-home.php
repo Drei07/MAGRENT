@@ -1,12 +1,10 @@
 <?php
-include_once 'dashboard/user/authentication/user-forgot-password.php';
-
+include_once 'header.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <?php include_once 'configuration/header.php'; ?>
+    <?php include_once '../../configuration/header2.php'; ?>
     <title>MAGRENT | Find Home</title>
 </head>
 <!-- page wrapper -->
@@ -60,11 +58,10 @@ include_once 'dashboard/user/authentication/user-forgot-password.php';
                     </div>
                     <div class="right-column pull-right">
                         <ul class="social-links clearfix">
-                            <li><a href="<?php echo $config->getSystemFacebook() ?>"><i class="fab fa-facebook-f"></i></a></li>
-                            <li><a href="<?php echo $config->getSystemInstagram() ?>"><i class="fab fa-instagram"></i></a></li>
+                            <li><a href="profile"><i class="fas fa-user"></i>&nbsp;&nbsp;<?php echo $user_email ?></a></li>
                         </ul>
                         <div class="sign-box">
-                            <a href="signin"><i class="fas fa-user"></i>Sign In</a>
+                        <a href="authentication/user-signout" class="btn-signout"><i class="fa fa-sign-out"></i>Sign out</a>
                         </div>
                     </div>
                 </div>
@@ -74,7 +71,7 @@ include_once 'dashboard/user/authentication/user-forgot-password.php';
                 <div class="outer-box">
                     <div class="main-box">
                         <div class="logo-box">
-                            <figure class="logo"><a href="./"><img src="src/images/main_logo/<?php echo $config->getSystemLogo() ?>" alt=""></a></figure>
+                            <figure class="logo"><a href="./"><img src="../../src/images/main_logo/<?php echo $config->getSystemLogo() ?>" alt=""></a></figure>
                         </div>
                         <div class="menu-area clearfix">
                             <!--Mobile Navigation Toggler-->
@@ -87,10 +84,9 @@ include_once 'dashboard/user/authentication/user-forgot-password.php';
                                 <div class="collapse navbar-collapse show clearfix" id="navbarSupportedContent">
                                     <ul class="navigation clearfix">
                                         <li class=""><a href="./"><span>Home</span></a></li>
-                                        <li class=""><a href="partners"><span>Became A Partner</span></a></li>
-                                        <li class=""><a href="find-home"><span>Find A Home</span></a></li>
+                                        <li class="current"><a href="find-home"><span>Find A Home</span></a></li>
                                         <li class=""><a href="about-us"><span>About Us</span></a></li>
-                                        <li><a href="contact-us"><span>Contact Us</span></a></li>
+                                        <li class=""><a href="settings"><span>Settings</span></a></li>
                                     </ul>
                                 </div>
                             </nav>
@@ -104,7 +100,7 @@ include_once 'dashboard/user/authentication/user-forgot-password.php';
                 <div class="outer-box">
                     <div class="main-box">
                         <div class="logo-box">
-                            <figure class="logo"><a href="./"><img src="src/images/main_logo/<?php echo $config->getSystemLogo() ?>" alt=""></a></figure>
+                            <figure class="logo"><a href="./"><img src="../../src/images/main_logo/<?php echo $config->getSystemLogo() ?>" alt=""></a></figure>
                         </div>
                         <div class="menu-area clearfix">
                             <nav class="main-menu clearfix">
@@ -123,7 +119,7 @@ include_once 'dashboard/user/authentication/user-forgot-password.php';
             <div class="close-btn"><i class="fas fa-times"></i></div>
 
             <nav class="menu-box">
-                <div class="nav-logo"><a href=""><img src="src/images/main_logo/<?php echo $config->getSystemLogo() ?>" alt="" title=""></a></div>
+                <div class="nav-logo"><a href=""><img src="../../src/images/main_logo/<?php echo $config->getSystemLogo() ?>" alt="" title=""></a></div>
                 <div class="menu-outer"><!--Here Menu Will Come Automatically Via Javascript / Same Menu as in Header--></div>
                 <div class="contact-info">
                     <h4>Contact Info</h4>
@@ -147,8 +143,8 @@ include_once 'dashboard/user/authentication/user-forgot-password.php';
         <!--Page Title-->
         <section class="page-title-two bg-color-1 centred">
             <div class="pattern-layer">
-                <div class="pattern-1" style="background-image: url(src/images/shape/shape-9.png);"></div>
-                <div class="pattern-2" style="background-image: url(src/images/shape/shape-10.png);"></div>
+                <div class="pattern-1" style="background-image: url(../../src/images/shape/shape-9.png);"></div>
+                <div class="pattern-2" style="background-image: url(../../src/images/shape/shape-10.png);"></div>
             </div>
             <div class="auto-container">
                 <div class="content-box clearfix">
@@ -543,7 +539,7 @@ include_once 'dashboard/user/authentication/user-forgot-password.php';
                                 <div class="deals-block-one">
                                     <div class="inner-box">
                                         <div class="image-box">
-                                            <figure class="image"><img src="src/images/resource/deals-3.jpg" alt=""></figure>
+                                            <figure class="image"><img src="../../src/images/resource/deals-3.jpg" alt=""></figure>
                                             <div class="batch"><i class="icon-11"></i></div>
                                             <span class="category">Featured</span>
                                             <div class="buy-btn"><a href="property-details.html">For Buy</a></div>
@@ -559,7 +555,7 @@ include_once 'dashboard/user/authentication/user-forgot-password.php';
                                                 </div>
                                                 <div class="author-box pull-right">
                                                     <figure class="author-thumb">
-                                                        <img src="src/images/feature/author-1.jpg" alt="">
+                                                        <img src="../../src/images/feature/author-1.jpg" alt="">
                                                         <span>Michael Bean</span>
                                                     </figure>
                                                 </div>
@@ -583,7 +579,7 @@ include_once 'dashboard/user/authentication/user-forgot-password.php';
                                 <div class="deals-block-one">
                                     <div class="inner-box">
                                         <div class="image-box">
-                                            <figure class="image"><img src="src/images/resource/deals-4.jpg" alt=""></figure>
+                                            <figure class="image"><img src="../../src/images/resource/deals-4.jpg" alt=""></figure>
                                             <div class="batch"><i class="icon-11"></i></div>
                                             <span class="category">Featured</span>
                                             <div class="buy-btn"><a href="property-details.html">For Buy</a></div>
@@ -599,7 +595,7 @@ include_once 'dashboard/user/authentication/user-forgot-password.php';
                                                 </div>
                                                 <div class="author-box pull-right">
                                                     <figure class="author-thumb">
-                                                        <img src="src/images/feature/author-1.jpg" alt="">
+                                                        <img src="../../src/images/feature/author-1.jpg" alt="">
                                                         <span>Michael Bean</span>
                                                     </figure>
                                                 </div>
@@ -623,7 +619,7 @@ include_once 'dashboard/user/authentication/user-forgot-password.php';
                                 <div class="deals-block-one">
                                     <div class="inner-box">
                                         <div class="image-box">
-                                            <figure class="image"><img src="src/images/resource/deals-5.jpg" alt=""></figure>
+                                            <figure class="image"><img src="../../src/images/resource/deals-5.jpg" alt=""></figure>
                                             <div class="batch"><i class="icon-11"></i></div>
                                             <span class="category">Featured</span>
                                             <div class="buy-btn"><a href="property-details.html">For Buy</a></div>
@@ -639,7 +635,7 @@ include_once 'dashboard/user/authentication/user-forgot-password.php';
                                                 </div>
                                                 <div class="author-box pull-right">
                                                     <figure class="author-thumb">
-                                                        <img src="src/images/feature/author-1.jpg" alt="">
+                                                        <img src="../../src/images/feature/author-1.jpg" alt="">
                                                         <span>Michael Bean</span>
                                                     </figure>
                                                 </div>
@@ -663,7 +659,7 @@ include_once 'dashboard/user/authentication/user-forgot-password.php';
                                 <div class="deals-block-one">
                                     <div class="inner-box">
                                         <div class="image-box">
-                                            <figure class="image"><img src="src/images/resource/deals-6.jpg" alt=""></figure>
+                                            <figure class="image"><img src="../../src/images/resource/deals-6.jpg" alt=""></figure>
                                             <div class="batch"><i class="icon-11"></i></div>
                                             <span class="category">Featured</span>
                                             <div class="buy-btn"><a href="property-details.html">For Buy</a></div>
@@ -679,7 +675,7 @@ include_once 'dashboard/user/authentication/user-forgot-password.php';
                                                 </div>
                                                 <div class="author-box pull-right">
                                                     <figure class="author-thumb">
-                                                        <img src="src/images/feature/author-1.jpg" alt="">
+                                                        <img src="../../src/images/feature/author-1.jpg" alt="">
                                                         <span>Michael Bean</span>
                                                     </figure>
                                                 </div>
@@ -703,7 +699,7 @@ include_once 'dashboard/user/authentication/user-forgot-password.php';
                                 <div class="deals-block-one">
                                     <div class="inner-box">
                                         <div class="image-box">
-                                            <figure class="image"><img src="src/images/resource/deals-7.jpg" alt=""></figure>
+                                            <figure class="image"><img src="../../src/images/resource/deals-7.jpg" alt=""></figure>
                                             <div class="batch"><i class="icon-11"></i></div>
                                             <span class="category">Featured</span>
                                             <div class="buy-btn"><a href="property-details.html">For Buy</a></div>
@@ -719,7 +715,7 @@ include_once 'dashboard/user/authentication/user-forgot-password.php';
                                                 </div>
                                                 <div class="author-box pull-right">
                                                     <figure class="author-thumb">
-                                                        <img src="src/images/feature/author-1.jpg" alt="">
+                                                        <img src="../../src/images/feature/author-1.jpg" alt="">
                                                         <span>Michael Bean</span>
                                                     </figure>
                                                 </div>
@@ -747,14 +743,14 @@ include_once 'dashboard/user/authentication/user-forgot-password.php';
                                         <div class="feature-block-one">
                                             <div class="inner-box">
                                                 <div class="image-box">
-                                                    <figure class="image"><img src="src/images/feature/feature-1.jpg" alt=""></figure>
+                                                    <figure class="image"><img src="../../src/images/feature/feature-1.jpg" alt=""></figure>
                                                     <div class="batch"><i class="icon-11"></i></div>
                                                     <span class="category">Featured</span>
                                                 </div>
                                                 <div class="lower-content">
                                                     <div class="author-info clearfix">
                                                         <div class="author pull-left">
-                                                            <figure class="author-thumb"><img src="src/images/feature/author-1.jpg" alt=""></figure>
+                                                            <figure class="author-thumb"><img src="../../src/images/feature/author-1.jpg" alt=""></figure>
                                                             <h6>Michael Bean</h6>
                                                         </div>
                                                         <div class="buy-btn pull-right"><a href="property-details.html">For Buy</a></div>
@@ -787,14 +783,14 @@ include_once 'dashboard/user/authentication/user-forgot-password.php';
                                         <div class="feature-block-one">
                                             <div class="inner-box">
                                                 <div class="image-box">
-                                                    <figure class="image"><img src="src/images/feature/feature-2.jpg" alt=""></figure>
+                                                    <figure class="image"><img src="../../src/images/feature/feature-2.jpg" alt=""></figure>
                                                     <div class="batch"><i class="icon-11"></i></div>
                                                     <span class="category">Featured</span>
                                                 </div>
                                                 <div class="lower-content">
                                                     <div class="author-info clearfix">
                                                         <div class="author pull-left">
-                                                            <figure class="author-thumb"><img src="src/images/feature/author-2.jpg" alt=""></figure>
+                                                            <figure class="author-thumb"><img src="../../src/images/feature/author-2.jpg" alt=""></figure>
                                                             <h6>Robert Niro</h6>
                                                         </div>
                                                         <div class="buy-btn pull-right"><a href="property-details.html">For Rent</a></div>
@@ -827,14 +823,14 @@ include_once 'dashboard/user/authentication/user-forgot-password.php';
                                         <div class="feature-block-one">
                                             <div class="inner-box">
                                                 <div class="image-box">
-                                                    <figure class="image"><img src="src/images/feature/feature-3.jpg" alt=""></figure>
+                                                    <figure class="image"><img src="../../src/images/feature/feature-3.jpg" alt=""></figure>
                                                     <div class="batch"><i class="icon-11"></i></div>
                                                     <span class="category">Featured</span>
                                                 </div>
                                                 <div class="lower-content">
                                                     <div class="author-info clearfix">
                                                         <div class="author pull-left">
-                                                            <figure class="author-thumb"><img src="src/images/feature/author-3.jpg" alt=""></figure>
+                                                            <figure class="author-thumb"><img src="../../src/images/feature/author-3.jpg" alt=""></figure>
                                                             <h6>Keira Mel</h6>
                                                         </div>
                                                         <div class="buy-btn pull-right"><a href="property-details.html">Sold Out</a></div>
@@ -867,14 +863,14 @@ include_once 'dashboard/user/authentication/user-forgot-password.php';
                                         <div class="feature-block-one">
                                             <div class="inner-box">
                                                 <div class="image-box">
-                                                    <figure class="image"><img src="src/images/feature/feature-4.jpg" alt=""></figure>
+                                                    <figure class="image"><img src="../../src/images/feature/feature-4.jpg" alt=""></figure>
                                                     <div class="batch"><i class="icon-11"></i></div>
                                                     <span class="category">Featured</span>
                                                 </div>
                                                 <div class="lower-content">
                                                     <div class="author-info clearfix">
                                                         <div class="author pull-left">
-                                                            <figure class="author-thumb"><img src="src/images/feature/author-1.jpg" alt=""></figure>
+                                                            <figure class="author-thumb"><img src="../../src/images/feature/author-1.jpg" alt=""></figure>
                                                             <h6>Michael Bean</h6>
                                                         </div>
                                                         <div class="buy-btn pull-right"><a href="property-details.html">For Buy</a></div>
@@ -907,14 +903,14 @@ include_once 'dashboard/user/authentication/user-forgot-password.php';
                                         <div class="feature-block-one">
                                             <div class="inner-box">
                                                 <div class="image-box">
-                                                    <figure class="image"><img src="src/images/feature/feature-5.jpg" alt=""></figure>
+                                                    <figure class="image"><img src="../../src/images/feature/feature-5.jpg" alt=""></figure>
                                                     <div class="batch"><i class="icon-11"></i></div>
                                                     <span class="category">Featured</span>
                                                 </div>
                                                 <div class="lower-content">
                                                     <div class="author-info clearfix">
                                                         <div class="author pull-left">
-                                                            <figure class="author-thumb"><img src="src/images/feature/author-2.jpg" alt=""></figure>
+                                                            <figure class="author-thumb"><img src="../../src/images/feature/author-2.jpg" alt=""></figure>
                                                             <h6>Robert Niro</h6>
                                                         </div>
                                                         <div class="buy-btn pull-right"><a href="property-details.html">For Rent</a></div>
@@ -947,14 +943,14 @@ include_once 'dashboard/user/authentication/user-forgot-password.php';
                                         <div class="feature-block-one">
                                             <div class="inner-box">
                                                 <div class="image-box">
-                                                    <figure class="image"><img src="src/images/feature/feature-6.jpg" alt=""></figure>
+                                                    <figure class="image"><img src="../../src/images/feature/feature-6.jpg" alt=""></figure>
                                                     <div class="batch"><i class="icon-11"></i></div>
                                                     <span class="category">Featured</span>
                                                 </div>
                                                 <div class="lower-content">
                                                     <div class="author-info clearfix">
                                                         <div class="author pull-left">
-                                                            <figure class="author-thumb"><img src="src/images/feature/author-3.jpg" alt=""></figure>
+                                                            <figure class="author-thumb"><img src="../../src/images/feature/author-3.jpg" alt=""></figure>
                                                             <h6>Keira Mel</h6>
                                                         </div>
                                                         <div class="buy-btn pull-right"><a href="property-details.html">Sold Out</a></div>
@@ -1071,8 +1067,8 @@ include_once 'dashboard/user/authentication/user-forgot-password.php';
     </div>
 
     <!-- script -->
-    <?php include_once 'configuration/footer.php'; ?>
-    <?php include_once 'configuration/sweetalert.php'; ?>
+    <?php include_once '../../configuration/footer2.php'; ?>
+    <?php include_once '../../configuration/sweetalert.php'; ?>
 
 </body><!-- End of .page_wrapper -->
 

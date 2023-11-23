@@ -82,6 +82,7 @@
                                 <div class="collapse navbar-collapse show clearfix" id="navbarSupportedContent">
                                     <ul class="navigation clearfix">
                                         <li class="current"><a href=""><span>Home</span></a></li>
+                                        <li class=""><a href="partners"><span>Became A Partner</span></a></li>
                                         <li class=""><a href="find-home"><span>Find A Home</span></a></li>
                                         <li class=""><a href="about-us"><span>About Us</span></a></li>
                                         <li><a href="contact-us"><span>Contact Us</span></a></li>
@@ -138,54 +139,12 @@
 
 
         <!-- banner-section -->
-        <section class="banner-section" style="background-image: url(src/images/banner/banner-1.jpg);">
+        <section class="banner-section" style="background-image: url(src/images/banner/banner-1.jpeg);">
             <div class="auto-container">
                 <div class="inner-container">
                     <div class="content-box centred">
                         <h2>Find Your New Home Through Magrent</h2>
                         <p>In the heart of San Francisco Agusan Del Sur</p>
-                    </div>
-                    <div class="search-field">
-                        <div class="tabs-box">
-                            <div class="tabs-content info-group">
-                                <div class="tab active-tab" id="tab-1">
-                                    <div class="inner-box">
-                                        <div class="top-search">
-                                            <form action="" method="post" class="search-form">
-                                                <div class="row clearfix">
-                                                    <div class="col-lg-6 col-md-12 col-sm-12 column">
-                                                        <div class="form-group">
-                                                            <label>Search Property</label>
-                                                            <div class="field-input">
-                                                                <i class="fas fa-search"></i>
-                                                                <input type="search" name="search-field" placeholder="Search by Property, Location or Landmark..." required="">
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-6 col-md-12 col-sm-12 column">
-                                                        <div class="form-group">
-                                                            <label>Room Type</label>
-                                                            <div class="select-box">
-                                                                <select class="wide">
-                                                                    <option data-display="All Type" value="0">All Type</option>
-                                                                    <option value="1">Apartment</option>
-                                                                    <option value="2">House</option>
-                                                                    <option value="3">Lady Bed Space</option>
-                                                                    <option value="4">Men Bed Space</option>
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="search-btn">
-                                                    <button type="submit"><i class="fas fa-search"></i>Search</button>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -194,7 +153,7 @@
 
 
         <!-- category-section -->
-        <section class="category-section centred">
+        <!-- <section class="category-section centred">
             <div class="auto-container">
                 <div class="inner-container wow slideInLeft animated" data-wow-delay="00ms" data-wow-duration="1500ms">
                     <ul class="category-list clearfix">
@@ -237,7 +196,7 @@
                     </ul>
                 </div>
             </div>
-        </section>
+        </section> -->
         <!-- category-section end -->
 
 
@@ -644,9 +603,9 @@
                                 </div>
                                 <div class="widget-content">
                                     <ul class="links-list class">
-                                        <li><a href="">About Us</a></li>
-                                        <li><a href="">Find Home</a></li>
-                                        <li><a href="">Contact Us</a></li>
+                                        <li><a href="about-us">About Us</a></li>
+                                        <li><a href="find-home">Find Home</a></li>
+                                        <li><a href="contact-us">Contact Us</a></li>
                                     </ul>
                                 </div>
                             </div>

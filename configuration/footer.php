@@ -13,6 +13,9 @@
     <script src="src/js/jQuery.style.switcher.min.js"></script>
     <script src="src/js/jquery-ui.js"></script>
     <script src="src/js/nav-tool.js"></script>
+    <script src="src/js/product-filter.js"></script>
+    <script src="src/js/jquery.paroller.min.js"></script>
+
 
     <!-- main-js -->
     <script src="src/js/script.js"></script>
@@ -20,3 +23,8 @@
     <!-- sweet alert -->
     <script src="src/node_modules/sweetalert/dist/sweetalert.min.js"></script>
 	<script src="src/node_modules/jquery/dist/jquery.min.js"></script>
+
+    <!-- map script -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA-CE0deH3Jhj6GN4YvdCFZS7DpbXexzGU"></script>
+    <script src="src/js/gmaps.js"></script>
+    <script src="src/js/map-helper.js"></script>

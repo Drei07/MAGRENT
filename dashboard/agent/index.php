@@ -58,10 +58,10 @@ include_once 'header.php';
                     </div>
                     <div class="right-column pull-right">
                         <ul class="social-links clearfix">
-                            <li><a href="#"><i class="fas fa-user"></i>&nbsp;&nbsp;<?php echo $user_email ?></a></li>
+                            <li><a href="profile"><i class="fas fa-user"></i>&nbsp;&nbsp;<?php echo $user_email ?></a></li>
                         </ul>
                         <div class="sign-box">
-                            <a href="authentication/user-signout" class="btn-signout"><i class="fa fa-sign-out"></i>Sign out</a>
+                            <a href="authentication/agent-signout" class="btn-signout"><i class="fa fa-sign-out"></i>Sign out</a>
                         </div>
                     </div>
                 </div>
@@ -84,7 +84,8 @@ include_once 'header.php';
                                 <div class="collapse navbar-collapse show clearfix" id="navbarSupportedContent">
                                     <ul class="navigation clearfix">
                                         <li class="current"><a href="./"><span>Home</span></a></li>
-                                        <li class=""><a href="find-home"><span>Find A Home</span></a></li>
+                                        <li class=""><a href="pricing"><span>Pricing</span></a></li>
+                                        <li class=""><a href="property"><span>Property</span></a></li>
                                         <li class=""><a href="about-us"><span>About Us</span></a></li>
                                         <li class=""><a href="contact-us"><span>Contact Us</span></a></li>
                                         <li class=""><a href="settings"><span>Settings</span></a></li>

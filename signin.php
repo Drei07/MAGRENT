@@ -86,6 +86,7 @@ include_once 'dashboard/user/authentication/user-signin.php';
                                 <div class="collapse navbar-collapse show clearfix" id="navbarSupportedContent">
                                     <ul class="navigation clearfix">
                                         <li class=""><a href="./"><span>Home</span></a></li>
+                                        <li class=""><a href="partners"><span>Became A Partner</span></a></li>
                                         <li class=""><a href="find-home"><span>Find A Home</span></a></li>
                                         <li class=""><a href="about-us"><span>About Us</span></a></li>
                                         <li><a href="contact-us"><span>Contact Us</span></a></li>
@@ -199,7 +200,7 @@ include_once 'dashboard/user/authentication/user-signin.php';
                                 </div>
                                 <div class="tab" id="tab-2">
                                     <div class="inner-box">
-                                        <h4>Sign Up</h4>
+                                        <h4>User Sign Up</h4>
                                         <form action="dashboard/user/authentication/user-signup.php" method="post" class="default-form">
                                             <div class="form-group">
                                                 <label>First Name <span style="font-size:17px; margin-top: 2rem; color:red; opacity:0.8;">*</span></label>
@@ -214,7 +215,7 @@ include_once 'dashboard/user/authentication/user-signin.php';
                                                 <input type="text" onkeyup="this.value = this.value.toUpperCase();" name="last_name" required="">
                                             </div>
                                             <div class="form-group">
-                                                <label>Email address</label>
+                                                <label>Email address <span style="font-size:17px; margin-top: 2rem; color:red; opacity:0.8;">*</span></label>
                                                 <input type="email" name="email" required="">
                                             </div>
                                             <div class="form-group message-btn">
@@ -256,9 +257,9 @@ include_once 'dashboard/user/authentication/user-signin.php';
                                 </div>
                                 <div class="widget-content">
                                     <ul class="links-list class">
-                                        <li><a href="">About Us</a></li>
-                                        <li><a href="">Find Home</a></li>
-                                        <li><a href="">Contact Us</a></li>
+                                        <li><a href="about-us">About Us</a></li>
+                                        <li><a href="find-home">Find Home</a></li>
+                                        <li><a href="contact-us">Contact Us</a></li><a href="">Contact Us</a></li>
                                     </ul>
                                 </div>
                             </div>

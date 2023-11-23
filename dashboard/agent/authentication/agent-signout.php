@@ -1,6 +1,6 @@
 <?php
-require_once 'user-class.php';
-$user = new USER();
+require_once 'agent-class.php';
+$user = new AGENT();
 
 if(!$user->isUserLoggedIn())
 {
