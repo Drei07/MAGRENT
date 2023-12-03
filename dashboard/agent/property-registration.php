@@ -915,12 +915,7 @@ include_once 'header.php';
 
 
         }
-        document.addEventListener('DOMContentLoaded', function() {
-            initialize();
-        });
-        window.onload = function() {
-            initialize();
-        };
+
     </script>
     <?php include_once '../../configuration/sweetalert.php'; ?>
 
