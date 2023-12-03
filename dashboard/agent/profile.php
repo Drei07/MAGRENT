@@ -84,8 +84,12 @@ include_once 'header.php';
                                     <ul class="navigation clearfix">
                                         <li class=""><a href="./"><span>Home</span></a></li>
                                         <li class=""><a href="pricing"><span>Pricing</span></a></li>
-                                        <li class=""><a href="property"><span>Property</span></a></li>
-                                        <li class=""><a href="about-us"><span>About Us</span></a></li>
+                                        <li class="dropdown"><a href="#"><span>Property</span></a>
+                                            <ul>
+                                                <li><a href="property">Property</a></li>
+                                                <li><a href="property-registration">Property Registration</a></li>
+                                            </ul>
+                                        </li>                                        <li class=""><a href="about-us"><span>About Us</span></a></li>
                                         <li class=""><a href="contact-us"><span>Contact Us</span></a></li>
                                         <li class=""><a href="settings"><span>Settings</span></a></li>
                                     </ul>

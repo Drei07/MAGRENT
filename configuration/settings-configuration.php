@@ -27,6 +27,9 @@ class SystemConfig {
     private $SSKey;
     private $google_recaptcha_api_last_update;
 
+    private $google_maps_api;
+
+
     public function __construct()
     {
         $database = new Database();
@@ -65,6 +68,14 @@ class SystemConfig {
         $this->SKey = $google['site_key'];
         $this->SSKey = $google['site_secret_key'];
         $this->google_recaptcha_api_last_update = $google['updated_at'];
+
+        //get Google Maps API
+        $stmt = $this->runQuery("SELECT * FROM google_maps_api LIMIT 1");
+        $stmt->execute(array());
+        $google_maps = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        $this->google_maps_api = $google_maps['api'];
+
     }
 
     public function runQuery($sql)
@@ -134,18 +145,19 @@ class SystemConfig {
         return $this->google_recaptcha_api_last_update;
     }
 
+    public function getGoogleMapsAPI() {
+        return $this->google_maps_api;
+    }
  
 }
-
-
 
  // Main URL class
 class MainUrl {
     private $url;
 
     public function __construct() {
-        // $this->url = "http://localhost/MAGRENT"; // localhost
-        $this->url = "https://trackeme.website"; // webhost
+        $this->url = "http://localhost/MAGRENT"; // localhost
+        // $this->url = "https://trackeme.website"; // webhost
     }
 
     public function getUrl() {

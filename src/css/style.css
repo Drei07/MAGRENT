@@ -93,6 +93,14 @@ body {
 	text-align: center;
 }
 
+#map-canvas {
+  width: 100%; /* or specify a fixed width */
+  height: 700px; /* specify a height for the map */
+  margin-bottom: 4rem;
+  border-radius: 10px;
+
+}
+
 
 .large-container{
   max-width: 1550px;
@@ -380,6 +388,8 @@ img {
   border-radius: 5px;
   z-index: 1;
   transition: all 500ms ease;
+  cursor: pointer;
+
 }
 
 .theme-btn.btn-one{
@@ -5520,6 +5530,7 @@ div#mCSB_1_container{
   position: relative;
   display: block;
   overflow: hidden;
+  height: 355px;
 }
 
 .deals-block-one .inner-box .image-box .image::after {
@@ -5531,6 +5542,7 @@ div#mCSB_1_container{
   content: '';
   width: 0;
   height: 0;
+  object-fit: cover;
   background: rgba(255, 255, 255,.2);
   border-radius: 0%;
   -webkit-transform: translate(-50%, -50%);
@@ -8940,6 +8952,13 @@ div#mCSB_1_container{
 }
 
 .myprofile-section .property-details h6{
+  font-size: 15px;
+  line-height: 16px;
+  font-weight: 500;
+  margin-bottom: 12px;
+}
+
+.myprofile-section .gallery-box h6{
   font-size: 15px;
   line-height: 16px;
   font-weight: 500;

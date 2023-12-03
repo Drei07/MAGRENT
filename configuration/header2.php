@@ -16,7 +16,7 @@
     <link href="../../src/css/font-awesome-all.css" rel="stylesheet">
     <link href="../../src/css/flaticon.css" rel="stylesheet">
     <link href="../../src/css/owl.css" rel="stylesheet">
-    <link href="../../src/css/bootstrap.css" rel="stylesheet">
+	<link rel="stylesheet" href="../../src/node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link href="../../src/css/jquery.fancybox.min.css" rel="stylesheet">
     <link href="../../src/css/animate.css" rel="stylesheet">
     <link href="../../src/css/jquery-ui.css" rel="stylesheet">
@@ -25,3 +25,4 @@
     <link href="../../src/css/switcher-style.css" rel="stylesheet">
     <link href="../../src/css/style.css" rel="stylesheet">
     <link href="../../src/css/responsive.css" rel="stylesheet">
+    

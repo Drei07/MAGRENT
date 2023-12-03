@@ -1,13 +1,48 @@
 <?php
 include_once 'header.php';
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+	// Retrieve the values from the POST request
+	$propertyId = isset($_POST['property_id']) ? $_POST['property_id'] : '';
+
+	// Store the values in session variables
+	$_SESSION['property_id'] = $propertyId;
+}
+
+// Retrieve the values from session variables
+$propertyId = isset($_SESSION['property_id']) ? $_SESSION['property_id'] : '';
+
+//property data
+$stmt = $user->runQuery("SELECT * FROM property WHERE id=:id");
+$stmt->execute(array(":id" => $propertyId));
+$property_data = $stmt->fetch(PDO::FETCH_ASSOC);
+
+//property gallery data
+$stmt = $user->runQuery("SELECT * FROM property_gallery WHERE property_id=:id");
+$stmt->execute(array(":id" => $propertyId));
+$property_gallery_data = $stmt->fetch(PDO::FETCH_ASSOC);
+
+//property location
+$stmt = $user->runQuery("SELECT * FROM property_location WHERE property_id=:id");
+$stmt->execute(array(":id" => $propertyId));
+$property_location_data = $stmt->fetch(PDO::FETCH_ASSOC);
+
+//property floor plan
+$stmt = $user->runQuery("SELECT * FROM property_floor_plan WHERE property_id=:id");
+$stmt->execute(array(":id" => $propertyId));
+$property_floor_plan_data = $stmt->fetch(PDO::FETCH_ASSOC);
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <?php include_once '../../configuration/header2.php'; ?>
-    <title>MAGRENT | Contact Us</title>
+    <title>MAGRENT | Property Details</title>
 </head>
 <!-- page wrapper -->
+
 <body>
     <div class="boxed_wrapper">
         <!-- preloader -->
@@ -60,7 +95,7 @@ include_once 'header.php';
                             <li><a href="profile"><i class="fas fa-user"></i>&nbsp;&nbsp;<?php echo $user_email ?></a></li>
                         </ul>
                         <div class="sign-box">
-                        <a href="authentication/agent-signout" class="btn-signout"><i class="fa fa-sign-out"></i>Sign out</a>
+                            <a href="authentication/agent-signout" class="btn-signout"><i class="fa fa-sign-out"></i>Sign out</a>
                         </div>
                     </div>
                 </div>
@@ -84,13 +119,14 @@ include_once 'header.php';
                                     <ul class="navigation clearfix">
                                         <li class=""><a href="./"><span>Home</span></a></li>
                                         <li class=""><a href="pricing"><span>Pricing</span></a></li>
-                                        <li class="dropdown"><a href="#"><span>Property</span></a>
+                                        <li class="dropdown current"><a href="#"><span>Property</span></a>
                                             <ul>
                                                 <li><a href="property">Property</a></li>
                                                 <li><a href="property-registration">Property Registration</a></li>
                                             </ul>
-                                        </li>                                        <li class=""><a href="about-us"><span>About Us</span></a></li>
-                                        <li class="current"><a href="contact-us"><span>Contact Us</span></a></li>
+                                        </li>
+                                        <li class=""><a href="about-us"><span>About Us</span></a></li>
+                                        <li class=""><a href="contact-us"><span>Contact Us</span></a></li>
                                         <li class=""><a href="settings"><span>Settings</span></a></li>
                                     </ul>
                                 </div>
@@ -143,8 +179,6 @@ include_once 'header.php';
         </div>
         <!-- End Mobile Menu -->
 
-
-
         <!--Page Title-->
         <section class="page-title-two bg-color-1 centred">
             <div class="pattern-layer">
@@ -153,88 +187,105 @@ include_once 'header.php';
             </div>
             <div class="auto-container">
                 <div class="content-box clearfix">
-                    <h1>Contact Us</h1>
+                    <h1>Property Details</h1>
                     <ul class="bread-crumb clearfix">
                         <li><a href="./">Home</a></li>
-                        <li>Contact Us</li>
+                        <li>Property Details</li>
                     </ul>
                 </div>
             </div>
         </section>
         <!--End Page Title-->
 
-
-        <!-- main-footer -->
-        <footer class="main-footer">
-            <div class="footer-top bg-color-2">
-                <div class="auto-container">
-                    <div class="row clearfix">
-                        <div class="col-lg-3 col-md-6 col-sm-12 footer-column mx-auto">
-                            <div class="footer-widget about-widget">
-                                <div class="widget-title">
-                                    <h3>About</h3>
-                                </div>
-                                <div class="text">
-                                    <p>Welcome to Magrent! Discover the perfect living space with our easy-to-use room rental finder.</p>
-                                    <p>Find your next home is now a seamless experience – just a few clicks away.</p>
-                                </div>
+    <!-- main-footer -->
+    <footer class="main-footer">
+        <div class="footer-top bg-color-2">
+            <div class="auto-container">
+                <div class="row clearfix">
+                    <div class="col-lg-3 col-md-6 col-sm-12 footer-column mx-auto">
+                        <div class="footer-widget about-widget">
+                            <div class="widget-title">
+                                <h3>About</h3>
+                            </div>
+                            <div class="text">
+                                <p>Welcome to Magrent! Discover the perfect living space with our easy-to-use room rental finder.</p>
+                                <p>Find your next home is now a seamless experience – just a few clicks away.</p>
                             </div>
                         </div>
-                        <div class="col-lg-3 col-md-6 col-sm-12 footer-column mx-auto">
-                            <div class="footer-widget links-widget ml-70">
-                                <div class="widget-title">
-                                    <h3>Services</h3>
-                                </div>
-                                <div class="widget-content">
-                                    <ul class="links-list class">
-                                        <li><a href="about-us">About Us</a></li>
-                                        <li><a href="find-home">Find Home</a></li>
-                                        <li><a href="contact-us">Contact Us</a></li>
-                                    </ul>
-                                </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-12 footer-column mx-auto">
+                        <div class="footer-widget links-widget ml-70">
+                            <div class="widget-title">
+                                <h3>Services</h3>
+                            </div>
+                            <div class="widget-content">
+                                <ul class="links-list class">
+                                    <li><a href="about-us">About Us</a></li>
+                                    <li><a href="find-home">Find Home</a></li>
+                                    <li><a href="contact-us">Contact Us</a></li>
+                                </ul>
                             </div>
                         </div>
-                        <div class="col-lg-3 col-md-6 col-sm-12 footer-column mx-auto">
-                            <div class="footer-widget contact-widget">
-                                <div class="widget-title">
-                                    <h3>Contacts</h3>
-                                </div>
-                                <div class="widget-content">
-                                    <ul class="info-list clearfix">
-                                        <li><i class="fas fa-map-marker-alt"></i><?php echo $config->getSystemAddress() ?></li>
-                                        <li><i class="fas fa-phone"></i><a href=""><?php echo $config->getSystemNumber() ?></a></li>
-                                        <li><i class="fas fa-envelope"></i><a href=""><?php echo $config->getSystemEmail() ?></a></li>
-                                    </ul>
-                                </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-12 footer-column mx-auto">
+                        <div class="footer-widget contact-widget">
+                            <div class="widget-title">
+                                <h3>Contacts</h3>
+                            </div>
+                            <div class="widget-content">
+                                <ul class="info-list clearfix">
+                                    <li><i class="fas fa-map-marker-alt"></i><?php echo $config->getSystemAddress() ?></li>
+                                    <li><i class="fas fa-phone"></i><a href=""><?php echo $config->getSystemNumber() ?></a></li>
+                                    <li><i class="fas fa-envelope"></i><a href=""><?php echo $config->getSystemEmail() ?></a></li>
+                                </ul>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="footer-bottom">
-                <div class="auto-container">
-                    <div class="inner-box clearfix">
-                        <div class="copyright pull-left">
-                            <p><?php echo $config->getSystemCopyright() ?></p>
-                        </div>
-                        <ul class="footer-nav pull-right clearfix">
-                            <li><a href="terms">Terms of Service</a></li>
-                            <li><a href="privacy_policy">Privacy Policy</a></li>
-                        </ul>
+        </div>
+        <div class="footer-bottom">
+            <div class="auto-container">
+                <div class="inner-box clearfix">
+                    <div class="copyright pull-left">
+                        <p><?php echo $config->getSystemCopyright() ?></p>
                     </div>
+                    <ul class="footer-nav pull-right clearfix">
+                        <li><a href="terms">Terms of Service</a></li>
+                        <li><a href="privacy_policy">Privacy Policy</a></li>
+                    </ul>
                 </div>
             </div>
-        </footer>
-        <!-- main-footer end -->
+        </div>
+    </footer>
+    <!-- main-footer end -->
 
-        <!--Scroll to top-->
-        <button class="scroll-top scroll-to-target" data-target="html">
-            <span class="fal fa-angle-up"></span>
-        </button>
+    <!--Scroll to top-->
+    <button class="scroll-top scroll-to-target" data-target="html">
+        <span class="fal fa-angle-up"></span>
+    </button>
     </div>
 
     <!-- script -->
     <?php include_once '../../configuration/footer2.php'; ?>
+    <script>
+        function setSessionValues(propertyId) {
+			fetch('property-details.php', {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/x-www-form-urlencoded',
+					},
+					body: 'property_id=' + encodeURIComponent(propertyId),
+				})
+				.then(response => {
+					window.location.href = 'property-details';
+				})
+				.catch(error => {
+					console.error('Error:', error);
+				});
+		}
+
+    </script>
     <?php include_once '../../configuration/sweetalert.php'; ?>
 
 </body><!-- End of .page_wrapper -->

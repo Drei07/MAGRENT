@@ -2,18 +2,18 @@
 class Database
 {
     // // Localhost
-    // private $host = "localhost";
-    // private $db_name = "magrent";
-    // private $username = "root";
-    // private $password = "";
-    // public $conn;
+    private $host = "localhost";
+    private $db_name = "magrent";
+    private $username = "root";
+    private $password = "";
+    public $conn;
 
     // Live
-    private $host = "localhost";
-    private $db_name = "u297724503_magrent2023";
-    private $username = "u297724503_magrent2023";
-    private $password = "Magrent2023";
-    public $conn;
+    // private $host = "localhost";
+    // private $db_name = "u297724503_magrent2023";
+    // private $username = "u297724503_magrent2023";
+    // private $password = "Magrent2023";
+    // public $conn;
 
      
     public function dbConnection()
