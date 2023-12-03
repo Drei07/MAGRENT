@@ -280,7 +280,7 @@ include_once 'header.php';
                                             </div>
                                             <div class="col-lg-4 col-md-6 col-sm-12 column">
                                                 <div class="field-input">
-                                                    <label>Parking <span style="font-size:17px; margin-top: 2rem; color:red; opacity:0.8;">*</span></label>
+                                                    <label>Parking </label>
                                                     <div class="select-box">
                                                         <select class="wide" name="parking" required>
                                                             <option value="">How many parking?</option>
@@ -307,7 +307,7 @@ include_once 'header.php';
                                             </div>
                                             <div class="col-lg-4 col-md-6 col-sm-12 column">
                                                 <div class="field-input">
-                                                    <label>Garage Size in SqFt <span style="font-size:17px; margin-top: 2rem; color:red; opacity:0.8;">*</span></label>
+                                                    <label>Garage Size in SqFt</label>
                                                     <input type="text" class="form-control numbers" name="garage_size" inputmode="numeric">
                                                     <div class="invalid-feedback">
                                                         Please provide an garage size in SqFt.
@@ -629,7 +629,7 @@ include_once 'header.php';
                                 <div class="gallery-box">
                                     <h4><i class="icon-16"></i>Floor Plan:</h4>
 
-                                    <h6>First Floor <span style="font-size:17px; margin-top: 2rem; color:red; opacity:0.8;">*</span></h6>
+                                    <h6>First Floor</h6>
                                     <div class="upload-inner centred">
                                         <i class="fal fa-cloud-upload"></i>
                                         <div class="upload-box">
