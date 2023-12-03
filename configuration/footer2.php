@@ -30,5 +30,4 @@
 	<script src="../../src/node_modules/jquery/dist/jquery.min.js"></script>
 
     <!-- map script -->
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=<?php echo $config->getGoogleMapsAPI() ?>&libraries=places&callback=initialize"></script>
 

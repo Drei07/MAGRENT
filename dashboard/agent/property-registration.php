@@ -759,6 +759,7 @@ include_once 'header.php';
 
     <!-- script -->
     <?php include_once '../../configuration/footer2.php'; ?>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=<?php echo $config->getGoogleMapsAPI() ?>&libraries=places&callback=initialize"></script>
 
     <script>
         //google maps--------------------------------------------------------------
