@@ -711,6 +711,14 @@
 			if (!form.checkValidity()) {
 				event.preventDefault()
 				event.stopPropagation()
+
+				swal({
+					title: "Oops!",
+					text: "Please fill in all required fields!",
+					icon: "error",
+					button: false,
+					timer: 10000,
+				});
 			}
 
 			form.classList.add('was-validated')
@@ -740,6 +748,23 @@ function previewImage(event, containerId, previewId) {
 		container.style.display = 'none';
 	}
 }
+
+function closePreview(containerId, inputId) {
+    var container = document.getElementById(containerId);
+    var preview = container.querySelector('img');
+    var input = document.getElementById(inputId);
+
+    // Hide the preview container
+    container.style.display = 'none';
+
+    // Clear the image source to hide the preview
+    preview.src = '';
+
+    // Reset the file input element
+    input.value = '';
+}
+
+
 
 //FOR AMENITIES AND DAYS PROPERTY REGISTRATION
 function submitForm() {

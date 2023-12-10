@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Dec 03, 2023 at 02:52 PM
+-- Generation Time: Dec 11, 2023 at 12:37 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.0.28
 
@@ -20,6 +20,63 @@ SET time_zone = "+00:00";
 --
 -- Database: `magrent`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `amenities`
+--
+
+CREATE TABLE `amenities` (
+  `id` int(11) NOT NULL,
+  `amenities` varchar(145) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `amenities`
+--
+
+INSERT INTO `amenities` (`id`, `amenities`, `created_at`, `updated_at`) VALUES
+(1, 'Air Conditioned', '2023-12-04 04:07:09', NULL),
+(2, 'Swimming Pool', '2023-12-04 04:07:18', '2023-12-04 04:08:04'),
+(3, 'Washer & Dryer', '2023-12-04 04:07:09', '2023-12-04 04:08:13'),
+(4, 'Washing Machine', '2023-12-04 04:07:18', '2023-12-04 04:08:20'),
+(5, 'Gym', '2023-12-04 04:07:09', '2023-12-04 04:08:30'),
+(6, 'Basketball Court', '2023-12-04 04:07:18', '2023-12-04 04:08:37'),
+(7, 'Refrigerator', '2023-12-04 04:07:09', '2023-12-04 04:08:44'),
+(8, 'Internet', '2023-12-04 04:07:18', '2023-12-04 04:08:50'),
+(9, 'Kithchen', '2023-12-04 04:07:09', '2023-12-04 04:08:56'),
+(10, 'Closet', '2023-12-04 04:07:18', '2023-12-04 04:09:04'),
+(11, 'Dining Table', '2023-12-04 04:07:09', '2023-12-04 04:09:11'),
+(12, 'Smart TV', '2023-12-04 04:07:18', '2023-12-04 04:09:17');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `day`
+--
+
+CREATE TABLE `day` (
+  `id` int(14) NOT NULL,
+  `day` varchar(145) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `day`
+--
+
+INSERT INTO `day` (`id`, `day`, `created_at`, `updated_at`) VALUES
+(1, 'Monday', '2023-12-10 01:22:38', NULL),
+(2, 'Tuesday', '2023-12-10 01:22:38', '2023-12-10 01:23:06'),
+(3, 'Wednesday', '2023-12-10 01:22:38', '2023-12-10 01:23:13'),
+(4, 'Thursday', '2023-12-10 01:22:38', '2023-12-10 01:23:19'),
+(5, 'Friday', '2023-12-10 01:22:38', '2023-12-10 01:23:23'),
+(6, 'Saturday', '2023-12-10 01:22:38', '2023-12-10 01:23:28'),
+(7, 'Sunday', '2023-12-10 01:22:38', '2023-12-10 01:23:31');
 
 -- --------------------------------------------------------
 
@@ -60,7 +117,7 @@ CREATE TABLE `google_maps_api` (
 --
 
 INSERT INTO `google_maps_api` (`id`, `api`, `created_at`, `updated_at`) VALUES
-(1, 'AIzaSyDeHPujdw2baDAsFBeG2y2JFNre_xMXtko', '2023-12-03 08:39:56', NULL);
+(1, 'AIzaSyCzYdQJTyqPkzfTsVEwzJSSgQhe_Qg9OLI', '2023-12-03 08:39:56', '2023-12-03 14:10:34');
 
 -- --------------------------------------------------------
 
@@ -104,7 +161,10 @@ CREATE TABLE `logs` (
 INSERT INTO `logs` (`id`, `user_id`, `activity`, `created_at`, `updated_at`) VALUES
 (1, 12, 'Has successfully signed in', '2023-11-25 05:01:25', NULL),
 (2, 1, 'Has successfully signed in', '2023-12-01 11:55:36', NULL),
-(3, 1, 'Has successfully signed in', '2023-12-01 12:36:26', NULL);
+(3, 1, 'Has successfully signed in', '2023-12-01 12:36:26', NULL),
+(4, 13, 'Has successfully signed in', '2023-12-04 05:33:35', NULL),
+(5, 1, 'Has successfully signed in', '2023-12-07 06:29:35', NULL),
+(6, 1, 'Has successfully signed in', '2023-12-09 12:37:19', NULL);
 
 -- --------------------------------------------------------
 
@@ -126,6 +186,7 @@ CREATE TABLE `property` (
   `garage_size` varchar(145) DEFAULT NULL,
   `property_description` longtext DEFAULT NULL,
   `amenities` varchar(145) DEFAULT NULL,
+  `status` enum('active','disable') NOT NULL DEFAULT 'active',
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -134,8 +195,8 @@ CREATE TABLE `property` (
 -- Dumping data for table `property`
 --
 
-INSERT INTO `property` (`id`, `user_id`, `property_name`, `property_price`, `property_contact_details`, `bedrooms`, `bathrooms`, `property_type`, `parking`, `property_size`, `garage_size`, `property_description`, `amenities`, `created_at`, `updated_at`) VALUES
-(1, 1, 'JULIUS DORMITORY', '2000', '09776621929', 4, 3, 2, 1, '100', '20', 'Introducing an exceptional opportunity for female residents seeking a comfortable and budget-friendly living arrangement in the heart of Alegria, San Francisco, Agusan del Sur. Nestled within the esteemed Padilla Delos Reyes Building, Room 642 offers an inviting and secure environment for discerning individuals in search of a well-appointed bed spacer.', '1, 3, 4, 8, 9, 10, 11, 12', '2023-12-03 12:10:17', NULL);
+INSERT INTO `property` (`id`, `user_id`, `property_name`, `property_price`, `property_contact_details`, `bedrooms`, `bathrooms`, `property_type`, `parking`, `property_size`, `garage_size`, `property_description`, `amenities`, `status`, `created_at`, `updated_at`) VALUES
+(1, 1, 'JULIUS DORMITORY', '2000', '09776621925', 1, 1, 1, 2, '1000', '200', 'Introducing an exceptional opportunity for female residents seeking a comfortable and budget-friendly living arrangement in the heart of Alegria, San Francisco, Agusan del Sur. Nestled within the esteemed Padilla Delos Reyes Building, Room 642 offers an inviting and secure environment for discerning individuals in search of a well-appointed bed spacer.ddd', '1, 2, 3, 4', 'active', '2023-12-03 12:10:17', '2023-12-10 11:05:34');
 
 -- --------------------------------------------------------
 
@@ -158,7 +219,7 @@ CREATE TABLE `property_floor_plan` (
 --
 
 INSERT INTO `property_floor_plan` (`id`, `property_id`, `first_floor`, `second_floor`, `third_floor`, `created_at`, `updated_at`) VALUES
-(1, 1, 'img1.jpeg', '', '', '2023-12-03 12:10:17', NULL);
+(1, 1, '384551403_308574592143937_4922595560698870182_n.jpg', '', '', '2023-12-03 12:10:17', '2023-12-10 23:37:39');
 
 -- --------------------------------------------------------
 
@@ -183,7 +244,7 @@ CREATE TABLE `property_gallery` (
 --
 
 INSERT INTO `property_gallery` (`id`, `property_id`, `picture_1`, `picture_2`, `picture_3`, `picture_4`, `picture_5`, `created_at`, `updated_at`) VALUES
-(1, 1, 'img1.jpeg', 'img2.jpeg', 'img3.jpeg', 'img4.jpeg', 'img5.jpeg', '2023-12-03 12:10:17', NULL);
+(1, 1, '1.jpeg', '2.jpeg', '3.jpeg', '4.jpeg', '5.jpeg', '2023-12-03 12:10:17', '2023-12-10 22:52:10');
 
 -- --------------------------------------------------------
 
@@ -206,7 +267,7 @@ CREATE TABLE `property_location` (
 --
 
 INSERT INTO `property_location` (`id`, `property_id`, `address`, `latitude`, `longitude`, `created_at`, `updated_at`) VALUES
-(1, 1, 'G247+96R, San Francisco - Barobo Rd, San Francisco, Agusan del Sur, Philippines', '8.506087350933502', '126.01269911830444', '2023-12-03 12:10:17', NULL);
+(1, 1, 'G233+6X3, Karaos - Lapag - Alegria Rd, San Francisco, Agusan del Sur, Philippines', '8.503328527667376', '126.00527476375122', '2023-12-03 12:10:17', '2023-12-10 13:20:59');
 
 -- --------------------------------------------------------
 
@@ -230,7 +291,7 @@ CREATE TABLE `property_viewing_time` (
 --
 
 INSERT INTO `property_viewing_time` (`id`, `property_id`, `visiting_rules`, `visitation_hours_from`, `visitation_hours_to`, `visitation_days`, `created_at`, `updated_at`) VALUES
-(1, 1, 'NO rules', '09:00:00', '17:00:00', '1, 2, 4, 5, 6', '2023-12-03 12:10:17', NULL);
+(1, 1, 'NO rules', '09:00:00', '17:00:00', '1, 2, 3, 4, 5, 6, 7', '2023-12-03 12:10:17', '2023-12-10 13:17:03');
 
 -- --------------------------------------------------------
 
@@ -293,12 +354,25 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `first_name`, `middle_name`, `last_name`, `sex`, `date_of_birth`, `age`, `civil_status`, `phone_number`, `email`, `password`, `profile`, `valid_id`, `status`, `tokencode`, `account_status`, `user_type`, `created_at`, `updated_at`) VALUES
-(1, 'SUPERADMIN', 'SUPERADMIN', 'SUPERADMIN', 'MALE', NULL, NULL, NULL, NULL, 'andrei.m.viscayno@gmail.coms', '24b35e91f6650c460b66bceaa1590664', 'profile.png', NULL, 'Y', '174b66675b0e6170e83b8f4fbd7ba02f', 'active', '2', '2023-11-20 04:14:08', '2023-11-23 12:50:11'),
-(12, 'ANDREI', 'MALANSAN', 'VISCAYNO', NULL, NULL, NULL, NULL, NULL, 'andrei.m.viscayno@gmail.com', 'add484c80a6aea49893d9e1601699490', 'profile.png', '370223302_323647357055512_8090533492567327622_n.jpg', 'Y', 'ff556245e16913f8ce1185c73cf9d975', 'active', '2', '2023-11-25 05:00:38', '2023-11-25 05:01:02');
+(1, 'Andrei', 'SUPERADMIN', 'SUPERADMIN', 'MALE', NULL, NULL, NULL, NULL, 'andrei.m.viscayno@gmail.coms', '24b35e91f6650c460b66bceaa1590664', 'profile.png', NULL, 'Y', '174b66675b0e6170e83b8f4fbd7ba02f', 'active', '2', '2023-11-20 04:14:08', '2023-12-10 23:35:10'),
+(12, 'ANDREI', 'MALANSAN', 'VISCAYNO', NULL, NULL, NULL, NULL, NULL, 'andrei.m.viscayno@gmail.com', 'add484c80a6aea49893d9e1601699490', 'profile.png', '370223302_323647357055512_8090533492567327622_n.jpg', 'Y', 'ff556245e16913f8ce1185c73cf9d975', 'active', '2', '2023-11-25 05:00:38', '2023-12-04 05:42:58'),
+(13, 'ANDREI', 'MANALA', 'VISCAYNO', NULL, NULL, NULL, NULL, NULL, 'sir.viscayno@gmail.com', '708792fe14671ee816a1a16e1bcaadcd', 'profile.png', NULL, 'Y', '804bd882e689f11f5f880d25008cbff7', 'active', '3', '2023-12-04 05:30:48', '2023-12-04 05:39:46');
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `amenities`
+--
+ALTER TABLE `amenities`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `day`
+--
+ALTER TABLE `day`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `email_config`
@@ -376,6 +450,18 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `amenities`
+--
+ALTER TABLE `amenities`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT for table `day`
+--
+ALTER TABLE `day`
+  MODIFY `id` int(14) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
 -- AUTO_INCREMENT for table `email_config`
 --
 ALTER TABLE `email_config`
@@ -397,13 +483,13 @@ ALTER TABLE `google_recaptcha_api`
 -- AUTO_INCREMENT for table `logs`
 --
 ALTER TABLE `logs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `property`
 --
 ALTER TABLE `property`
-  MODIFY `id` int(14) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(14) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `property_floor_plan`
@@ -421,13 +507,13 @@ ALTER TABLE `property_gallery`
 -- AUTO_INCREMENT for table `property_location`
 --
 ALTER TABLE `property_location`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `property_viewing_time`
 --
 ALTER TABLE `property_viewing_time`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `system_config`
@@ -439,7 +525,7 @@ ALTER TABLE `system_config`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- Constraints for dumped tables
