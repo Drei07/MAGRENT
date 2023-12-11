@@ -6850,6 +6850,7 @@ div#mCSB_1_container{
 .default-form input[type="tel"],
 .default-form input[type="number"],
 .default-form input[type="password"],
+.default-form input[type="date"],
 .default-form textarea{
   position: relative;
   display: block;

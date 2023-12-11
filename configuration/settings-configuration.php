@@ -156,9 +156,15 @@ class MainUrl {
     private $url;
 
     public function __construct() {
-        // $this->url = "http://localhost/MAGRENT"; // localhost
-        $this->url = "https://trackeme.website"; // webhost
+        // Check if the server is running on localhost
+        if ($_SERVER['SERVER_NAME'] === 'localhost' || $_SERVER['SERVER_ADDR'] === '127.0.0.1') {
+            $this->url = "http://localhost/MAGRENT";
+        } else {
+            // Set the URL for the web host
+            $this->url = "https://trackeme.website";
+        }
     }
+    
 
     public function getUrl() {
         return $this->url;

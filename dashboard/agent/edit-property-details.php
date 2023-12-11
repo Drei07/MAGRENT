@@ -721,7 +721,7 @@ $property_floor_plan_data = $stmt->fetch(PDO::FETCH_ASSOC);
                                             </div>
                                         </div>
                                     </div>
-                                    <button type="submit" class="theme-btn btn-one" name="btn-edit-property" onclick="submitForm()">Register</button>
+                                    <button type="submit" class="theme-btn btn-one" name="btn-edit-property" onclick="submitForm()">Submit</button>
                                 </div>
                             </div>
                         </div>

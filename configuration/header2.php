@@ -25,5 +25,7 @@
     <link href="../../src/css/switcher-style.css" rel="stylesheet">
     <link href="../../src/css/style.css" rel="stylesheet">
     <link href="../../src/css/responsive.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../src/node_modules/boxicons/css/boxicons.min.css">
+
 
     
