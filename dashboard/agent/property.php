@@ -228,7 +228,7 @@ include_once 'header.php';
                                                     <li><i class="icon-14"></i><?php echo $property_data['bedrooms'] ?> Beds</li>
                                                     <li><i class="icon-15"></i><?php echo $property_data['bathrooms'] ?>  Baths</li>
                                                 </ul>
-                                                <div class="other-info-box clearfix">
+                                                <div class="other-info-box clearfix" onclick="setSessionValues(<?php echo $property_data['id'] ?>)">
                                                     <div class="btn-box pull-left"><a href=""  onclick="setSessionValues(<?php echo $property_data['id'] ?>)" class="theme-btn btn-two">See Details</a></div>
                                                 </div>
                                             </div>

@@ -32,6 +32,10 @@ $stmt = $user->runQuery("SELECT * FROM property_floor_plan WHERE property_id=:id
 $stmt->execute(array(":id" => $propertyId));
 $property_floor_plan_data = $stmt->fetch(PDO::FETCH_ASSOC);
 
+//property floor plan
+$stmt = $user->runQuery("SELECT * FROM property_viewing_time WHERE property_id=:id");
+$stmt->execute(array(":id" => $propertyId));
+$property_viewing_time_data = $stmt->fetch(PDO::FETCH_ASSOC);
 
 ?>
 <!DOCTYPE html>
@@ -224,9 +228,9 @@ $property_floor_plan_data = $stmt->fetch(PDO::FETCH_ASSOC);
                             </div>
                         </div>
                         <ul class="other-option pull-right clearfix">
-                            <div class="form-group message-btn">
-                                <button type="submit" onclick="setSessionValues(<?php echo $property_data['id'] ?>)" class="theme-btn btn-one">Edit Details</button>
-                            </div>                        
+                                <!-- <button type="submit" onclick="setSessionValues(<?php echo $property_data['id'] ?>)" class="theme-btn btn-one">Edit Details</button> -->
+                                <li><a href="controller/property-controller?property_id=<?php echo $propertyId ?>&delete_property=1" class="delete_property"><i class='bx bxs-trash' ></i></a></li>
+                                <li><a onclick="setSessionValues(<?php echo $property_data['id'] ?>)" ><i class='bx bxs-edit'></i></a></li>
                         </ul>
                     </div>
                 </div>
@@ -316,6 +320,7 @@ $property_floor_plan_data = $stmt->fetch(PDO::FETCH_ASSOC);
                                     ?>
                                 </ul>
                             </div>
+                            
                             <div class="floorplan-inner content-widget">
                                 <div class="title-box">
                                     <h4>Floor Plan</h4>
@@ -376,8 +381,43 @@ $property_floor_plan_data = $stmt->fetch(PDO::FETCH_ASSOC);
                                     <h4>Property Viewing Schedule</h4>
                                 </div>
                                 <div class="form-inner">
+                                <h6>Visiting Rules:</h6>
+                                <p><?php echo $property_viewing_time_data['visiting_rules'] ?></p><br>
+                                <h6>Visitation Time From:</h6>
+                                <p><?php echo date("h:i A", strtotime($property_viewing_time_data['visitation_hours_from'])); ?></p><br>
+                                <h6>Visitation Time To:</h6>
+                                <p><?php echo date("h:i A", strtotime($property_viewing_time_data['visitation_hours_to']));?></p><br>
                                 </div>
+                                <div class="amenities-box">
+                                <ul class="list clearfix">
+                                    <?php
+                                    $stmt3 = $user->runQuery("SELECT * FROM property_viewing_time WHERE property_id=:id");
+                                    $stmt3->execute(array(":id" => $propertyId));
+
+                                    if ($stmt3->rowCount() >= 1) {
+                                        while ($property_viewing_time_data = $stmt3->fetch(PDO::FETCH_ASSOC)) {
+                                            // Explode the values from the amenities column
+                                            $visitationDaysArray = explode(',', $property_viewing_time_data['visitation_days']);
+
+                                            // Iterate through the exploded values
+                                            foreach ($visitationDaysArray as $days) {
+                                                // Use each amenity value as needed
+                                                // echo "Amenity: " . trim($amenity) . "<br>";
+                                                $stmt5 = $user->runQuery("SELECT * FROM day WHERE id=:id");
+                                                $stmt5->execute(array(":id" => trim($days)));
+                                                $days_data = $stmt5->fetch(PDO::FETCH_ASSOC);
+
+                                                ?>
+                                                    <li><?php echo $days_data['day']?></li>
+                                                <?php
+                                            }
+                                        }
+                                    }
+                                    ?>
+                                </ul>
                             </div>
+                            </div>
+                            
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-12 col-sm-12 sidebar-side">

@@ -892,3 +892,23 @@ function getAgeVal(pid) {
 		return false;
 	}
 };
+
+
+//Delete Profile
+$('.delete_property').on('click', function (e) {
+	e.preventDefault();
+	const href = $(this).attr('href')
+
+	swal({
+		title: "Delete?",
+		text: "Do you want to delete this property?",
+		icon: "warning",
+		buttons: true,
+		dangerMode: true,
+	})
+		.then((willDelete) => {
+			if (willDelete) {
+				document.location.href = href;
+			}
+		});
+})
