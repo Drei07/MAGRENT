@@ -1,6 +1,4 @@
 <?php
-include_once '../configuration/settings-configuration.php';
-
 class Database
 {
     private $host;

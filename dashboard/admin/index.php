@@ -27,7 +27,7 @@ include_once 'header.php';
 				</a>
 			</li>
 			<li>
-				<a href="sub-admin">
+				<a href="user">
 					<i class='bx bxs-user-plus'></i>
 					<span class="text">User Account</span>
 				</a>

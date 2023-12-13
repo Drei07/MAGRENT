@@ -7,7 +7,7 @@ include_once 'header.php';
     <?php
     include_once '../../configuration/header3.php';
     ?>
-	<title>Audit Trail</title>
+	<title>User Account</title>
 </head>
 <body>
 
@@ -35,13 +35,13 @@ include_once 'header.php';
 			</li>
 		</ul>
 		<ul class="side-menu top">
-			<li>
+			<li class="active">
 				<a href="settings">
 					<i class='bx bxs-cog' ></i>
 					<span class="text">Settings</span>
 				</a>
 			</li>
-			<li  class="active">
+			<li>
 				<a href="audit-trail">
 					<i class='bx bxl-blogger'></i>
 					<span class="text">Audit Trail</span>
@@ -55,6 +55,7 @@ include_once 'header.php';
 			</li>
 		</ul>
 	</section>
+	<!-- SIDEBAR -->
 	<!-- SIDEBAR -->
 
 
@@ -82,28 +83,30 @@ include_once 'header.php';
 		<main>
 			<div class="head-title">
 				<div class="left">
-					<h1>Audit Trail</h1>
+					<h1>User Account</h1>
 					<ul class="breadcrumb">
 						<li>
 							<a class="active" href="./">Home</a>
 						</li>
 						<li>|</li>
 						<li>
-							<a href="">Audit Trail</a>
+							<a href="">User Account</a>
 						</li>
 					</ul>
 				</div>
 			</div>
-
+            <div class="modal-button">
+				<button type="button" data-bs-toggle="modal" data-bs-target="#classModal" class="btn-dark"><i class='bx bxs-plus-circle'></i> Add User Account</button>
+			</div>
 			<div class="table-data">
 				<div class="order">
 					<div class="head">
-						<h3><i class='bx bxl-blogger'></i> Audit Trail</h3>
+						<h3><i class='bx bxs-user-account' ></i> List of User Account</h3>
 					</div>
                     <!-- BODY -->
                     <section class="data-table">
                         <div class="searchBx">
-                            <input type="input" placeholder="Search Logs . . . . . ." class="search" name="search_box" id="search_box"><button class="searchBtn"><i class="bx bx-search icon"></i></button>
+                            <input type="input" placeholder="Search User . . . . . ." class="search" name="search_box" id="search_box"><button class="searchBtn"><i class="bx bx-search icon"></i></button>
                         </div>
 
                         <div class="table">
@@ -121,9 +124,10 @@ include_once 'header.php';
 	<?php
     include_once '../../configuration/footer3.php';
     ?>
+
 	<script>
 
-//live search---------------------------------------------------------------------------------------//
+	//live search---------------------------------------------------------------------------------------//
 	$(document).ready(function(){
 
 	load_data(1);
@@ -131,7 +135,7 @@ include_once 'header.php';
 	function load_data(page, query = '')
 	{
 	$.ajax({
-		url:"tables/logs-table.php",
+		url:"tables/agent-table.php",
 		method:"POST",
 		data:{page:page, query:query},
 		success:function(data)

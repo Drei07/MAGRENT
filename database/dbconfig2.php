@@ -1,8 +1,6 @@
 
 
 <?php
-    include_once '../configuration/settings-configuration.php';
-
 	try {
 
     // Check if the server is running on localhost
