@@ -53,11 +53,11 @@ $query .= 'ORDER BY id ASC ';
 $filter_query = $query . 'LIMIT '.$start.', '.$limit.'';
 
 $statement = $pdoConnect->prepare($query);
-$statement->execute(array(":user_type" => 3, ":status" => "N"));
+$statement->execute(array(":user_type" => 2, ":status" => "N"));
 $total_data = $statement->rowCount();
 
 $statement = $pdoConnect->prepare($filter_query);
-$statement->execute(array(":user_type" => 3 , ":status" => "N"));
+$statement->execute(array(":user_type" => 2 , ":status" => "N"));
 $total_filter_data = $statement->rowCount();
 
 if($total_data > 0)

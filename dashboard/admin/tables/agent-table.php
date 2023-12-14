@@ -16,7 +16,7 @@ function get_total_row($pdoConnect)
 {
   $pdoQuery = "SELECT COUNT(*) as total_rows FROM users WHERE user_type = :user_type AND status = :status";
   $pdoResult = $pdoConnect->prepare($pdoQuery);
-  $pdoResult->execute(array(":user_type" => 3, ":status" => "Y"));
+  $pdoResult->execute(array(":user_type" => 2, ":status" => "Y"));
   $row = $pdoResult->fetch(PDO::FETCH_ASSOC);
   return $row['total_rows'];
 }
@@ -53,11 +53,11 @@ $query .= 'ORDER BY id ASC ';
 $filter_query = $query . 'LIMIT '.$start.', '.$limit.'';
 
 $statement = $pdoConnect->prepare($query);
-$statement->execute(array(":user_type" => 3, ":status" => "Y"));
+$statement->execute(array(":user_type" => 2, ":status" => "Y"));
 $total_data = $statement->rowCount();
 
 $statement = $pdoConnect->prepare($filter_query);
-$statement->execute(array(":user_type" => 3, ":status" => "Y"));
+$statement->execute(array(":user_type" => 2, ":status" => "Y"));
 $total_filter_data = $statement->rowCount();
 
 if($total_data > 0)
