@@ -33,6 +33,12 @@ include_once 'header.php';
 					<span class="text">User Account</span>
 				</a>
 			</li>
+			<li>
+				<a href="pending-user">
+					<i class='bx bxs-user-account'></i>
+					<span class="text">Pending User</span>
+				</a>
+			</li>
 		</ul>
 		<ul class="side-menu top">
 			<li class="active">

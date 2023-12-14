@@ -136,6 +136,14 @@ public function systemLogo(){
       exit;
      }
     }
+    else if($userRow['status']=="D"){
+      $_SESSION['status_title'] = "Sorry !";
+      $_SESSION['status'] = "Your application as an agent is decline, sorry for inconvenience.";
+      $_SESSION['status_code'] = "error";
+      $_SESSION['status_timer'] = 10000000;
+     header("Location: ../../../signin");
+     exit;
+    }
     else
     {
       $_SESSION['status_title'] = "Sorry !";

@@ -7,7 +7,7 @@ include_once 'header.php';
     <?php
     include_once '../../configuration/header3.php';
     ?>
-	<title>Dashboard</title>
+	<title>Pending User Account</title>
 </head>
 <body>
 
@@ -17,10 +17,11 @@ include_once 'header.php';
 	<!-- SIDEBAR -->
 	<section id="sidebar">
 		<a href="" class="brand">
-			<span class="text">MAGRENT</span>
+		<span class="text">MAGRENT</span>
+
 		</a>
 		<ul class="side-menu top">
-			<li  class="active">
+			<li>
 				<a href="./">
 					<i class='bx bxs-dashboard' ></i>
 					<span class="text">Dashboard</span>
@@ -32,15 +33,15 @@ include_once 'header.php';
 					<span class="text">User Account</span>
 				</a>
 			</li>
-			<li>
+            <li class="active">
 				<a href="pending-user">
-					<i class='bx bxs-user-account'></i>
+					<i class='bx bxs-user-plus'></i>
 					<span class="text">Pending User</span>
 				</a>
 			</li>
 		</ul>
 		<ul class="side-menu top">
-			<li>
+			<li >
 				<a href="settings">
 					<i class='bx bxs-cog' ></i>
 					<span class="text">Settings</span>
@@ -60,6 +61,7 @@ include_once 'header.php';
 			</li>
 		</ul>
 	</section>
+	<!-- SIDEBAR -->
 	<!-- SIDEBAR -->
 
 
@@ -87,39 +89,36 @@ include_once 'header.php';
 		<main>
 			<div class="head-title">
 				<div class="left">
-					<h1>Dashboard</h1>
+					<h1>Pending Agent Account</h1>
 					<ul class="breadcrumb">
 						<li>
 							<a class="active" href="./">Home</a>
 						</li>
 						<li>|</li>
 						<li>
-							<a href="">Dashboard</a>
+							<a href="">Pending Agent Account</a>
 						</li>
 					</ul>
 				</div>
 			</div>
+			<div class="table-data">
+				<div class="order">
+					<div class="head">
+						<h3><i class='bx bxs-user-account' ></i> List of Pending Agent Account</h3>
+					</div>
+                    <!-- BODY -->
+                    <section class="data-table">
+                        <div class="searchBx">
+                            <input type="input" placeholder="Search User . . . . . ." class="search" name="search_box" id="search_box"><button class="searchBtn"><i class="bx bx-search icon"></i></button>
+                        </div>
 
-			<ul class="dashboard_data">
-				<li>
-					<i class='bx bx-user-circle'></i>
-					<span class="text">
-					<?php
-								$pdoQuery = "SELECT * FROM 	users WHERE user_type = :user_type";
-								$pdoResult1 = $pdoConnect->prepare($pdoQuery);
-								$pdoResult1->execute(array(":user_type" => 2));
+                        <div class="table">
+                        <div id="dynamic_content">
+                        </div>
 
-								$count = $pdoResult1->rowCount();
-
-								echo
-								"
-									<h3>$count</h3>
-								";
-							?>
-						<p>User Accounts</p>
-					</span>
-				</li>
-			</ul>
+                    </section>
+				</div>
+			</div>
 		</main>
 		<!-- MAIN -->
 	</section>
@@ -128,6 +127,41 @@ include_once 'header.php';
 	<?php
     include_once '../../configuration/footer3.php';
     ?>
+
+	<script>
+
+	//live search---------------------------------------------------------------------------------------//
+	$(document).ready(function(){
+
+	load_data(1);
+
+	function load_data(page, query = '')
+	{
+	$.ajax({
+		url:"tables/pending-agent-table.php",
+		method:"POST",
+		data:{page:page, query:query},
+		success:function(data)
+		{
+		$('#dynamic_content').html(data);
+		}
+	});
+	}
+
+	$(document).on('click', '.page-link', function(){
+	var page = $(this).data('page_number');
+	var query = $('#search_box').val();
+	load_data(page, query);
+	});
+
+	$('#search_box').keyup(function(){
+	var query = $('#search_box').val();
+	load_data(1, query);
+	});
+
+	});
+
+	</script>
 
 		<!-- SWEET ALERT -->
 		<?php

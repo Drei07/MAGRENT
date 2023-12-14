@@ -88,14 +88,52 @@ function getAgeVal(pid) {
 	}
 };
 
-//View Profile
+//View Pending Account
 $('.view').on('click', function (e) {
 	e.preventDefault();
 	const href = $(this).attr('href')
 
 	swal({
 		title: "View?",
-		text: "Do you want to view this data?",
+		text: "Do you want to view this agent data?",
+		icon: "warning",
+		buttons: true,
+		dangerMode: true,
+	})
+		.then((willDelete) => {
+			if (willDelete) {
+				document.location.href = href;
+			}
+		});
+})
+
+//Delete Profile
+$('.delete_agent_account').on('click', function (e) {
+	e.preventDefault();
+	const href = $(this).attr('href')
+
+	swal({
+		title: "Delete?",
+		text: "Do you want to delete this request?",
+		icon: "warning",
+		buttons: true,
+		dangerMode: true,
+	})
+		.then((willDelete) => {
+			if (willDelete) {
+				document.location.href = href;
+			}
+		});
+})
+
+//View Pending Account
+$('.accept_agent_account').on('click', function (e) {
+	e.preventDefault();
+	const href = $(this).attr('href')
+
+	swal({
+		title: "Accept?",
+		text: "Do you want to accept this agent as part of MAGRENT?",
 		icon: "warning",
 		buttons: true,
 		dangerMode: true,
@@ -221,24 +259,6 @@ $('.print').on('click', function (e) {
 		});
 })
 
-//print
-$('.view').on('click', function (e) {
-	e.preventDefault();
-	const href = $(this).attr('href')
-
-	swal({
-		title: "View?",
-		text: "Do you want to view this file?",
-		icon: "info",
-		buttons: true,
-		dangerMode: true,
-	})
-		.then((willDelete) => {
-			if (willDelete) {
-				document.location.href = href;
-			}
-		});
-})
 
 //remove
 $('.remove').on('click', function (e) {

@@ -281,7 +281,7 @@ border-right-color: var(--main);
 	background: var(--main);
 }
 #sidebar .side-menu.top li.active a i{
-	color: var(--icon-pink);
+	color: var(--light-main);
 }
 #sidebar.hide .side-menu li a {
 	width: calc(48px - (4px * 2));
@@ -800,9 +800,9 @@ border-right-color: var(--main);
 	padding-left: 6px;
 }
 #content main .table-data .order table td img {
-	width: 36px;
-	height: 36px;
-	border-radius: 50%;
+	width: 100px;
+	height: 100px;
+	border-radius: 10px;
 	object-fit: cover;
 }
 #content main .table-data .order table tbody tr:hover {

@@ -196,6 +196,8 @@ public function mainUrl(){
   $mail->SetFrom($smtp_email, $system_name);
   $mail->Subject    = $subject;
   $mail->MsgHTML($message);
+  $imagePath = __DIR__ . '/../../../src/images/main_logo/logo.png';
+  $mail->AddEmbeddedImage($imagePath, 'logo', 'logo.png');
   $mail->Send();
  } 
 }

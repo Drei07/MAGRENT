@@ -27,15 +27,21 @@ include_once 'header.php';
 					<span class="text">Dashboard</span>
 				</a>
 			</li>
-			<li>
+			<li class="active">
 				<a href="user">
 					<i class='bx bxs-user-plus'></i>
 					<span class="text">User Account</span>
 				</a>
 			</li>
+			<li>
+				<a href="pending-user">
+					<i class='bx bxs-user-account'></i>
+					<span class="text">Pending User</span>
+				</a>
+			</li>
 		</ul>
 		<ul class="side-menu top">
-			<li class="active">
+			<li >
 				<a href="settings">
 					<i class='bx bxs-cog' ></i>
 					<span class="text">Settings</span>
@@ -94,9 +100,6 @@ include_once 'header.php';
 						</li>
 					</ul>
 				</div>
-			</div>
-            <div class="modal-button">
-				<button type="button" data-bs-toggle="modal" data-bs-target="#classModal" class="btn-dark"><i class='bx bxs-plus-circle'></i> Add User Account</button>
 			</div>
 			<div class="table-data">
 				<div class="order">

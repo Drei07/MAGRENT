@@ -117,7 +117,7 @@ if(isset($_GET['id']) && isset($_GET['code']))
                             <li><a href="<?php echo $config->getSystemInstagram() ?>"><i class="fab fa-instagram"></i></a></li>
                         </ul>
                         <div class="sign-box">
-                            <a href="./"><i class="fas fa-user"></i>Sign In</a>
+                            <a href="../../signin"><i class="fas fa-user"></i>Sign In</a>
                         </div>
                     </div>
                 </div>
@@ -140,10 +140,10 @@ if(isset($_GET['id']) && isset($_GET['code']))
                                 <div class="collapse navbar-collapse show clearfix" id="navbarSupportedContent">
                                     <ul class="navigation clearfix">
                                         <li class=""><a href="../../"><span>Home</span></a></li>
-                                        <li class=""><a href="partners"><span>Became A Partner</span></a></li>
-                                        <li class=""><a href="find-home"><span>Find A Home</span></a></li>
-                                        <li class=""><a href="about-us"><span>About Us</span></a></li>
-                                        <li><a href="contact-us"><span>Contact Us</span></a></li>
+                                        <li class=""><a href="../../partners"><span>Became A Partner</span></a></li>
+                                        <li class=""><a href="../../find-home"><span>Find A Home</span></a></li>
+                                        <li class=""><a href="../../about-us"><span>About Us</span></a></li>
+                                        <li><a href="../../contact-us"><span>Contact Us</span></a></li>
                                     </ul>
                                 </div>
                             </nav>

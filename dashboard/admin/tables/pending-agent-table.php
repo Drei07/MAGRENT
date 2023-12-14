@@ -16,7 +16,7 @@ function get_total_row($pdoConnect)
 {
   $pdoQuery = "SELECT COUNT(*) as total_rows FROM users WHERE user_type = :user_type AND status = :status";
   $pdoResult = $pdoConnect->prepare($pdoQuery);
-  $pdoResult->execute(array(":user_type" => 3, ":status" => "Y"));
+  $pdoResult->execute(array(":user_type" => 3, ":status" => "N"));
   $row = $pdoResult->fetch(PDO::FETCH_ASSOC);
   return $row['total_rows'];
 }
@@ -53,11 +53,11 @@ $query .= 'ORDER BY id ASC ';
 $filter_query = $query . 'LIMIT '.$start.', '.$limit.'';
 
 $statement = $pdoConnect->prepare($query);
-$statement->execute(array(":user_type" => 3, ":status" => "Y"));
+$statement->execute(array(":user_type" => 3, ":status" => "N"));
 $total_data = $statement->rowCount();
 
 $statement = $pdoConnect->prepare($filter_query);
-$statement->execute(array(":user_type" => 3, ":status" => "Y"));
+$statement->execute(array(":user_type" => 3 , ":status" => "N"));
 $total_filter_data = $statement->rowCount();
 
 if($total_data > 0)
@@ -67,7 +67,6 @@ $output = '
       Showing ' . ($start + 1) . ' to ' . min($start + $limit, $total_data) . ' of ' . $total_record . ' entries
     </div>
     <thead>
-    <th>STATUS</th>
     <th>NAME</th>
     <th>EMAIL</th>
     <th>VALID ID</th>
@@ -77,27 +76,20 @@ $output = '
   while($row=$statement->fetch(PDO::FETCH_ASSOC))
   {
 
-    if ($row["account_status"] == "active") {
-      $button = '<button type="button" class="btn btn-danger V"><a href="controller/agent-controller?agent_id='.$row["id"].'&disabled_agent=1" class="delete"><i class="bx bxs-trash"></i></a></button>';
-      $status = '<button type="button" class="btn btn-success V" style="width: 80px;">Active</button>';
-    
-    } else if ($row["account_status"] == "disabled") {
-      $button = '<button type="button" class="btn btn-warning V"><a href="controller/agent-controller?agent_id='.$row["id"].'&activate_agent=1" class="activate">Activate</a></button>';
-      $status = '<button type="button" class="btn btn-danger V" style="width: 80px;">Disabled</button>';
-    }
 
     $output .= '
     <tr>
-      <td>'.$status.'</td>
-      <td>'.$row["last_name"].', '.$row["first_name"].' '.$row["middle_name"].'</td>
+      <td>'.$row["last_name"].', '.$row["first_name"].' '.$row["middle_name"].'
+      </td>
       <td>'.$row["email"].'</td>
       <td><a href="../../src/images/identification/' . $row["valid_id"] . '" data-lightbox="images" data-title="Agent Valid ID"><img src="../../src/images/identification/' . $row["valid_id"] . '"></a></td>
-
       <td>
-      '.$button.'
+        <button type="button" class="btn btn-success V"><a href="controller/agent-controller?agent_id='.$row["id"].'&accept_application=1" class="accept_agent_account">Accept</a></button>
+        <button type="button" class="btn btn-danger V"><a href="controller/agent-controller?agent_id='.$row["id"].'&delete_application=1" class="delete_agent_account"><i class="bx bx-trash"></i></a></button>
       </td>        
     </tr>
     ';
+    
   }
 }
 else
@@ -231,7 +223,7 @@ echo $output;
 ?>
 
 <script src="../../src/node_modules/sweetalert/dist/sweetalert.min.js"></script>
-<script src="../../src/js/form.js"></script>
+<script src="../../src/js/form.js"></script><!-- Add these links to include Lightbox2 CSS and JS files -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/css/lightbox.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/js/lightbox.min.js"></script>
 
