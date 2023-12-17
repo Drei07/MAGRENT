@@ -44,7 +44,7 @@ class PropertyController
         $stmt_property_post->execute(array(":id" => $user_id));
         $property_post_data = $stmt_property_post->fetch(PDO::FETCH_ASSOC);
 
-        if($stmt_property_post->rowCount() > $number_of_post){
+        if($stmt_property_post->rowCount() >= $number_of_post){
             $_SESSION['status_title'] = "Oops!";
             $_SESSION['status'] = "All Credits have been used, Please choose a package to get more credits, Thank you";
             $_SESSION['status_code'] = "error";
