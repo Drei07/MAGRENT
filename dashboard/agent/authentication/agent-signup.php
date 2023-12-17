@@ -25,13 +25,13 @@ class AgentController
         $this->conn = $db;
     }
 
-    public function agentRegistration($first_name, $middle_name, $last_name, $email, $user_type,  $valid_id, $tokencode, $hash_password)
+    public function agentRegistration($first_name, $middle_name, $last_name, $email, $user_type,  $valid_id, $tokencode, $hash_password, $package_type)
     {
 
             $folder = "../../../src/images/identification/" . basename($valid_id);
 
             if (move_uploaded_file($_FILES['valid_id']['tmp_name'], $folder)) {
-                $this->agent->register($first_name, $middle_name, $last_name, $email, $valid_id, $hash_password, $tokencode, $user_type);
+                $this->agent->register($first_name, $middle_name, $last_name, $email, $valid_id, $hash_password, $tokencode, $user_type, $package_type);
                 $id = $this->agent->lasdID();
                 $key = base64_encode($id);
                 $id = $key;
@@ -141,6 +141,7 @@ if (isset($_POST['btn-register-agent'])) {
     $user_type          = 2;
     $valid_id           = $_FILES['valid_id']['name'];
     $tokencode          = md5(uniqid(rand()));
+    $package_type       = 1;//default
 
 
     // Generate Password
@@ -149,5 +150,5 @@ if (isset($_POST['btn-register-agent'])) {
     $hash_password      = substr($shuffle, 0, 8);
 
     $register_agent = new AgentController();
-    $register_agent->agentRegistration($first_name, $middle_name, $last_name, $email, $user_type, $valid_id, $tokencode, $hash_password);
+    $register_agent->agentRegistration($first_name, $middle_name, $last_name, $email, $user_type, $valid_id, $tokencode, $hash_password, $package_type );
 }

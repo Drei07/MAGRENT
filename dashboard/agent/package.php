@@ -3,11 +3,13 @@ include_once 'header.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <?php include_once '../../configuration/header2.php'; ?>
-    <title>MAGRENT | Pricing</title>
+    <title>MAGRENT | Package</title>
 </head>
 <!-- page wrapper -->
+
 <body>
     <div class="boxed_wrapper">
         <!-- preloader -->
@@ -60,7 +62,7 @@ include_once 'header.php';
                             <li><a href="profile"><i class="fas fa-user"></i>&nbsp;&nbsp;<?php echo $user_email ?></a></li>
                         </ul>
                         <div class="sign-box">
-                        <a href="authentication/agent-signout" class="btn-signout"><i class="fa fa-sign-out"></i>Sign out</a>
+                            <a href="authentication/agent-signout" class="btn-signout"><i class="fa fa-sign-out"></i>Sign out</a>
                         </div>
                     </div>
                 </div>
@@ -83,7 +85,7 @@ include_once 'header.php';
                                 <div class="collapse navbar-collapse show clearfix" id="navbarSupportedContent">
                                     <ul class="navigation clearfix">
                                         <li class=""><a href="./"><span>Home</span></a></li>
-                                        <li class="current"><a href="pricing"><span>Pricing</span></a></li>
+                                        <li class="current"><a href="package"><span>Package</span></a></li>
                                         <li class="dropdown"><a href="#"><span>Property</span></a>
                                             <ul>
                                                 <li><a href="property">Property</a></li>
@@ -152,169 +154,66 @@ include_once 'header.php';
             </div>
             <div class="auto-container">
                 <div class="content-box clearfix">
-                    <h1>Pricing</h1>
+                    <h1>Package</h1>
                     <ul class="bread-crumb clearfix">
                         <li><a href="./">Home</a></li>
-                        <li>Pricing</li>
+                        <li>Package</li>
                     </ul>
                 </div>
             </div>
         </section>
         <!--End Page Title-->
 
-         <!-- pricing-section -->
-         <section class="pricing-section sec-pad centred">
+        <!-- pricing-section -->
+        <section class="pricing-section sec-pad centred">
             <div class="auto-container">
                 <div class="tabs-box">
-                    <ul class="tab-btns tab-buttons clearfix">
-                        <li class="tab-btn active-btn" data-tab="#tab-1">Monthly</li>
-                        <li class="tab-btn" data-tab="#tab-2">Yearly</li>
-                    </ul>
+                    <div class="sec-title">
+                        <h5>Choose a Package</h5>
+                    </div>
                     <div class="tabs-content">
                         <div class="tab active-tab" id="tab-1">
                             <div class="row clearfix">
-                                <div class="col-lg-4 col-md-6 col-sm-12 pricing-block">
-                                    <div class="pricing-block-one wow fadeInUp animated" data-wow-delay="00ms" data-wow-duration="1500ms">
-                                        <div class="pricing-table">
-                                            <div class="table-header">
-                                                <div class="shape-1" style="background-image: url(../../src/images/shape/shape-4.png);"></div>
-                                                <div class="shape-2" style="background-image: url(../../src/images/shape/shape-5.png);"></div>
-                                                <h4>Basic Pack</h4>
-                                                <h2>$39 <span>/ mo</span></h2>
-                                            </div>
-                                            <div class="table-content">
-                                                <ul class="feature-list clearfix">
-                                                    <li>1 Bathroom Cleaning</li>
-                                                    <li>Up to 3 Bedrooms Cleaning</li>
-                                                    <li>1 Livingroom Cleaning</li>
-                                                    <li>Kitchen Cleaning</li>
-                                                </ul>
-                                            </div>
-                                            <div class="table-footer">
-                                                <a href="pricing.html" class="link-btn">Buy Now</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4 col-md-6 col-sm-12 pricing-block">
-                                    <div class="pricing-block-one wow fadeInUp animated" data-wow-delay="300ms" data-wow-duration="1500ms">
-                                        <div class="pricing-table">
-                                            <div class="table-header">
-                                                <div class="shape-1" style="background-image: url(../../src/images/shape/shape-4.png);"></div>
-                                                <div class="shape-2" style="background-image: url(../../src/images/shape/shape-5.png);"></div>
-                                                <h4>Premium Pack</h4>
-                                                <h2>$49 <span>/ mo</span></h2>
-                                            </div>
-                                            <div class="table-content">
-                                                <ul class="feature-list clearfix">
-                                                    <li>1 Bathroom Cleaning</li>
-                                                    <li>Up to 3 Bedrooms Cleaning</li>
-                                                    <li>1 Livingroom Cleaning</li>
-                                                    <li>Kitchen Cleaning</li>
-                                                </ul>
-                                            </div>
-                                            <div class="table-footer">
-                                                <a href="pricing.html" class="link-btn">Buy Now</a>
+                                <?php
+                                
+                                    $stmt = $user->runQuery("SELECT * FROM package");
+                                    $stmt->execute();
+                                
+                                    $firstRow = true; // Flag to track the first row
+                                
+                                    if ($stmt->rowCount() >= 1) {
+                                        while ($package_data = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                                            // Skip the first row
+                                            if ($firstRow) {
+                                                $firstRow = false;
+                                                continue;
+                                            }
+                                ?>
+                                    <div class="col-lg-4 col-md-6 col-sm-12 pricing-block">
+                                        <div class="pricing-block-one wow fadeInUp animated" data-wow-delay="00ms" data-wow-duration="1500ms">
+                                            <div class="pricing-table">
+                                                <div class="table-header">
+                                                    <div class="shape-1" style="background-image: url(../../src/images/shape/shape-4.png);"></div>
+                                                    <div class="shape-2" style="background-image: url(../../src/images/shape/shape-5.png);"></div>
+                                                    <h4><?php echo $package_data['package']?></h4>
+                                                    <h2>₱<?php echo $package_data['price']?><span>/ annualy</span></h2>
+                                                </div>
+                                                <div class="table-content">
+                                                    <ul class="feature-list clearfix">
+                                                        <li>Up to <?php echo $package_data['number_of_post']?> Property</li>
+
+                                                    </ul>
+                                                </div>
+                                                <div class="table-footer"  onclick="setSessionValues(<?php echo $package_data['id'] ?>)">
+                                                    <a href="" onclick="setSessionValues(<?php echo $package_data['id'] ?>)" class="link-btn">Buy Now</a>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-lg-4 col-md-6 col-sm-12 pricing-block">
-                                    <div class="pricing-block-one wow fadeInUp animated" data-wow-delay="600ms" data-wow-duration="1500ms">
-                                        <div class="pricing-table">
-                                            <div class="table-header">
-                                                <div class="shape-1" style="background-image: url(../../src/images/shape/shape-4.png);"></div>
-                                                <div class="shape-2" style="background-image: url(../../src/images/shape/shape-5.png);"></div>
-                                                <h4>Platinam Pack</h4>
-                                                <h2>$59 <span>/ mo</span></h2>
-                                            </div>
-                                            <div class="table-content">
-                                                <ul class="feature-list clearfix">
-                                                    <li>1 Bathroom Cleaning</li>
-                                                    <li>Up to 3 Bedrooms Cleaning</li>
-                                                    <li>1 Livingroom Cleaning</li>
-                                                    <li>Kitchen Cleaning</li>
-                                                </ul>
-                                            </div>
-                                            <div class="table-footer">
-                                                <a href="pricing.html" class="link-btn">Buy Now</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="tab" id="tab-2">
-                            <div class="row clearfix">
-                                <div class="col-lg-4 col-md-6 col-sm-12 pricing-block">
-                                    <div class="pricing-block-one">
-                                        <div class="pricing-table">
-                                            <div class="table-header">
-                                                <div class="shape-1" style="background-image: url(../../src/images/shape/shape-4.png);"></div>
-                                                <div class="shape-2" style="background-image: url(../../src/images/shape/shape-5.png);"></div>
-                                                <h4>Basic Pack</h4>
-                                                <h2>$59 <span>/ ye</span></h2>
-                                            </div>
-                                            <div class="table-content">
-                                                <ul class="feature-list clearfix">
-                                                    <li>1 Bathroom Cleaning</li>
-                                                    <li>Up to 3 Bedrooms Cleaning</li>
-                                                    <li>1 Livingroom Cleaning</li>
-                                                    <li>Kitchen Cleaning</li>
-                                                </ul>
-                                            </div>
-                                            <div class="table-footer">
-                                                <a href="pricing.html" class="link-btn">Buy Now</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4 col-md-6 col-sm-12 pricing-block">
-                                    <div class="pricing-block-one">
-                                        <div class="pricing-table">
-                                            <div class="table-header">
-                                                <div class="shape-1" style="background-image: url(../../src/images/shape/shape-4.png);"></div>
-                                                <div class="shape-2" style="background-image: url(../../src/images/shape/shape-5.png);"></div>
-                                                <h4>Premium Pack</h4>
-                                                <h2>$89 <span>/ ye</span></h2>
-                                            </div>
-                                            <div class="table-content">
-                                                <ul class="feature-list clearfix">
-                                                    <li>1 Bathroom Cleaning</li>
-                                                    <li>Up to 3 Bedrooms Cleaning</li>
-                                                    <li>1 Livingroom Cleaning</li>
-                                                    <li>Kitchen Cleaning</li>
-                                                </ul>
-                                            </div>
-                                            <div class="table-footer">
-                                                <a href="pricing.html" class="link-btn">Buy Now</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4 col-md-6 col-sm-12 pricing-block">
-                                    <div class="pricing-block-one">
-                                        <div class="pricing-table">
-                                            <div class="table-header">
-                                                <div class="shape-1" style="background-image: url(../../src/images/shape/shape-4.png);"></div>
-                                                <div class="shape-2" style="background-image: url(../../src/images/shape/shape-5.png);"></div>
-                                                <h4>Platinam Pack</h4>
-                                                <h2>$99 <span>/ ye</span></h2>
-                                            </div>
-                                            <div class="table-content">
-                                                <ul class="feature-list clearfix">
-                                                    <li>1 Bathroom Cleaning</li>
-                                                    <li>Up to 3 Bedrooms Cleaning</li>
-                                                    <li>1 Livingroom Cleaning</li>
-                                                    <li>Kitchen Cleaning</li>
-                                                </ul>
-                                            </div>
-                                            <div class="table-footer">
-                                                <a href="pricing.html" class="link-btn">Buy Now</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                <?php
+                                        }
+                                    }
+                                ?>
                             </div>
                         </div>
                     </div>
@@ -394,6 +293,24 @@ include_once 'header.php';
 
     <!-- script -->
     <?php include_once '../../configuration/footer2.php'; ?>
+    <script>
+        function setSessionValues(packageId) {
+			fetch('payment.php', {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/x-www-form-urlencoded',
+					},
+					body: 'package_id=' + encodeURIComponent(packageId),
+				})
+				.then(response => {
+					window.location.href = 'payment';
+				})
+				.catch(error => {
+					console.error('Error:', error);
+				});
+		}
+
+    </script>
     <?php include_once '../../configuration/sweetalert.php'; ?>
 
 </body><!-- End of .page_wrapper -->

@@ -172,31 +172,43 @@
                         <div class="tab active-tab" id="tab-1">
                             <div class="gallery-box">
                                 <h4><i class="icon-42"></i>General Information:</h4>
-                                <form action="dashboard/agent/authentication/agent-signup.php" method="POST" novalidate enctype="multipart/form-data">
+                                <form action="dashboard/agent/authentication/agent-signup.php" method="POST" class="needs-validation" novalidate enctype="multipart/form-data">
                                     <div class="inner-box default-form">
                                         <div class="row clearfix">
                                             <div class="col-lg-6 col-md-6 col-sm-12 column">
                                                 <div class="field-input">
                                                     <label>First Name <span style="font-size:17px; margin-top: 2rem; color:red; opacity:0.8;">*</span></label>
-                                                    <input type="text" onkeyup="this.value = this.value.toUpperCase();" name="first_name" require placeholder="Jose">
+                                                    <input type="text" class="form-control"  onkeyup="this.value = this.value.toUpperCase();" name="first_name" required placeholder="Jose">
+                                                    <div class="invalid-feedback">
+                                                        Please provide a First Name.
+                                                    </div>
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-md-6 col-sm-12 column">
                                                 <div class="field-input">
                                                     <label>Middle Name</label>
-                                                    <input type="text" onkeyup="this.value = this.value.toUpperCase();" name="middle_name" require placeholder="Manalo">
+                                                    <input type="text" class="form-control" onkeyup="this.value = this.value.toUpperCase();" name="middle_name" placeholder="Manalo">
+                                                    <div class="invalid-feedback">
+                                                        Please provide a Middle Name.
+                                                    </div>
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-md-6 col-sm-12 column">
                                                 <div class="field-input">
                                                     <label>Last Name <span style="font-size:17px; margin-top: 2rem; color:red; opacity:0.8;">*</span></label>
-                                                    <input type="text" onkeyup="this.value = this.value.toUpperCase();" name="last_name" require placeholder="Cruz">
+                                                    <input type="text" class="form-control"  onkeyup="this.value = this.value.toUpperCase();" name="last_name" required placeholder="Cruz">
+                                                    <div class="invalid-feedback">
+                                                        Please provide a Last Name.
+                                                    </div>
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-md-6 col-sm-12 column">
                                                 <div class="field-input">
                                                     <label>Email address <span style="font-size:17px; margin-top: 2rem; color:red; opacity:0.8;">*</span></label>
-                                                    <input type="email" name="email" require placeholder="sample@gmail.com">
+                                                    <input type="email" class="form-control"  name="email" required placeholder="sample@gmail.com">
+                                                    <div class="invalid-feedback">
+                                                        Please provide an Email.
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -212,11 +224,14 @@
                                             <div id="image-preview-container">
                                                 <img id="image-preview" style="max-width: 50%; margin: 10px; border-radius: 10px;">
                                             </div>
+                                            <div class="invalid-feedback">
+                                                Please provide a Valid ID.
+                                            </div>
                                         </div>
                                     </div>
                                     
                                     <div class="form-group message-btn">
-                                        <button type="submit" class="theme-btn btn-one" name="btn-register-agent">Register</button>
+                                        <button type="submit" class="theme-btn btn-one" name="btn-register-agent" onclick="submitForm()">Register</button>
                                     </div>
                                 </form>
                             </div>

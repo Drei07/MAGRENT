@@ -1,12 +1,29 @@
 <?php
 include_once 'header.php';
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Retrieve the values from the POST request
+    $packageId = isset($_POST['package_id']) ? $_POST['package_id'] : '';
+
+    // Store the values in session variables
+    $_SESSION['package_id'] = $packageId;
+}
+
+// Retrieve the values from session variables
+$packageId = isset($_SESSION['package_id']) ? $_SESSION['package_id'] : '';
+
+//property data
+$stmt = $user->runQuery("SELECT * FROM package WHERE id=:id");
+$stmt->execute(array(":id" => $packageId));
+$packageData = $stmt->fetch(PDO::FETCH_ASSOC);
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <?php include_once '../../configuration/header2.php'; ?>
-    <title>MAGRENT | Property</title>
+    <title>MAGRENT | Payment</title>
 </head>
 <!-- page wrapper -->
 
@@ -85,8 +102,8 @@ include_once 'header.php';
                                 <div class="collapse navbar-collapse show clearfix" id="navbarSupportedContent">
                                     <ul class="navigation clearfix">
                                         <li class=""><a href="./"><span>Home</span></a></li>
-                                        <li class=""><a href="package"><span>Package</span></a></li>
-                                        <li class="dropdown current"><a href="#"><span>Property</span></a>
+                                        <li class="current"><a href="package"><span>Package</span></a></li>
+                                        <li class="dropdown"><a href="#"><span>Property</span></a>
                                             <ul>
                                                 <li><a href="property">Property</a></li>
                                                 <li><a href="property-registration">Property Registration</a></li>
@@ -154,104 +171,78 @@ include_once 'header.php';
             </div>
             <div class="auto-container">
                 <div class="content-box clearfix">
-                    <h1>My Property</h1>
+                    <h1>Payment</h1>
                     <ul class="bread-crumb clearfix">
                         <li><a href="./">Home</a></li>
-                        <li>My Property</li>
+                        <li><a href="package">Package</a></li>
+                        <li>Payment</li>
                     </ul>
                 </div>
             </div>
         </section>
         <!--End Page Title-->
 
-        <div class="page-content clearfix">
-            <!-- deals-style-two -->
-            <section class="deals-style-two">
-                <div class="auto-container">
-                    <div class="item-shorting clearfix">
-                        <div class="left-column pull-left">
-                            <h5>Search Reasults: <span>Showing 1-1 of 1 Listings</span></h5>
-                        </div>
-                    </div>
-                    <div class="wrapper list">
-                        <div class="deals-list-content list-item">
-                            <?php
-                            $stmt1 = $user->runQuery("SELECT * FROM property WHERE user_id=:user_id");
-                            $stmt1->execute(array(":user_id" => $user_id));
-                            if ($stmt1->rowCount() >= 1) {
-                                while ($property_data = $stmt1->fetch(PDO::FETCH_ASSOC)) {
-                                    extract($property_data);
-
-                                    $stmt2 = $user->runQuery("SELECT * FROM property_gallery WHERE property_id=:property_id");
-                                    $stmt2->execute(array(":property_id" => $property_data['id']));
-                                    $property_gallery_data = $stmt2->fetch(PDO::FETCH_ASSOC);
-                            ?>
-                                    <div class="deals-block-one">
-                                        <div class="inner-box">
-                                            <div class="image-box">
-                                                <figure class="image"><img src="../../src/images/property_gallery/<?php echo $property_gallery_data['picture_1'] ?>" style="height: 100%;" alt=""></figure>
-                                                <div class="batch"><i class="icon-11"></i></div>
-                                                <span class="category">Featured</span>
+        <!-- myprofile-section -->
+        <section class="myprofile-section sec-pad">
+            <div class="auto-container">
+                <div class="tabs-box">
+                    <div class="tabs-content">
+                        <div class="tab active-tab" id="tab-1">
+                            <div class="gallery-box">
+                                <h4><i class='bx bxs-credit-card'></i>Payment Details</h4>
+                                <form action="controller/payment-controller.php" method="POST" class="needs-validation" novalidate  enctype="multipart/form-data">
+                                    <input type="hidden" name="user_id" value="<?php echo $user_id?>">
+                                    <input type="hidden" name="package_id" value="<?php echo $packageId?>">
+                                    <div class="upload-inner centred">
+                                        <div class="upload-box">
+                                            <label>You choose <strong><?php echo $packageData['package']?></strong> package, Scan this QR code to pay <strong>₱<?php echo $packageData['price']?></strong> with GCash</label>
+                                            <!-- Image Preview Container -->
+                                            <div >
+                                                <img src="../../src/images/gcash_qrcode/frame.png" style="max-width: 40%; margin: 10px; border-radius: 20px;">
                                             </div>
-                                            <div class="lower-content">
-                                                <div class="title-text">
-                                                    <h4><a href="" onclick="setSessionValues(<?php echo $property_data['id'] ?>)"><?php echo $property_data['property_name'] ?></a></h4>
-                                                </div>
-                                                <div class="price-box clearfix">
-                                                    <div class="price-info pull-left">
-                                                        <h6>Start From</h6>
-                                                        <h4>₱ <?php echo number_format($property_data['property_price']); ?></h4>
+                                        
+                                        </div>
+                                    </div>
+                                    <div class="inner-box default-form">
+                                        <div class="row clearfix">
+                                            <div class="col-lg-12 col-md-6 col-sm-12 column">
+                                                <div class="field-input">
+                                                    <label>Reference Number <span style="font-size:17px; margin-top: 2rem; color:red; opacity:0.8;">*</span></label>
+                                                    <input type="text" class="form-control"  name="reference_number" required placeholder="">
+                                                    <div class="invalid-feedback">
+                                                        Please provide the Reference Number.
                                                     </div>
-                                                  
-                                                </div>
-                                                <p><?php
-                                                    $description = $property_data['property_description'];
-                                                    $wordLimit = 20; // Set your desired word limit
-
-                                                    // Explode the description into an array of words
-                                                    $words = explode(' ', $description);
-
-                                                    // Check if the number of words exceeds the limit
-                                                    if (count($words) > $wordLimit) {
-                                                        // Slice the array to get only the first $wordLimit words
-                                                        $shortDescription = implode(' ', array_slice($words, 0, $wordLimit));
-
-                                                        // Output the truncated description with "See more" link
-                                                        echo '<p>' . $shortDescription . '... <a href="" onclick="setSessionValues('.$property_data['id'].')" style="color: #2dbe6c;">See more</a></p>';
-                                                    } else {
-                                                        // If the description is within the word limit, display the full description
-                                                        echo '<p>' . $description . '</p>';
-                                                    }
-                                                    ?></p>
-
-                                                <ul class="more-details clearfix">
-                                                    <li><i class="icon-14"></i><?php echo $property_data['bedrooms'] ?> Beds</li>
-                                                    <li><i class="icon-15"></i><?php echo $property_data['bathrooms'] ?>  Baths</li>
-                                                </ul>
-                                                <div class="other-info-box clearfix" onclick="setSessionValues(<?php echo $property_data['id'] ?>)">
-                                                    <div class="btn-box pull-left"><a href=""  onclick="setSessionValues(<?php echo $property_data['id'] ?>)" class="theme-btn btn-two">See Details</a></div>
                                                 </div>
                                             </div>
                                         </div>
+                                        <label>Proof of payment (screenshot) <span style="font-size:17px; margin-top: 2rem; color:red; opacity:0.8;">*</span></label>
                                     </div>
-                                <?php
-                                }
-                            } else {
-                                ?>
-                                <!-- error message -->
-                            <?php
-                            }
-
-                            ?>
+                                    <div class="upload-inner centred">
+                                        <i class="fal fa-cloud-upload"></i>
+                                        <div class="upload-box">
+                                            <input type="file" class="form-control" name="proof_of_payment" id="check14" style="height: 33px;" required onchange="previewImage(event, 'image-preview-container-4', 'image-preview-4')">
+                                            <label for="check14">Click here to upload your screenshot</label>
+                                            <!-- Image Preview Container -->
+                                            <div id="image-preview-container-4">
+                                                <img id="image-preview-4" style="max-width: 50%; margin: 10px; border-radius: 10px;">
+                                            </div>
+                                            <div class="invalid-feedback">
+                                                Please provide an Proof of payment.
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group message-btn">
+                                        <button type="submit" class="theme-btn btn-one" name="btn-add-payment" onclick="submitForm()">Confirm</button>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </section>
-            <!-- deals-style-two end -->
+            </div>
         </div>
-
-    </div>
-    <!-- page-content end -->
+    </section>
+    <!-- myprofile-section end -->
 
     <!-- main-footer -->
     <footer class="main-footer">
@@ -324,24 +315,6 @@ include_once 'header.php';
 
     <!-- script -->
     <?php include_once '../../configuration/footer2.php'; ?>
-    <script>
-        function setSessionValues(propertyId) {
-			fetch('property-details.php', {
-					method: 'POST',
-					headers: {
-						'Content-Type': 'application/x-www-form-urlencoded',
-					},
-					body: 'property_id=' + encodeURIComponent(propertyId),
-				})
-				.then(response => {
-					window.location.href = 'property-details';
-				})
-				.catch(error => {
-					console.error('Error:', error);
-				});
-		}
-
-    </script>
     <?php include_once '../../configuration/sweetalert.php'; ?>
 
 </body><!-- End of .page_wrapper -->

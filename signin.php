@@ -179,18 +179,24 @@ include_once 'dashboard/user/authentication/user-signin.php';
                                 <div class="tab active-tab" id="tab-1">
                                     <div class="inner-box">
                                         <h4>Sign in</h4>
-                                        <form action="dashboard/user/authentication/user-signin.php" method="post" class="default-form">
+                                        <form action="dashboard/user/authentication/user-signin.php" method="post" novalidate class="default-form needs-validation">
                                             <input type="hidden" id="g-token" name="g-token">    
                                             <div class="form-group">
                                                 <label>Email address</label>
-                                                <input type="email" name="email" required autofocus>
+                                                <input type="email" class="form-control" name="email" required autofocus>
+                                                <div class="invalid-feedback">
+                                                        Please provide your Email.
+                                                </div>
                                             </div>
                                             <div class="form-group">
                                                 <label>Password</label>
-                                                <input type="password" autocomplete="off" name="password" required data-eye>
+                                                <input type="password" class="form-control" autocomplete="off" name="password" required data-eye>
+                                                <div class="invalid-feedback">
+                                                        Please provide your Password.
+                                                </div>
                                             </div>
                                             <div class="form-group message-btn">
-                                                <button type="submit" class="theme-btn btn-one" name="btn-signin">Sign in</button>
+                                                <button type="submit" class="theme-btn btn-one" name="btn-signin" onclick="submitForm()">Sign in</button>
                                             </div>
                                         </form>
                                         <div class="othre-text">
@@ -201,25 +207,37 @@ include_once 'dashboard/user/authentication/user-signin.php';
                                 <div class="tab" id="tab-2">
                                     <div class="inner-box">
                                         <h4>User Sign Up</h4>
-                                        <form action="dashboard/user/authentication/user-signup.php" method="post" class="default-form">
+                                        <form action="dashboard/user/authentication/user-signup.php" method="post" class="default-form needs-validation" novalidate>
                                             <div class="form-group">
                                                 <label>First Name <span style="font-size:17px; margin-top: 2rem; color:red; opacity:0.8;">*</span></label>
-                                                <input type="text" onkeyup="this.value = this.value.toUpperCase();" name="first_name" required="">
+                                                <input type="text" class="form-control" onkeyup="this.value = this.value.toUpperCase();" name="first_name" required="">
+                                                <div class="invalid-feedback">
+                                                    Please provide a First Name.
+                                                </div>
                                             </div>
                                             <div class="form-group">
                                                 <label>Middle Name</label>
-                                                <input type="text" onkeyup="this.value = this.value.toUpperCase();" name="middle_name" required="">
+                                                <input type="text" class="form-control" onkeyup="this.value = this.value.toUpperCase();" name="middle_name">
+                                                <div class="invalid-feedback">
+                                                    Please provide a Middle Name.
+                                                </div>
                                             </div>
                                             <div class="form-group">
                                                 <label>Last Name <span style="font-size:17px; margin-top: 2rem; color:red; opacity:0.8;">*</span></label>
-                                                <input type="text" onkeyup="this.value = this.value.toUpperCase();" name="last_name" required="">
+                                                <input type="text" class="form-control" onkeyup="this.value = this.value.toUpperCase();" name="last_name" required="">
+                                                <div class="invalid-feedback">
+                                                    Please provide a Last Name.
+                                                </div>
                                             </div>
                                             <div class="form-group">
                                                 <label>Email address <span style="font-size:17px; margin-top: 2rem; color:red; opacity:0.8;">*</span></label>
-                                                <input type="email" name="email" required="">
+                                                <input type="email" class="form-control" name="email" required="">
+                                                <div class="invalid-feedback">
+                                                    Please provide a Email Address
+                                                </div>
                                             </div>
                                             <div class="form-group message-btn">
-                                                <button type="submit" class="theme-btn btn-one" name="btn-signup">Sign Up</button>
+                                                <button type="submit" class="theme-btn btn-one" name="btn-signup" onclick="submitForm()">Sign Up</button>
                                             </div>
                                         </form>
                                         <div class="othre-text">

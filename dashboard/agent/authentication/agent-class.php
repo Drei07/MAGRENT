@@ -74,13 +74,13 @@ public function systemLogo(){
   return $stmt;
  }
  
- public function register($first_name, $middle_name, $last_name, $email, $valid_id, $hash_password, $tokencode, $user_type)
+ public function register($first_name, $middle_name, $last_name, $email, $valid_id, $hash_password, $tokencode, $user_type, $package_type)
  {
   try
   {       
    $password = md5($hash_password);
-   $stmt = $this->conn->prepare("INSERT INTO users(first_name, middle_name, last_name, email, password, valid_id, tokencode, user_type) 
-                                        VALUES(:first_name, :middle_name, :last_name, :email, :password, :valid_id, :tokencode, :user_type)");
+   $stmt = $this->conn->prepare("INSERT INTO users(first_name, middle_name, last_name, email, password, valid_id, tokencode, user_type, package_id) 
+                                        VALUES(:first_name, :middle_name, :last_name, :email, :password, :valid_id, :tokencode, :user_type, :package_id)");
    
    $stmt->bindparam(":first_name",$first_name);
    $stmt->bindparam(":middle_name",$middle_name);
@@ -90,6 +90,8 @@ public function systemLogo(){
    $stmt->bindparam(":valid_id",$valid_id);
    $stmt->bindparam(":tokencode",$tokencode);
    $stmt->bindparam(":user_type",$user_type);
+   $stmt->bindparam(":package_id",$package_type);
+
    $stmt->execute(); 
    return $stmt;
   }

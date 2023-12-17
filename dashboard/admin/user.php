@@ -39,6 +39,18 @@ include_once 'header.php';
 					<span class="text">Pending User</span>
 				</a>
 			</li>
+			<li>
+				<a href="package">
+					<i class='bx bxs-package' ></i>
+					<span class="text">Package</span>
+				</a>
+			</li>
+			<li>
+				<a href="payment?status=?">
+					<i class='bx bxs-credit-card'></i>
+					<span class="text">Payment</span>
+				</a>
+			</li>
 		</ul>
 		<ul class="side-menu top">
 			<li >
@@ -163,24 +175,7 @@ include_once 'header.php';
 
 	</script>
 
-		<!-- SWEET ALERT -->
-		<?php
+<?php include_once '../../configuration/sweetalert.php'; ?>
 
-		if(isset($_SESSION['status']) && $_SESSION['status'] !='')
-		{
-		?>
-		<script>
-			swal({
-			title: "<?php echo $_SESSION['status_title']; ?>",
-			text: "<?php echo $_SESSION['status']; ?>",
-			icon: "<?php echo $_SESSION['status_code']; ?>",
-			button: false,
-			timer: <?php echo $_SESSION['status_timer']; ?>,
-			});
-		</script>
-		<?php
-		unset($_SESSION['status']);
-		}
-		?>
 </body>
 </html>

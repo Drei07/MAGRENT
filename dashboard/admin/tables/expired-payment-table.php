@@ -13,9 +13,9 @@ if(!$user->isUserLoggedIn())
 
 function get_total_row($pdoConnect)
 {
-  $pdoQuery = "SELECT COUNT(*) as total_rows FROM logs";
+  $pdoQuery = "SELECT COUNT(*) as total_rows FROM payment WHERE status = :status";
   $pdoResult = $pdoConnect->prepare($pdoQuery);
-  $pdoResult->execute();
+  $pdoResult->execute(array(":status" => "expired"));
   $row = $pdoResult->fetch(PDO::FETCH_ASSOC);
   return $row['total_rows'];
 }
@@ -34,13 +34,13 @@ else
 }
 
 $query = "
-SELECT * FROM logs
+SELECT * FROM payment WHERE status=:status
 ";
 $output = '';
 if($_POST['query'] != '')
 {
   $query .= '
-  WHERE activity LIKE "%'.str_replace(' ', '%', $_POST['query']).'%"
+  AND reference_number LIKE "%'.str_replace(' ', '%', $_POST['query']).'%"
   ';
 }
 
@@ -49,11 +49,11 @@ $query .= 'ORDER BY id DESC ';
 $filter_query = $query . 'LIMIT '.$start.', '.$limit.'';
 
 $statement = $pdoConnect->prepare($query);
-$statement->execute();
+$statement->execute(array(":status" => "expired"));
 $total_data = $statement->rowCount();
 
 $statement = $pdoConnect->prepare($filter_query);
-$statement->execute();
+$statement->execute(array(":status" => "expired"));
 $total_filter_data = $statement->rowCount();
 
 if($total_data > 0)
@@ -63,35 +63,47 @@ $output = '
     Showing ' . ($start + 1) . ' to ' . min($start + $limit, $total_data) . ' of ' . $total_record . ' entries
   </div>
     <thead>
-    <th>ACTIVITY ID</th>
-    <th>USER</th>
-    <th>ACTIVITY</th>
-    <th>DATE</th>
+    <th>EMAIL</th>
+    <th>PACKAGE</th>
+    <th>PRICE (PHP)</th>
+    <th>REFERENCE NUMBER</th>
+    <th>PROOF OF PAYMENT</th>
+    <th>START DATE</th>
+    <th>END DATE</th>
     </thead>
 ';
   while($row=$statement->fetch(PDO::FETCH_ASSOC))
   {
-
-    $user_id = $row["user_id"];
-
+    $user_id = $row['user_id'];
     $pdoQuery = "SELECT * FROM users WHERE id = :id";
     $pdoResult = $pdoConnect->prepare($pdoQuery);
-    $pdoResult->execute(array(":id" => $user_id));
+    $pdoExec = $pdoResult->execute(array(":id" => $user_id));
     $user_data = $pdoResult->fetch(PDO::FETCH_ASSOC);
+
+    $package_id = $row['package_id'];
+    $pdoQuery = "SELECT * FROM package WHERE id = :id";
+    $pdoResult1 = $pdoConnect->prepare($pdoQuery);
+    $pdoExec = $pdoResult1->execute(array(":id" => $package_id));
+    $package_data = $pdoResult1->fetch(PDO::FETCH_ASSOC);
+
+
 
     $output .= '
     <tr>
-      <td>'.$row["id"].'</td>
       <td>'.$user_data["email"].'</td>
-      <td>'.$row["activity"].'</td>
-      <td>'.date("F j, Y h:i A", strtotime($row['created_at'])).'</td>
+      <td>'.$package_data["package"].'</td>
+      <td>'.$package_data["price"].'</td>
+      <td>'.$row["reference_number"].'</td>
+      <td><a href="../../src/images/proof_of_payment/' . $row["proof_of_payment"] . '" data-lightbox="images" data-title="Proof of Payment"><img src="../../src/images/proof_of_payment/' . $row["proof_of_payment"] . '"></a></td>
+      <td>'.$row["start_date"].'</td>
+      <td>'.$row["end_date"].'</td>
     </tr>
     ';
   }
 }
 else
 {
-  echo '<h1>No Data Found</h1>';
+  echo '<h1>No Expired Payment Found</h1>';
 }
 
 $output .= '
@@ -219,24 +231,9 @@ echo $output;
 
 ?>
 <script src="../../src/node_modules/sweetalert/dist/sweetalert.min.js"></script>
-<script>
-$('.view').on('click', function(e){
-  e.preventDefault();
-  const href = $(this).attr('href')
+<script src="../../src/js/form.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/css/lightbox.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/js/lightbox.min.js"></script>
 
-        swal({
-        title: "View?",
-        text: "Do you want to view more?",
-        icon: "info",
-        buttons: true,
-        dangerMode: true,
-      })
-      .then((willDelete) => {
-        if (willDelete) {
-          document.location.href = href;
-        }
-      });
-})
 
-</script>
 </table>

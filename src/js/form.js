@@ -145,6 +145,46 @@ $('.accept_agent_account').on('click', function (e) {
 		});
 })
 
+//Accept payment
+$('.accept_payment').on('click', function (e) {
+	e.preventDefault();
+	const href = $(this).attr('href')
+
+	swal({
+		title: "Accept?",
+		text: "Do you want to accept this payment?",
+		icon: "warning",
+		buttons: true,
+		dangerMode: true,
+	})
+		.then((willDelete) => {
+			if (willDelete) {
+				document.location.href = href;
+			}
+		});
+})
+
+//Dccep payment
+$('.decline_payment').on('click', function (e) {
+	e.preventDefault();
+	const href = $(this).attr('href')
+
+	swal({
+		title: "Decline?",
+		text: "Do you want to decline this payment?",
+		icon: "warning",
+		buttons: true,
+		dangerMode: true,
+	})
+		.then((willDelete) => {
+			if (willDelete) {
+				document.location.href = href;
+			}
+		});
+})
+
+
+
 //Delete Profile
 $('.delete').on('click', function (e) {
 	e.preventDefault();

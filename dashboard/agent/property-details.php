@@ -122,7 +122,7 @@ $property_viewing_time_data = $stmt->fetch(PDO::FETCH_ASSOC);
                                 <div class="collapse navbar-collapse show clearfix" id="navbarSupportedContent">
                                     <ul class="navigation clearfix">
                                         <li class=""><a href="./"><span>Home</span></a></li>
-                                        <li class=""><a href="pricing"><span>Pricing</span></a></li>
+                                        <li class=""><a href="package"><span>Package</span></a></li>
                                         <li class="dropdown current"><a href="#"><span>Property</span></a>
                                             <ul>
                                                 <li><a href="property">Property</a></li>

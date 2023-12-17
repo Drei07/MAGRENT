@@ -13,7 +13,7 @@ if(!$user->isUserLoggedIn())
 
 function get_total_row($pdoConnect)
 {
-  $pdoQuery = "SELECT COUNT(*) as total_rows FROM logs";
+  $pdoQuery = "SELECT COUNT(*) as total_rows FROM package";
   $pdoResult = $pdoConnect->prepare($pdoQuery);
   $pdoResult->execute();
   $row = $pdoResult->fetch(PDO::FETCH_ASSOC);
@@ -34,13 +34,13 @@ else
 }
 
 $query = "
-SELECT * FROM logs
+SELECT * FROM package
 ";
 $output = '';
 if($_POST['query'] != '')
 {
   $query .= '
-  WHERE activity LIKE "%'.str_replace(' ', '%', $_POST['query']).'%"
+  WHERE package LIKE "%'.str_replace(' ', '%', $_POST['query']).'%"
   ';
 }
 
@@ -63,28 +63,23 @@ $output = '
     Showing ' . ($start + 1) . ' to ' . min($start + $limit, $total_data) . ' of ' . $total_record . ' entries
   </div>
     <thead>
-    <th>ACTIVITY ID</th>
-    <th>USER</th>
-    <th>ACTIVITY</th>
+    <th>PACKAGE</th>
+    <th>PRICE (PHP)</th>
+    <th>CREDITS</th>
     <th>DATE</th>
+    <th>ACTION</th>
     </thead>
 ';
   while($row=$statement->fetch(PDO::FETCH_ASSOC))
   {
 
-    $user_id = $row["user_id"];
-
-    $pdoQuery = "SELECT * FROM users WHERE id = :id";
-    $pdoResult = $pdoConnect->prepare($pdoQuery);
-    $pdoResult->execute(array(":id" => $user_id));
-    $user_data = $pdoResult->fetch(PDO::FETCH_ASSOC);
-
     $output .= '
     <tr>
-      <td>'.$row["id"].'</td>
-      <td>'.$user_data["email"].'</td>
-      <td>'.$row["activity"].'</td>
+      <td>'.$row["package"].'</td>
+      <td>'.$row["price"].'</td>
+      <td>'.$row["number_of_post"].'</td>
       <td>'.date("F j, Y h:i A", strtotime($row['created_at'])).'</td>
+      <td><button type="button" class="btn btn-primary V"><a href="edit-package?id=' . $row["id"] . '" class="edit"><i class="bx bxs-edit"></i></a></button></td>
     </tr>
     ';
   }
@@ -219,24 +214,9 @@ echo $output;
 
 ?>
 <script src="../../src/node_modules/sweetalert/dist/sweetalert.min.js"></script>
-<script>
-$('.view').on('click', function(e){
-  e.preventDefault();
-  const href = $(this).attr('href')
+<script src="../../src/js/form.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/css/lightbox.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/js/lightbox.min.js"></script>
 
-        swal({
-        title: "View?",
-        text: "Do you want to view more?",
-        icon: "info",
-        buttons: true,
-        dangerMode: true,
-      })
-      .then((willDelete) => {
-        if (willDelete) {
-          document.location.href = href;
-        }
-      });
-})
 
-</script>
 </table>

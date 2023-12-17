@@ -27,6 +27,32 @@ class PropertyController
 
     public function propertyRegistration($user_id, $property_name, $property_price, $property_contact, $bedrooms, $bathrooms, $property_type, $parking, $property_size, $garage_size, $property_description, $selected_amenities, $picture1, $picture2, $picture3, $picture4, $picture5, $visiting_rules, $visitation_hours_from, $visitation_hours_to, $selected_days, $address, $latitude, $longitude, $first_floor, $second_floor, $third_floor)
     {
+        $stmt_users = $this->agent->runQuery('SELECT * FROM users WHERE id=:id');
+        $stmt_users->execute(array(":id" => $user_id));
+        $user_data = $stmt_users->fetch(PDO::FETCH_ASSOC);
+
+        $user_package_type = $user_data['package_id'];
+
+        $stmt_package = $this->agent->runQuery('SELECT * FROM package WHERE id=:id');
+        $stmt_package->execute(array(":id" => $user_package_type));
+        $package_data = $stmt_package->fetch(PDO::FETCH_ASSOC);
+
+        $number_of_post = $package_data['number_of_post'];
+
+
+        $stmt_property_post = $this->agent->runQuery('SELECT * FROM property WHERE user_id=:id');
+        $stmt_property_post->execute(array(":id" => $user_id));
+        $property_post_data = $stmt_property_post->fetch(PDO::FETCH_ASSOC);
+
+        if($stmt_property_post->rowCount() > $number_of_post){
+            $_SESSION['status_title'] = "Oops!";
+            $_SESSION['status'] = "All Credits have been used, Please choose a package to get more credits, Thank you";
+            $_SESSION['status_code'] = "error";
+            $_SESSION['status_timer'] = 100000;
+            header('Location: ../package');
+            exit();
+        }
+        else{
             $stmt = $this->agent->runQuery('INSERT INTO property (user_id, property_name, property_price, property_contact_details, bedrooms, bathrooms, property_type, parking, property_size, garage_size, property_description, amenities) VALUES (:user_id, :property_name, :property_price, :property_contact_details, :bedrooms, :bathrooms, :property_type, :parking, :property_size, :garage_size, :property_description, :amenities)');
             $exec = $stmt->execute(array(
                 ":user_id"                   => $user_id, 
@@ -115,7 +141,9 @@ class PropertyController
                 $_SESSION['status_timer'] = 100000;
                 header('Location: ../property_registration');
             }
+        }
     }
+    
     
     private function propertyGallery($propertyId, $picture1, $picture2, $picture3, $picture4, $picture5)
     {
