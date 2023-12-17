@@ -46,7 +46,7 @@ include_once 'header.php';
 				</a>
 			</li>
 			<li>
-            <   a href="payment?status=?">
+                <a href="payment?status=?">
 					<i class='bx bxs-credit-card'></i>
 					<span class="text">Payment</span>
 				</a>
