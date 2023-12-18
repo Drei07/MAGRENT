@@ -229,7 +229,7 @@ $property_viewing_time_data = $stmt->fetch(PDO::FETCH_ASSOC);
                         </div>
                         <ul class="other-option pull-right clearfix">
                                 <!-- <button type="submit" onclick="setSessionValues(<?php echo $property_data['id'] ?>)" class="theme-btn btn-one">Edit Details</button> -->
-                                <li><a href="controller/property-controller?property_id=<?php echo $propertyId ?>&delete_property=1" class="delete_property"><i class='bx bxs-trash' ></i></a></li>
+                                <!-- <li><a href="controller/property-controller?property_id=<?php echo $propertyId ?>&delete_property=1" class="delete_property"><i class='bx bxs-trash' ></i></a></li> -->
                                 <li><a onclick="setSessionValues(<?php echo $property_data['id'] ?>)" ><i class='bx bxs-edit'></i></a></li>
                         </ul>
                     </div>
