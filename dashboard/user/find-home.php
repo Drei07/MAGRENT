@@ -3,6 +3,7 @@ include_once 'header.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <?php include_once '../../configuration/header2.php'; ?>
     <title>MAGRENT | Find Home</title>
@@ -61,7 +62,7 @@ include_once 'header.php';
                             <li><a href="profile"><i class="fas fa-user"></i>&nbsp;&nbsp;<?php echo $user_email ?></a></li>
                         </ul>
                         <div class="sign-box">
-                        <a href="authentication/user-signout" class="btn-signout"><i class="fa fa-sign-out"></i>Sign out</a>
+                            <a href="authentication/user-signout" class="btn-signout"><i class="fa fa-sign-out"></i>Sign out</a>
                         </div>
                     </div>
                 </div>
@@ -161,355 +162,6 @@ include_once 'header.php';
 
         <div class="page-content clearfix">
             <div class="right-column pull-right">
-                <!-- search-field-section -->
-                <section class="search-field-section style-two">
-                    <div class="auto-container">
-                        <div class="inner-container">
-                            <div class="search-field">
-                                <div class="tabs-box">
-                                    <div class="tabs-content info-group">
-
-                                        <div class="tab active-tab" id="tab-1">
-                                            <div class="inner-box">
-                                                <div class="top-search">
-                                                    <form action="index.html" method="post" class="search-form">
-                                                        <div class="row clearfix">
-                                                            <div class="col-lg-4 col-md-12 col-sm-12 column">
-                                                                <div class="form-group">
-                                                                    <label>Search Property</label>
-                                                                    <div class="field-input">
-                                                                        <i class="fas fa-search"></i>
-                                                                        <input type="search" name="search-field" placeholder="Search by Property, Location or Landmark..." required="">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-4 col-md-6 col-sm-12 column">
-                                                                <div class="form-group">
-                                                                    <label>Location</label>
-                                                                    <div class="select-box">
-                                                                        <i class="far fa-compass"></i>
-                                                                        <select class="wide">
-                                                                            <option data-display="Input location">Input location</option>
-                                                                            <option value="1">New York</option>
-                                                                            <option value="2">California</option>
-                                                                            <option value="3">London</option>
-                                                                            <option value="4">Maxico</option>
-                                                                        </select>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-4 col-md-6 col-sm-12 column">
-                                                                <div class="form-group">
-                                                                    <label>Property Type</label>
-                                                                    <div class="select-box">
-                                                                        <select class="wide">
-                                                                            <option data-display="All Type">All Type</option>
-                                                                            <option value="1">Laxury</option>
-                                                                            <option value="2">Classic</option>
-                                                                            <option value="3">Modern</option>
-                                                                            <option value="4">New</option>
-                                                                        </select>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="search-btn">
-                                                            <button type="submit"><i class="fas fa-search"></i>Search</button>
-                                                        </div>
-                                                    </form>
-                                                </div>
-                                                <div class="switch_btn_one ">
-                                                    <div class="advanced-search">
-                                                        <div class="close-btn">
-                                                            <a href="#" class="close-side-widget"><i class="far fa-times"></i></a>
-                                                        </div>
-                                                        <div class="row clearfix">
-                                                            <div class="col-lg-4 col-md-6 col-sm-12 column">
-                                                                <div class="form-group">
-                                                                    <label>Distance from Location</label>
-                                                                    <div class="select-box">
-                                                                        <select class="wide">
-                                                                            <option data-display="Distance from Location">Distance from Location</option>
-                                                                            <option value="1">Max Bath</option>
-                                                                            <option value="2">Within 1 Mile</option>
-                                                                            <option value="3">Within 2 Mile</option>
-                                                                            <option value="4">Within 3 Mile</option>
-                                                                        </select>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-4 col-md-6 col-sm-12 column">
-                                                                <div class="form-group">
-                                                                    <label>Bedrooms</label>
-                                                                    <div class="select-box">
-                                                                        <select class="wide">
-                                                                            <option data-display="Max Rooms">Max Rooms</option>
-                                                                            <option value="1">One Rooms</option>
-                                                                            <option value="2">Two Rooms</option>
-                                                                            <option value="3">Three Rooms</option>
-                                                                            <option value="4">Four Rooms</option>
-                                                                        </select>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-4 col-md-6 col-sm-12 column">
-                                                                <div class="form-group">
-                                                                    <label>Sort by</label>
-                                                                    <div class="select-box">
-                                                                        <select class="wide">
-                                                                            <option data-display="Most Popular">Most Popular</option>
-                                                                            <option value="1">Top Rating</option>
-                                                                            <option value="2">New Rooms</option>
-                                                                            <option value="3">Classic Rooms</option>
-                                                                            <option value="4">Luxry Rooms</option>
-                                                                        </select>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-4 col-md-6 col-sm-12 column">
-                                                                <div class="form-group">
-                                                                    <label>Floor</label>
-                                                                    <div class="select-box">
-                                                                        <select class="wide">
-                                                                            <option data-display="Select Floor">Select Floor</option>
-                                                                            <option value="1">One Floor</option>
-                                                                            <option value="2">Two Floor</option>
-                                                                            <option value="3">Three Floor</option>
-                                                                            <option value="4">Four Floor</option>
-                                                                        </select>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-4 col-md-6 col-sm-12 column">
-                                                                <div class="form-group">
-                                                                    <label>Bath</label>
-                                                                    <div class="select-box">
-                                                                        <select class="wide">
-                                                                            <option data-display="Max Bath">Max Bath</option>
-                                                                            <option value="1">Max Bath</option>
-                                                                            <option value="2">Max Bath</option>
-                                                                            <option value="3">Max Bath</option>
-                                                                            <option value="4">Max Bath</option>
-                                                                        </select>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-4 col-md-6 col-sm-12 column">
-                                                                <div class="form-group">
-                                                                    <label>Agencies</label>
-                                                                    <div class="select-box">
-                                                                        <select class="wide">
-                                                                            <option data-display="Any Agency">Any Agency</option>
-                                                                            <option value="1">Any Agency</option>
-                                                                            <option value="2">Agency 01</option>
-                                                                            <option value="3">Agency 02</option>
-                                                                            <option value="4">Agency 03</option>
-                                                                        </select>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="range-box">
-                                                            <div class="row clearfix">
-                                                                <div class="col-lg-6 col-md-6 col-sm-12 column">
-                                                                    <div class="price-range">
-                                                                        <h6>Select Price Range</h6>
-                                                                        <div class="range-input">
-                                                                            <div class="input"><input type="text" class="property-amount" name="field-name" readonly=""></div>
-                                                                        </div>
-                                                                        <div class="price-range-slider"></div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-lg-6 col-md-6 col-sm-12 column">
-                                                                    <div class="area-range">
-                                                                        <h6>Select Area</h6>
-                                                                        <div class="range-input">
-                                                                            <div class="input"><input type="text" class="area-range" name="field-name" readonly=""></div>
-                                                                        </div>
-                                                                        <div class="area-range-slider"></div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="tab" id="tab-2">
-                                            <div class="inner-box">
-                                                <div class="top-search">
-                                                    <form action="index.html" method="post" class="search-form">
-                                                        <div class="row clearfix">
-                                                            <div class="col-lg-4 col-md-12 col-sm-12 column">
-                                                                <div class="form-group">
-                                                                    <label>Search Property</label>
-                                                                    <div class="field-input">
-                                                                        <i class="fas fa-search"></i>
-                                                                        <input type="search" name="search-field" placeholder="Search by Property, Location or Landmark..." required="">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-4 col-md-6 col-sm-12 column">
-                                                                <div class="form-group">
-                                                                    <label>Location</label>
-                                                                    <div class="select-box">
-                                                                        <i class="far fa-compass"></i>
-                                                                        <select class="wide">
-                                                                            <option data-display="Input location">Input location</option>
-                                                                            <option value="1">New York</option>
-                                                                            <option value="2">California</option>
-                                                                            <option value="3">London</option>
-                                                                            <option value="4">Maxico</option>
-                                                                        </select>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-4 col-md-6 col-sm-12 column">
-                                                                <div class="form-group">
-                                                                    <label>Property Type</label>
-                                                                    <div class="select-box">
-                                                                        <select class="wide">
-                                                                            <option data-display="All Type">All Type</option>
-                                                                            <option value="1">Laxury</option>
-                                                                            <option value="2">Classic</option>
-                                                                            <option value="3">Modern</option>
-                                                                            <option value="4">New</option>
-                                                                        </select>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="search-btn">
-                                                            <button type="submit"><i class="fas fa-search"></i>Search</button>
-                                                        </div>
-                                                    </form>
-                                                </div>
-                                                <div class="switch_btn_one ">
-                                                    <button class="nav-btn nav-toggler navSidebar-button clearfix search__toggler">Advanced Search<i class="fas fa-angle-down"></i></button>
-                                                    <div class="advanced-search">
-                                                        <div class="close-btn">
-                                                            <a href="#" class="close-side-widget"><i class="far fa-times"></i></a>
-                                                        </div>
-                                                        <div class="row clearfix">
-                                                            <div class="col-lg-4 col-md-6 col-sm-12 column">
-                                                                <div class="form-group">
-                                                                    <label>Distance from Location</label>
-                                                                    <div class="select-box">
-                                                                        <select class="wide">
-                                                                            <option data-display="Distance from Location">Distance from Location</option>
-                                                                            <option value="1">Max Bath</option>
-                                                                            <option value="2">Within 1 Mile</option>
-                                                                            <option value="3">Within 2 Mile</option>
-                                                                            <option value="4">Within 3 Mile</option>
-                                                                        </select>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-4 col-md-6 col-sm-12 column">
-                                                                <div class="form-group">
-                                                                    <label>Bedrooms</label>
-                                                                    <div class="select-box">
-                                                                        <select class="wide">
-                                                                            <option data-display="Max Rooms">Max Rooms</option>
-                                                                            <option value="1">One Rooms</option>
-                                                                            <option value="2">Two Rooms</option>
-                                                                            <option value="3">Three Rooms</option>
-                                                                            <option value="4">Four Rooms</option>
-                                                                        </select>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-4 col-md-6 col-sm-12 column">
-                                                                <div class="form-group">
-                                                                    <label>Sort by</label>
-                                                                    <div class="select-box">
-                                                                        <select class="wide">
-                                                                            <option data-display="Most Popular">Most Popular</option>
-                                                                            <option value="1">Top Rating</option>
-                                                                            <option value="2">New Rooms</option>
-                                                                            <option value="3">Classic Rooms</option>
-                                                                            <option value="4">Luxry Rooms</option>
-                                                                        </select>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-4 col-md-6 col-sm-12 column">
-                                                                <div class="form-group">
-                                                                    <label>Floor</label>
-                                                                    <div class="select-box">
-                                                                        <select class="wide">
-                                                                            <option data-display="Select Floor">Select Floor</option>
-                                                                            <option value="1">One Floor</option>
-                                                                            <option value="2">Two Floor</option>
-                                                                            <option value="3">Three Floor</option>
-                                                                            <option value="4">Four Floor</option>
-                                                                        </select>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-4 col-md-6 col-sm-12 column">
-                                                                <div class="form-group">
-                                                                    <label>Bath</label>
-                                                                    <div class="select-box">
-                                                                        <select class="wide">
-                                                                            <option data-display="Max Bath">Max Bath</option>
-                                                                            <option value="1">Max Bath</option>
-                                                                            <option value="2">Max Bath</option>
-                                                                            <option value="3">Max Bath</option>
-                                                                            <option value="4">Max Bath</option>
-                                                                        </select>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-4 col-md-6 col-sm-12 column">
-                                                                <div class="form-group">
-                                                                    <label>Agencies</label>
-                                                                    <div class="select-box">
-                                                                        <select class="wide">
-                                                                            <option data-display="Any Agency">Any Agency</option>
-                                                                            <option value="1">Any Agency</option>
-                                                                            <option value="2">Agency 01</option>
-                                                                            <option value="3">Agency 02</option>
-                                                                            <option value="4">Agency 03</option>
-                                                                        </select>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="range-box">
-                                                            <div class="row clearfix">
-                                                                <div class="col-lg-6 col-md-6 col-sm-12 column">
-                                                                    <div class="price-range">
-                                                                        <h6>Select Price Range</h6>
-                                                                        <div class="range-input">
-                                                                            <div class="input"><input type="text" class="property-amount" name="field-name" readonly=""></div>
-                                                                        </div>
-                                                                        <div class="price-range-slider"></div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-lg-6 col-md-6 col-sm-12 column">
-                                                                    <div class="area-range">
-                                                                        <h6>Select Area</h6>
-                                                                        <div class="range-input">
-                                                                            <div class="input"><input type="text" class="area-range" name="field-name" readonly=""></div>
-                                                                        </div>
-                                                                        <div class="area-range-slider"></div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-                <!-- search-field-section end -->
-
                 <!-- deals-style-two -->
                 <section class="deals-style-two">
                     <div class="auto-container">
@@ -517,470 +169,80 @@ include_once 'header.php';
                             <div class="left-column pull-left">
                                 <h5>Search Reasults: <span>Showing 1-5 of 20 Listings</span></h5>
                             </div>
-                            <div class="right-column pull-right clearfix">
-                                <div class="short-box clearfix">
-                                    <div class="select-box">
-                                        <select class="wide">
-                                            <option data-display="Sort by: Newest">Sort by: Newest</option>
-                                            <option value="1">New Arrival</option>
-                                            <option value="2">Top Rated</option>
-                                            <option value="3">Offer Place</option>
-                                            <option value="4">Most Place</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="short-menu clearfix">
-                                    <button class="list-view on"><i class="icon-35"></i></button>
-                                    <button class="grid-view"><i class="icon-36"></i></button>
-                                </div>
-                            </div>
                         </div>
+
                         <div class="wrapper list">
                             <div class="deals-list-content list-item">
-                                <div class="deals-block-one">
-                                    <div class="inner-box">
-                                        <div class="image-box">
-                                            <figure class="image"><img src="../../src/images/resource/deals-3.jpg" alt=""></figure>
-                                            <div class="batch"><i class="icon-11"></i></div>
-                                            <span class="category">Featured</span>
-                                            <div class="buy-btn"><a href="property-details.html">For Buy</a></div>
-                                        </div>
-                                        <div class="lower-content">
-                                            <div class="title-text">
-                                                <h4><a href="property-details.html">Villa on Grand Avenue</a></h4>
-                                            </div>
-                                            <div class="price-box clearfix">
-                                                <div class="price-info pull-left">
-                                                    <h6>Start From</h6>
-                                                    <h4>$30,000.00</h4>
-                                                </div>
-                                                <div class="author-box pull-right">
-                                                    <figure class="author-thumb">
-                                                        <img src="../../src/images/feature/author-1.jpg" alt="">
-                                                        <span>Michael Bean</span>
-                                                    </figure>
-                                                </div>
-                                            </div>
-                                            <p>Lorem ipsum dolor sit amet consectetur adipisicing sed eiusm do tempor incididunt labore.</p>
-                                            <ul class="more-details clearfix">
-                                                <li><i class="icon-14"></i>3 Beds</li>
-                                                <li><i class="icon-15"></i>2 Baths</li>
-                                                <li><i class="icon-16"></i>600 Sq Ft</li>
-                                            </ul>
-                                            <div class="other-info-box clearfix">
-                                                <div class="btn-box pull-left"><a href="property-details.html" class="theme-btn btn-two">See Details</a></div>
-                                                <ul class="other-option pull-right clearfix">
-                                                    <li><a href="property-details.html"><i class="icon-12"></i></a></li>
-                                                    <li><a href="property-details.html"><i class="icon-13"></i></a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="deals-block-one">
-                                    <div class="inner-box">
-                                        <div class="image-box">
-                                            <figure class="image"><img src="../../src/images/resource/deals-4.jpg" alt=""></figure>
-                                            <div class="batch"><i class="icon-11"></i></div>
-                                            <span class="category">Featured</span>
-                                            <div class="buy-btn"><a href="property-details.html">For Buy</a></div>
-                                        </div>
-                                        <div class="lower-content">
-                                            <div class="title-text">
-                                                <h4><a href="property-details.html">Contemporary Apartment</a></h4>
-                                            </div>
-                                            <div class="price-box clearfix">
-                                                <div class="price-info pull-left">
-                                                    <h6>Start From</h6>
-                                                    <h4>$20,000.00</h4>
-                                                </div>
-                                                <div class="author-box pull-right">
-                                                    <figure class="author-thumb">
-                                                        <img src="../../src/images/feature/author-1.jpg" alt="">
-                                                        <span>Michael Bean</span>
-                                                    </figure>
-                                                </div>
-                                            </div>
-                                            <p>Lorem ipsum dolor sit amet consectetur adipisicing sed eiusm do tempor incididunt labore.</p>
-                                            <ul class="more-details clearfix">
-                                                <li><i class="icon-14"></i>3 Beds</li>
-                                                <li><i class="icon-15"></i>2 Baths</li>
-                                                <li><i class="icon-16"></i>600 Sq Ft</li>
-                                            </ul>
-                                            <div class="other-info-box clearfix">
-                                                <div class="btn-box pull-left"><a href="property-details.html" class="theme-btn btn-two">See Details</a></div>
-                                                <ul class="other-option pull-right clearfix">
-                                                    <li><a href="property-details.html"><i class="icon-12"></i></a></li>
-                                                    <li><a href="property-details.html"><i class="icon-13"></i></a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="deals-block-one">
-                                    <div class="inner-box">
-                                        <div class="image-box">
-                                            <figure class="image"><img src="../../src/images/resource/deals-5.jpg" alt=""></figure>
-                                            <div class="batch"><i class="icon-11"></i></div>
-                                            <span class="category">Featured</span>
-                                            <div class="buy-btn"><a href="property-details.html">For Buy</a></div>
-                                        </div>
-                                        <div class="lower-content">
-                                            <div class="title-text">
-                                                <h4><a href="property-details.html">Luxury Villa With Pool</a></h4>
-                                            </div>
-                                            <div class="price-box clearfix">
-                                                <div class="price-info pull-left">
-                                                    <h6>Start From</h6>
-                                                    <h4>$35,000.00</h4>
-                                                </div>
-                                                <div class="author-box pull-right">
-                                                    <figure class="author-thumb">
-                                                        <img src="../../src/images/feature/author-1.jpg" alt="">
-                                                        <span>Michael Bean</span>
-                                                    </figure>
-                                                </div>
-                                            </div>
-                                            <p>Lorem ipsum dolor sit amet consectetur adipisicing sed eiusm do tempor incididunt labore.</p>
-                                            <ul class="more-details clearfix">
-                                                <li><i class="icon-14"></i>3 Beds</li>
-                                                <li><i class="icon-15"></i>2 Baths</li>
-                                                <li><i class="icon-16"></i>600 Sq Ft</li>
-                                            </ul>
-                                            <div class="other-info-box clearfix">
-                                                <div class="btn-box pull-left"><a href="property-details.html" class="theme-btn btn-two">See Details</a></div>
-                                                <ul class="other-option pull-right clearfix">
-                                                    <li><a href="property-details.html"><i class="icon-12"></i></a></li>
-                                                    <li><a href="property-details.html"><i class="icon-13"></i></a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="deals-block-one">
-                                    <div class="inner-box">
-                                        <div class="image-box">
-                                            <figure class="image"><img src="../../src/images/resource/deals-6.jpg" alt=""></figure>
-                                            <div class="batch"><i class="icon-11"></i></div>
-                                            <span class="category">Featured</span>
-                                            <div class="buy-btn"><a href="property-details.html">For Buy</a></div>
-                                        </div>
-                                        <div class="lower-content">
-                                            <div class="title-text">
-                                                <h4><a href="property-details.html">Home in Merrick Way</a></h4>
-                                            </div>
-                                            <div class="price-box clearfix">
-                                                <div class="price-info pull-left">
-                                                    <h6>Start From</h6>
-                                                    <h4>$45,000.00</h4>
-                                                </div>
-                                                <div class="author-box pull-right">
-                                                    <figure class="author-thumb">
-                                                        <img src="../../src/images/feature/author-1.jpg" alt="">
-                                                        <span>Michael Bean</span>
-                                                    </figure>
-                                                </div>
-                                            </div>
-                                            <p>Lorem ipsum dolor sit amet consectetur adipisicing sed eiusm do tempor incididunt labore.</p>
-                                            <ul class="more-details clearfix">
-                                                <li><i class="icon-14"></i>3 Beds</li>
-                                                <li><i class="icon-15"></i>2 Baths</li>
-                                                <li><i class="icon-16"></i>600 Sq Ft</li>
-                                            </ul>
-                                            <div class="other-info-box clearfix">
-                                                <div class="btn-box pull-left"><a href="property-details.html" class="theme-btn btn-two">See Details</a></div>
-                                                <ul class="other-option pull-right clearfix">
-                                                    <li><a href="property-details.html"><i class="icon-12"></i></a></li>
-                                                    <li><a href="property-details.html"><i class="icon-13"></i></a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="deals-block-one">
-                                    <div class="inner-box">
-                                        <div class="image-box">
-                                            <figure class="image"><img src="../../src/images/resource/deals-7.jpg" alt=""></figure>
-                                            <div class="batch"><i class="icon-11"></i></div>
-                                            <span class="category">Featured</span>
-                                            <div class="buy-btn"><a href="property-details.html">For Buy</a></div>
-                                        </div>
-                                        <div class="lower-content">
-                                            <div class="title-text">
-                                                <h4><a href="property-details.html">Apartment in Glasgow</a></h4>
-                                            </div>
-                                            <div class="price-box clearfix">
-                                                <div class="price-info pull-left">
-                                                    <h6>Start From</h6>
-                                                    <h4>$40,000.00</h4>
-                                                </div>
-                                                <div class="author-box pull-right">
-                                                    <figure class="author-thumb">
-                                                        <img src="../../src/images/feature/author-1.jpg" alt="">
-                                                        <span>Michael Bean</span>
-                                                    </figure>
-                                                </div>
-                                            </div>
-                                            <p>Lorem ipsum dolor sit amet consectetur adipisicing sed eiusm do tempor incididunt labore.</p>
-                                            <ul class="more-details clearfix">
-                                                <li><i class="icon-14"></i>3 Beds</li>
-                                                <li><i class="icon-15"></i>2 Baths</li>
-                                                <li><i class="icon-16"></i>600 Sq Ft</li>
-                                            </ul>
-                                            <div class="other-info-box clearfix">
-                                                <div class="btn-box pull-left"><a href="property-details.html" class="theme-btn btn-two">See Details</a></div>
-                                                <ul class="other-option pull-right clearfix">
-                                                    <li><a href="property-details.html"><i class="icon-12"></i></a></li>
-                                                    <li><a href="property-details.html"><i class="icon-13"></i></a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="deals-grid-content">
-                                <div class="row clearfix">
-                                    <div class="col-lg-6 col-md-6 col-sm-12 feature-block">
-                                        <div class="feature-block-one">
+                                <?php
+                                $stmt1 = $user->runQuery("SELECT * FROM property WHERE status=:status");
+                                $stmt1->execute(array(":status" => "active"));
+                                if ($stmt1->rowCount() >= 1) {
+                                    while ($property_data = $stmt1->fetch(PDO::FETCH_ASSOC)) {
+                                        extract($property_data);
+
+                                        $stmt2 = $user->runQuery("SELECT * FROM property_gallery WHERE property_id=:property_id");
+                                        $stmt2->execute(array(":property_id" => $property_data['id']));
+                                        $property_gallery_data = $stmt2->fetch(PDO::FETCH_ASSOC);
+                                ?>
+                                        <div class="deals-block-one">
                                             <div class="inner-box">
                                                 <div class="image-box">
-                                                    <figure class="image"><img src="../../src/images/feature/feature-1.jpg" alt=""></figure>
+                                                    <figure class="image"><img src="../../src/images/property_gallery/<?php echo $property_gallery_data['picture_1'] ?>" style="height: 100%;" alt=""></figure>
                                                     <div class="batch"><i class="icon-11"></i></div>
                                                     <span class="category">Featured</span>
                                                 </div>
                                                 <div class="lower-content">
-                                                    <div class="author-info clearfix">
-                                                        <div class="author pull-left">
-                                                            <figure class="author-thumb"><img src="../../src/images/feature/author-1.jpg" alt=""></figure>
-                                                            <h6>Michael Bean</h6>
-                                                        </div>
-                                                        <div class="buy-btn pull-right"><a href="property-details.html">For Buy</a></div>
-                                                    </div>
                                                     <div class="title-text">
-                                                        <h4><a href="property-details.html">Villa on Grand Avenue</a></h4>
+                                                        <h4><a href="" onclick="setSessionValues(<?php echo $property_data['id'] ?>)"><?php echo $property_data['property_name'] ?></a></h4>
                                                     </div>
                                                     <div class="price-box clearfix">
                                                         <div class="price-info pull-left">
                                                             <h6>Start From</h6>
-                                                            <h4>$30,000.00</h4>
+                                                            <h4>₱ <?php echo number_format($property_data['property_price']); ?></h4>
                                                         </div>
-                                                        <ul class="other-option pull-right clearfix">
-                                                            <li><a href="property-details.html"><i class="icon-12"></i></a></li>
-                                                            <li><a href="property-details.html"><i class="icon-13"></i></a></li>
-                                                        </ul>
+                                        
+
                                                     </div>
-                                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing sed.</p>
+
+                                                    <p><?php
+                                                        $description = $property_data['property_description'];
+                                                        $wordLimit = 20; // Set your desired word limit
+
+                                                        // Explode the description into an array of words
+                                                        $words = explode(' ', $description);
+
+                                                        // Check if the number of words exceeds the limit
+                                                        if (count($words) > $wordLimit) {
+                                                            // Slice the array to get only the first $wordLimit words
+                                                            $shortDescription = implode(' ', array_slice($words, 0, $wordLimit));
+
+                                                            // Output the truncated description with "See more" link
+                                                            echo '<p>' . $shortDescription . '... <a href="" onclick="setSessionValues(' . $property_data['id'] . ')" style="color: #2dbe6c;">See more</a></p>';
+                                                        } else {
+                                                            // If the description is within the word limit, display the full description
+                                                            echo '<p>' . $description . '</p>';
+                                                        }
+                                                        ?></p>
+
                                                     <ul class="more-details clearfix">
-                                                        <li><i class="icon-14"></i>3 Beds</li>
-                                                        <li><i class="icon-15"></i>2 Baths</li>
-                                                        <li><i class="icon-16"></i>600 Sq Ft</li>
+                                                        <li><i class="icon-14"></i><?php echo $property_data['bedrooms'] ?> Beds</li>
+                                                        <li><i class="icon-15"></i><?php echo $property_data['bathrooms'] ?> Baths</li>
                                                     </ul>
-                                                    <div class="btn-box"><a href="property-details.html" class="theme-btn btn-two">See Details</a></div>
+                                                    <div class="other-info-box clearfix" onclick="setSessionValues(<?php echo $property_data['id'] ?>)">
+                                                        <div class="btn-box pull-left"><a href="" onclick="setSessionValues(<?php echo $property_data['id'] ?>)" class="theme-btn btn-two">See Details</a></div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="col-lg-6 col-md-6 col-sm-12 feature-block">
-                                        <div class="feature-block-one">
-                                            <div class="inner-box">
-                                                <div class="image-box">
-                                                    <figure class="image"><img src="../../src/images/feature/feature-2.jpg" alt=""></figure>
-                                                    <div class="batch"><i class="icon-11"></i></div>
-                                                    <span class="category">Featured</span>
-                                                </div>
-                                                <div class="lower-content">
-                                                    <div class="author-info clearfix">
-                                                        <div class="author pull-left">
-                                                            <figure class="author-thumb"><img src="../../src/images/feature/author-2.jpg" alt=""></figure>
-                                                            <h6>Robert Niro</h6>
-                                                        </div>
-                                                        <div class="buy-btn pull-right"><a href="property-details.html">For Rent</a></div>
-                                                    </div>
-                                                    <div class="title-text">
-                                                        <h4><a href="property-details.html">Contemporary Apartment</a></h4>
-                                                    </div>
-                                                    <div class="price-box clearfix">
-                                                        <div class="price-info pull-left">
-                                                            <h6>Start From</h6>
-                                                            <h4>$45,000.00</h4>
-                                                        </div>
-                                                        <ul class="other-option pull-right clearfix">
-                                                            <li><a href="property-details.html"><i class="icon-12"></i></a></li>
-                                                            <li><a href="property-details.html"><i class="icon-13"></i></a></li>
-                                                        </ul>
-                                                    </div>
-                                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing sed.</p>
-                                                    <ul class="more-details clearfix">
-                                                        <li><i class="icon-14"></i>3 Beds</li>
-                                                        <li><i class="icon-15"></i>2 Baths</li>
-                                                        <li><i class="icon-16"></i>600 Sq Ft</li>
-                                                    </ul>
-                                                    <div class="btn-box"><a href="property-details.html" class="theme-btn btn-two">See Details</a></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 col-md-6 col-sm-12 feature-block">
-                                        <div class="feature-block-one">
-                                            <div class="inner-box">
-                                                <div class="image-box">
-                                                    <figure class="image"><img src="../../src/images/feature/feature-3.jpg" alt=""></figure>
-                                                    <div class="batch"><i class="icon-11"></i></div>
-                                                    <span class="category">Featured</span>
-                                                </div>
-                                                <div class="lower-content">
-                                                    <div class="author-info clearfix">
-                                                        <div class="author pull-left">
-                                                            <figure class="author-thumb"><img src="../../src/images/feature/author-3.jpg" alt=""></figure>
-                                                            <h6>Keira Mel</h6>
-                                                        </div>
-                                                        <div class="buy-btn pull-right"><a href="property-details.html">Sold Out</a></div>
-                                                    </div>
-                                                    <div class="title-text">
-                                                        <h4><a href="property-details.html">Luxury Villa With Pool</a></h4>
-                                                    </div>
-                                                    <div class="price-box clearfix">
-                                                        <div class="price-info pull-left">
-                                                            <h6>Start From</h6>
-                                                            <h4>$63,000.00</h4>
-                                                        </div>
-                                                        <ul class="other-option pull-right clearfix">
-                                                            <li><a href="property-details.html"><i class="icon-12"></i></a></li>
-                                                            <li><a href="property-details.html"><i class="icon-13"></i></a></li>
-                                                        </ul>
-                                                    </div>
-                                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing sed.</p>
-                                                    <ul class="more-details clearfix">
-                                                        <li><i class="icon-14"></i>3 Beds</li>
-                                                        <li><i class="icon-15"></i>2 Baths</li>
-                                                        <li><i class="icon-16"></i>600 Sq Ft</li>
-                                                    </ul>
-                                                    <div class="btn-box"><a href="property-details.html" class="theme-btn btn-two">See Details</a></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 col-md-6 col-sm-12 feature-block">
-                                        <div class="feature-block-one">
-                                            <div class="inner-box">
-                                                <div class="image-box">
-                                                    <figure class="image"><img src="../../src/images/feature/feature-4.jpg" alt=""></figure>
-                                                    <div class="batch"><i class="icon-11"></i></div>
-                                                    <span class="category">Featured</span>
-                                                </div>
-                                                <div class="lower-content">
-                                                    <div class="author-info clearfix">
-                                                        <div class="author pull-left">
-                                                            <figure class="author-thumb"><img src="../../src/images/feature/author-1.jpg" alt=""></figure>
-                                                            <h6>Michael Bean</h6>
-                                                        </div>
-                                                        <div class="buy-btn pull-right"><a href="property-details.html">For Buy</a></div>
-                                                    </div>
-                                                    <div class="title-text">
-                                                        <h4><a href="property-details.html">Home in Merrick Way</a></h4>
-                                                    </div>
-                                                    <div class="price-box clearfix">
-                                                        <div class="price-info pull-left">
-                                                            <h6>Start From</h6>
-                                                            <h4>$30,000.00</h4>
-                                                        </div>
-                                                        <ul class="other-option pull-right clearfix">
-                                                            <li><a href="property-details.html"><i class="icon-12"></i></a></li>
-                                                            <li><a href="property-details.html"><i class="icon-13"></i></a></li>
-                                                        </ul>
-                                                    </div>
-                                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing sed.</p>
-                                                    <ul class="more-details clearfix">
-                                                        <li><i class="icon-14"></i>3 Beds</li>
-                                                        <li><i class="icon-15"></i>2 Baths</li>
-                                                        <li><i class="icon-16"></i>600 Sq Ft</li>
-                                                    </ul>
-                                                    <div class="btn-box"><a href="property-details.html" class="theme-btn btn-two">See Details</a></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 col-md-6 col-sm-12 feature-block">
-                                        <div class="feature-block-one">
-                                            <div class="inner-box">
-                                                <div class="image-box">
-                                                    <figure class="image"><img src="../../src/images/feature/feature-5.jpg" alt=""></figure>
-                                                    <div class="batch"><i class="icon-11"></i></div>
-                                                    <span class="category">Featured</span>
-                                                </div>
-                                                <div class="lower-content">
-                                                    <div class="author-info clearfix">
-                                                        <div class="author pull-left">
-                                                            <figure class="author-thumb"><img src="../../src/images/feature/author-2.jpg" alt=""></figure>
-                                                            <h6>Robert Niro</h6>
-                                                        </div>
-                                                        <div class="buy-btn pull-right"><a href="property-details.html">For Rent</a></div>
-                                                    </div>
-                                                    <div class="title-text">
-                                                        <h4><a href="property-details.html">Apartment in Glasgow</a></h4>
-                                                    </div>
-                                                    <div class="price-box clearfix">
-                                                        <div class="price-info pull-left">
-                                                            <h6>Start From</h6>
-                                                            <h4>$45,000.00</h4>
-                                                        </div>
-                                                        <ul class="other-option pull-right clearfix">
-                                                            <li><a href="property-details.html"><i class="icon-12"></i></a></li>
-                                                            <li><a href="property-details.html"><i class="icon-13"></i></a></li>
-                                                        </ul>
-                                                    </div>
-                                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing sed.</p>
-                                                    <ul class="more-details clearfix">
-                                                        <li><i class="icon-14"></i>3 Beds</li>
-                                                        <li><i class="icon-15"></i>2 Baths</li>
-                                                        <li><i class="icon-16"></i>600 Sq Ft</li>
-                                                    </ul>
-                                                    <div class="btn-box"><a href="property-details.html" class="theme-btn btn-two">See Details</a></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 col-md-6 col-sm-12 feature-block">
-                                        <div class="feature-block-one">
-                                            <div class="inner-box">
-                                                <div class="image-box">
-                                                    <figure class="image"><img src="../../src/images/feature/feature-6.jpg" alt=""></figure>
-                                                    <div class="batch"><i class="icon-11"></i></div>
-                                                    <span class="category">Featured</span>
-                                                </div>
-                                                <div class="lower-content">
-                                                    <div class="author-info clearfix">
-                                                        <div class="author pull-left">
-                                                            <figure class="author-thumb"><img src="../../src/images/feature/author-3.jpg" alt=""></figure>
-                                                            <h6>Keira Mel</h6>
-                                                        </div>
-                                                        <div class="buy-btn pull-right"><a href="property-details.html">Sold Out</a></div>
-                                                    </div>
-                                                    <div class="title-text">
-                                                        <h4><a href="property-details.html">Family Home For Sale</a></h4>
-                                                    </div>
-                                                    <div class="price-box clearfix">
-                                                        <div class="price-info pull-left">
-                                                            <h6>Start From</h6>
-                                                            <h4>$63,000.00</h4>
-                                                        </div>
-                                                        <ul class="other-option pull-right clearfix">
-                                                            <li><a href="property-details.html"><i class="icon-12"></i></a></li>
-                                                            <li><a href="property-details.html"><i class="icon-13"></i></a></li>
-                                                        </ul>
-                                                    </div>
-                                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing sed.</p>
-                                                    <ul class="more-details clearfix">
-                                                        <li><i class="icon-14"></i>3 Beds</li>
-                                                        <li><i class="icon-15"></i>2 Baths</li>
-                                                        <li><i class="icon-16"></i>600 Sq Ft</li>
-                                                    </ul>
-                                                    <div class="btn-box"><a href="property-details.html" class="theme-btn btn-two">See Details</a></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                    <?php
+                                    }
+                                } else {
+                                    ?>
+                                    <!-- error message -->
+                                <?php
+                                }
+
+                                ?>
                             </div>
                         </div>
                         <div class="pagination-wrapper">
@@ -1069,6 +331,24 @@ include_once 'header.php';
 
     <!-- script -->
     <?php include_once '../../configuration/footer2.php'; ?>
+    <script>
+        function setSessionValues(propertyId) {
+			fetch('property-details.php', {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/x-www-form-urlencoded',
+					},
+					body: 'property_id=' + encodeURIComponent(propertyId),
+				})
+				.then(response => {
+					window.location.href = 'property-details';
+				})
+				.catch(error => {
+					console.error('Error:', error);
+				});
+		}
+
+    </script>
     <?php include_once '../../configuration/sweetalert.php'; ?>
 
 </body><!-- End of .page_wrapper -->

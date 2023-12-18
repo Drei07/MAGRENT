@@ -51,6 +51,14 @@ if (isset($_POST['btn-signin'])) {
                     exit();
                 }
             }
+            else{
+                $_SESSION['status_titlek'] = "Sorry !";
+                $_SESSION['status'] = "No account found";
+                $_SESSION['status_code'] = "error";
+                $_SESSION['status_timer'] = 10000000;
+                header("Location: ../../../signin");
+                exit();
+            }
         } else {
             $_SESSION['status_title'] = "Sorry !";
             $_SESSION['status'] = "No account found or your account has been removed!";
