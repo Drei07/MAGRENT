@@ -1,5 +1,5 @@
 <?php
-include_once 'header.php';
+include_once 'dashboard/user/authentication/user-forgot-password.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Retrieve the values from the POST request
@@ -17,15 +17,12 @@ $stmt = $user->runQuery("SELECT * FROM property WHERE id=:id");
 $stmt->execute(array(":id" => $propertyId));
 $property_data = $stmt->fetch(PDO::FETCH_ASSOC);
 
-$contact_number =  $property_data['property_contact_details'];
-
 //user data
 $stmt = $user->runQuery("SELECT * FROM users WHERE id=:id");
 $stmt->execute(array(":id" => $property_data['user_id']));
 $user_data = $stmt->fetch(PDO::FETCH_ASSOC);
-$agent_user_fullname          = $user_data['last_name'] . ", " . $user_data['first_name'];
-$agent_user_profile           = $user_data['profile'];
-
+$user_fullname          = $user_data['last_name'] . ", " . $user_data['first_name'];
+$user_profile           = $user_data['profile'];
 
 
 //property gallery data
@@ -53,7 +50,7 @@ $property_viewing_time_data = $stmt->fetch(PDO::FETCH_ASSOC);
 <html lang="en">
 
 <head>
-    <?php include_once '../../configuration/header2.php'; ?>
+    <?php include_once 'configuration/header.php'; ?>
     <title>MAGRENT | Property Details</title>
 </head>
 <!-- page wrapper -->
@@ -107,10 +104,11 @@ $property_viewing_time_data = $stmt->fetch(PDO::FETCH_ASSOC);
                     </div>
                     <div class="right-column pull-right">
                         <ul class="social-links clearfix">
-                            <li><a href="profile"><i class="fas fa-user"></i>&nbsp;&nbsp;<?php echo $user_email ?></a></li>
+                            <li><a href="<?php echo $config->getSystemFacebook() ?>"><i class="fab fa-facebook-f"></i></a></li>
+                            <li><a href="<?php echo $config->getSystemInstagram() ?>"><i class="fab fa-instagram"></i></a></li>
                         </ul>
                         <div class="sign-box">
-                            <a href="authentication/agent-signout" class="btn-signout"><i class="fa fa-sign-out"></i>Sign out</a>
+                            <a href="signin"><i class="fas fa-user"></i>Sign In</a>
                         </div>
                     </div>
                 </div>
@@ -120,7 +118,7 @@ $property_viewing_time_data = $stmt->fetch(PDO::FETCH_ASSOC);
                 <div class="outer-box">
                     <div class="main-box">
                         <div class="logo-box">
-                            <figure class="logo"><a href="./"><img src="../../src/images/main_logo/<?php echo $config->getSystemLogo() ?>" alt=""></a></figure>
+                            <figure class="logo"><a href="./"><img src="src/images/main_logo/<?php echo $config->getSystemLogo() ?>" alt=""></a></figure>
                         </div>
                         <div class="menu-area clearfix">
                             <!--Mobile Navigation Toggler-->
@@ -133,16 +131,10 @@ $property_viewing_time_data = $stmt->fetch(PDO::FETCH_ASSOC);
                                 <div class="collapse navbar-collapse show clearfix" id="navbarSupportedContent">
                                     <ul class="navigation clearfix">
                                         <li class=""><a href="./"><span>Home</span></a></li>
-                                        <li class=""><a href="package"><span>Package</span></a></li>
-                                        <li class="dropdown current"><a href="#"><span>Property</span></a>
-                                            <ul>
-                                                <li><a href="property">Property</a></li>
-                                                <li><a href="property-registration">Property Registration</a></li>
-                                            </ul>
-                                        </li>
+                                        <li class=""><a href="partners"><span>Became A Partner</span></a></li>
+                                        <li class=""><a href="find-home"><span>Find A Home</span></a></li>
                                         <li class=""><a href="about-us"><span>About Us</span></a></li>
-                                        <li class=""><a href="contact-us"><span>Contact Us</span></a></li>
-                                        <li class=""><a href="settings"><span>Settings</span></a></li>
+                                        <li><a href="contact-us"><span>Contact Us</span></a></li>
                                     </ul>
                                 </div>
                             </nav>
@@ -156,7 +148,7 @@ $property_viewing_time_data = $stmt->fetch(PDO::FETCH_ASSOC);
                 <div class="outer-box">
                     <div class="main-box">
                         <div class="logo-box">
-                            <figure class="logo"><a href="./"><img src="../../src/images/main_logo/<?php echo $config->getSystemLogo() ?>" alt=""></a></figure>
+                            <figure class="logo"><a href="./"><img src="src/images/main_logo/<?php echo $config->getSystemLogo() ?>" alt=""></a></figure>
                         </div>
                         <div class="menu-area clearfix">
                             <nav class="main-menu clearfix">
@@ -175,7 +167,7 @@ $property_viewing_time_data = $stmt->fetch(PDO::FETCH_ASSOC);
             <div class="close-btn"><i class="fas fa-times"></i></div>
 
             <nav class="menu-box">
-                <div class="nav-logo"><a href=""><img src="../../src/images/main_logo/<?php echo $config->getSystemLogo() ?>" alt="" title=""></a></div>
+                <div class="nav-logo"><a href=""><img src="src/images/main_logo/<?php echo $config->getSystemLogo() ?>" alt="" title=""></a></div>
                 <div class="menu-outer"><!--Here Menu Will Come Automatically Via Javascript / Same Menu as in Header--></div>
                 <div class="contact-info">
                     <h4>Contact Info</h4>
@@ -194,11 +186,13 @@ $property_viewing_time_data = $stmt->fetch(PDO::FETCH_ASSOC);
         </div>
         <!-- End Mobile Menu -->
 
+
+
         <!--Page Title-->
         <section class="page-title-two bg-color-1 centred">
             <div class="pattern-layer">
-                <div class="pattern-1" style="background-image: url(../../src/images/shape/shape-9.png);"></div>
-                <div class="pattern-2" style="background-image: url(../../src/images/shape/shape-10.png);"></div>
+                <div class="pattern-1" style="background-image: url(src/images/shape/shape-9.png);"></div>
+                <div class="pattern-2" style="background-image: url(src/images/shape/shape-10.png);"></div>
             </div>
             <div class="auto-container">
                 <div class="content-box clearfix">
@@ -220,7 +214,7 @@ $property_viewing_time_data = $stmt->fetch(PDO::FETCH_ASSOC);
                         <h3><?php echo $property_data['property_name'] ?></h3>
                         <div class="author-info clearfix">
                             <div class="author-box pull-left">
-                                <figure class="author-thumb"><img src="../../src/images/feature/author-1.jpg" alt=""></figure>
+                                <figure class="author-thumb"><img src="src/images/feature/author-1.jpg" alt=""></figure>
                                 <h6>Rating's</h6>
                             </div>
                             <ul class="rating clearfix pull-left">
@@ -239,8 +233,8 @@ $property_viewing_time_data = $stmt->fetch(PDO::FETCH_ASSOC);
                             </div>
                         </div>
                         <ul class="other-option pull-right clearfix">
-                                <!-- <button type="submit" onclick="setSessionValues(<?php echo $property_data['id'] ?>)" class="theme-btn btn-one">Edit Details</button> -->
-                                <!-- <li><a href="controller/property-controller?property_id=<?php echo $propertyId ?>&delete_property=1" class="delete_property"><i class='bx bxs-trash' ></i></a></li> -->
+                            <!-- <button type="submit" onclick="setSessionValues(<?php echo $property_data['id'] ?>)" class="theme-btn btn-one">Edit Details</button> -->
+                            <!-- <li><a href="controller/property-controller?property_id=<?php echo $propertyId ?>&delete_property=1" class="delete_property"><i class='bx bxs-trash' ></i></a></li> -->
                         </ul>
                     </div>
                 </div>
@@ -249,18 +243,18 @@ $property_viewing_time_data = $stmt->fetch(PDO::FETCH_ASSOC);
                         <div class="property-details-content">
                             <div class="carousel-inner">
                                 <div class="single-item-carousel owl-carousel owl-theme owl-dots-none">
-                                    <figure class="image-box"><img src="../../src/images/property_gallery/<?php echo $property_gallery_data['picture_1'] ?>" alt=""></figure>
-                                    <figure class="image-box"><img src="../../src/images/property_gallery/<?php echo $property_gallery_data['picture_2'] ?>" alt=""></figure>
-                                    <figure class="image-box"><img src="../../src/images/property_gallery/<?php echo $property_gallery_data['picture_3'] ?>" alt=""></figure>
-                                    <figure class="image-box"><img src="../../src/images/property_gallery/<?php echo $property_gallery_data['picture_4'] ?>" alt=""></figure>
-                                    <figure class="image-box"><img src="../../src/images/property_gallery/<?php echo $property_gallery_data['picture_5'] ?>" alt=""></figure>
+                                    <figure class="image-box"><img src="src/images/property_gallery/<?php echo $property_gallery_data['picture_1'] ?>" alt=""></figure>
+                                    <figure class="image-box"><img src="src/images/property_gallery/<?php echo $property_gallery_data['picture_2'] ?>" alt=""></figure>
+                                    <figure class="image-box"><img src="src/images/property_gallery/<?php echo $property_gallery_data['picture_3'] ?>" alt=""></figure>
+                                    <figure class="image-box"><img src="src/images/property_gallery/<?php echo $property_gallery_data['picture_4'] ?>" alt=""></figure>
+                                    <figure class="image-box"><img src="src/images/property_gallery/<?php echo $property_gallery_data['picture_5'] ?>" alt=""></figure>
 
                                 </div>
                             </div>
-                             <div class="discription-box content-widget">
+                            <div class="discription-box content-widget">
                                 <div class="title-box">
                                     <h4>Property Description</h4>
-                                    <ul class="other-option pull-right clearfix">       
+                                    <ul class="other-option pull-right clearfix">
                                 </div>
                                 <div class="text">
                                     <p><?php echo $property_data['property_description'] ?></p>
@@ -321,16 +315,16 @@ $property_viewing_time_data = $stmt->fetch(PDO::FETCH_ASSOC);
                                                 $stmt2->execute(array(":id" => trim($amenity)));
                                                 $amenities_data = $stmt2->fetch(PDO::FETCH_ASSOC);
 
-                                                ?>
-                                                    <li><?php echo $amenities_data['amenities']?></li>
-                                                <?php
+                                    ?>
+                                                <li><?php echo $amenities_data['amenities'] ?></li>
+                                    <?php
                                             }
                                         }
                                     }
                                     ?>
                                 </ul>
                             </div>
-                            
+
                             <div class="floorplan-inner content-widget">
                                 <div class="title-box">
                                     <h4>Floor Plan</h4>
@@ -344,7 +338,7 @@ $property_viewing_time_data = $stmt->fetch(PDO::FETCH_ASSOC);
                                         <div class="acc-content current">
                                             <div class="content-box">
                                                 <figure class="image-box">
-                                                    <img src="../../src/images/property_floorplan/<?php echo $property_floor_plan_data['first_floor'] ?>" alt="">
+                                                    <img src="src/images/property_floorplan/<?php echo $property_floor_plan_data['first_floor'] ?>" alt="">
                                                 </figure>
                                             </div>
                                         </div>
@@ -357,7 +351,7 @@ $property_viewing_time_data = $stmt->fetch(PDO::FETCH_ASSOC);
                                         <div class="acc-content">
                                             <div class="content-box">
                                                 <figure class="image-box">
-                                                    <img src="../../src/images/property_floorplan/<?php echo $property_floor_plan_data['second_floor'] ?>" alt="">
+                                                    <img src="src/images/property_floorplan/<?php echo $property_floor_plan_data['second_floor'] ?>" alt="">
                                                 </figure>
                                             </div>
                                         </div>
@@ -370,7 +364,7 @@ $property_viewing_time_data = $stmt->fetch(PDO::FETCH_ASSOC);
                                         <div class="acc-content">
                                             <div class="content-box">
                                                 <figure class="image-box">
-                                                    <img src="../../src/images/property_floorplan/<?php echo $property_floor_plan_data['third_floor'] ?>" alt="">
+                                                    <img src="src/images/property_floorplan/<?php echo $property_floor_plan_data['third_floor'] ?>" alt="">
                                                 </figure>
                                             </div>
                                         </div>
@@ -391,56 +385,56 @@ $property_viewing_time_data = $stmt->fetch(PDO::FETCH_ASSOC);
                                     <h4>Property Viewing Schedule</h4>
                                 </div>
                                 <div class="form-inner">
-                                <h6>Visiting Rules:</h6>
-                                <p><?php echo $property_viewing_time_data['visiting_rules'] ?></p><br>
-                                <h6>Visitation Time From:</h6>
-                                <p><?php echo date("h:i A", strtotime($property_viewing_time_data['visitation_hours_from'])); ?></p><br>
-                                <h6>Visitation Time To:</h6>
-                                <p><?php echo date("h:i A", strtotime($property_viewing_time_data['visitation_hours_to']));?></p><br>
+                                    <h6>Visiting Rules:</h6>
+                                    <p><?php echo $property_viewing_time_data['visiting_rules'] ?></p><br>
+                                    <h6>Visitation Time From:</h6>
+                                    <p><?php echo date("h:i A", strtotime($property_viewing_time_data['visitation_hours_from'])); ?></p><br>
+                                    <h6>Visitation Time To:</h6>
+                                    <p><?php echo date("h:i A", strtotime($property_viewing_time_data['visitation_hours_to'])); ?></p><br>
                                 </div>
                                 <div class="amenities-box">
-                                <ul class="list clearfix">
-                                    <?php
-                                    $stmt3 = $user->runQuery("SELECT * FROM property_viewing_time WHERE property_id=:id");
-                                    $stmt3->execute(array(":id" => $propertyId));
+                                    <ul class="list clearfix">
+                                        <?php
+                                        $stmt3 = $user->runQuery("SELECT * FROM property_viewing_time WHERE property_id=:id");
+                                        $stmt3->execute(array(":id" => $propertyId));
 
-                                    if ($stmt3->rowCount() >= 1) {
-                                        while ($property_viewing_time_data = $stmt3->fetch(PDO::FETCH_ASSOC)) {
-                                            // Explode the values from the amenities column
-                                            $visitationDaysArray = explode(',', $property_viewing_time_data['visitation_days']);
+                                        if ($stmt3->rowCount() >= 1) {
+                                            while ($property_viewing_time_data = $stmt3->fetch(PDO::FETCH_ASSOC)) {
+                                                // Explode the values from the amenities column
+                                                $visitationDaysArray = explode(',', $property_viewing_time_data['visitation_days']);
 
-                                            // Iterate through the exploded values
-                                            foreach ($visitationDaysArray as $days) {
-                                                // Use each amenity value as needed
-                                                // echo "Amenity: " . trim($amenity) . "<br>";
-                                                $stmt5 = $user->runQuery("SELECT * FROM day WHERE id=:id");
-                                                $stmt5->execute(array(":id" => trim($days)));
-                                                $days_data = $stmt5->fetch(PDO::FETCH_ASSOC);
+                                                // Iterate through the exploded values
+                                                foreach ($visitationDaysArray as $days) {
+                                                    // Use each amenity value as needed
+                                                    // echo "Amenity: " . trim($amenity) . "<br>";
+                                                    $stmt5 = $user->runQuery("SELECT * FROM day WHERE id=:id");
+                                                    $stmt5->execute(array(":id" => trim($days)));
+                                                    $days_data = $stmt5->fetch(PDO::FETCH_ASSOC);
 
-                                                ?>
-                                                    <li><?php echo $days_data['day']?></li>
-                                                <?php
+                                        ?>
+                                                    <li><?php echo $days_data['day'] ?></li>
+                                        <?php
+                                                }
                                             }
                                         }
-                                    }
-                                    ?>
-                                </ul>
+                                        ?>
+                                    </ul>
+                                </div>
                             </div>
-                            </div>
-                            
+
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-12 col-sm-12 sidebar-side">
                         <div class="property-sidebar default-sidebar">
                             <div class="author-widget sidebar-widget">
                                 <div class="author-box">
-                                    <figure class="author-thumb"><img src="../../src/images/profile/<?php echo $agent_user_profile ?>" alt=""></figure>
+                                    <figure class="author-thumb"><img src="src/images/profile/<?php echo $user_profile ?>" alt=""></figure>
                                     <div class="inner">
-                                        <h6><?php echo $agent_user_fullname ?></h6><br>
+                                        <h6><?php echo $user_fullname ?></h6><br>
                                         <ul class="info clearfix">
                                             <li><i class="fas fa-map-marker-alt"></i>84 St. John Wood High Street,
                                                 St Johns Wood</li>
-                                            <li><i class="fas fa-phone"></i><a><?php echo $contact_number ?></a></li>
+                                            <li><i class="fas fa-phone"></i><a href="tel:03030571965">030 3057 1965</a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -522,7 +516,7 @@ $property_viewing_time_data = $stmt->fetch(PDO::FETCH_ASSOC);
     </div>
 
     <!-- script -->
-    <?php include_once '../../configuration/footer2.php'; ?>
+    <?php include_once 'configuration/footer.php'; ?>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCzYdQJTyqPkzfTsVEwzJSSgQhe_Qg9OLI&callback=initMap" async defer></script>
     <script>
         function initMap() {
@@ -561,7 +555,7 @@ $property_viewing_time_data = $stmt->fetch(PDO::FETCH_ASSOC);
 		}
 
     </script>
-    <?php include_once '../../configuration/sweetalert.php'; ?>
+    <?php include_once 'configuration/sweetalert.php'; ?>
 
 </body><!-- End of .page_wrapper -->
 

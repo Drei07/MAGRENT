@@ -1,11 +1,16 @@
+<?php
+include_once 'dashboard/user/authentication/user-forgot-password.php';
 
+?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <?php include_once 'configuration/header.php'; ?>
     <title>MAGRENT</title>
 </head>
 <!-- page wrapper -->
+
 <body>
     <div class="boxed_wrapper">
         <!-- preloader -->
@@ -334,7 +339,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="more-btn centred"><a href="property-list.html" class="theme-btn btn-one">View All Listing</a></div>
+                <div class="more-btn centred"><a href="property-details" class="theme-btn btn-one">View All Listing</a></div>
             </div>
         </section>
         <!-- feature-section end -->
@@ -495,86 +500,32 @@
                     <h2>Meet Our Excellent Agents</h2>
                 </div>
                 <div class="single-item-carousel owl-carousel owl-theme owl-dots-none nav-style-one">
-                    <div class="team-block-one">
-                        <div class="inner-box">
-                            <figure class="image-box"><img src="src/images/team/team-1.jpg" alt=""></figure>
-                            <div class="lower-content">
-                                <div class="inner">
-                                    <h4><a href="agents-details.html">Merrie Lewis</a></h4>
-                                    <span class="designation">Senior Agent</span>
-                                    <ul class="social-links clearfix">
-                                        <li><a href=""><i class="fab fa-facebook-f"></i></a></li>
-                                        <li><a href=""><i class="fab fa-twitter"></i></a></li>
-                                        <li><a href=""><i class="fab fa-google-plus-g"></i></a></li>
-                                    </ul>
+                    <?php
+                    //user data
+                    $stmt = $user->runQuery("SELECT * FROM users WHERE user_type=:user_type");
+                    $stmt->execute(array(":user_type" => 2));
+                    while ($agent_data = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                    ?>
+                        <div class="team-block-one">
+                            <div class="inner-box">
+                                <figure class="image-box"><img src="src/images/profile/<?php echo $agent_data['profile'] ?>" alt=""></figure>
+                                <div class="lower-content">
+                                    <div class="inner">
+                                        <h4><a href="agents-details.html"><?php echo $agent_data['first_name'], $agent_data['last_name'] ?></a></h4>
+                                        <span class="designation">Senior Agent</span>
+                                        <ul class="social-links clearfix">
+                                            <li><a href=""><i class="fab fa-facebook-f"></i></a></li>
+                                            <li><a href=""><i class="fab fa-twitter"></i></a></li>
+                                            <li><a href=""><i class="fab fa-google-plus-g"></i></a></li>
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="team-block-one">
-                        <div class="inner-box">
-                            <figure class="image-box"><img src="src/images/team/team-2.jpg" alt=""></figure>
-                            <div class="lower-content">
-                                <div class="inner">
-                                    <h4><a href="agents-details.html">Parks Missie</a></h4>
-                                    <span class="designation">Senior Agent</span>
-                                    <ul class="social-links clearfix">
-                                        <li><a href=""><i class="fab fa-facebook-f"></i></a></li>
-                                        <li><a href=""><i class="fab fa-twitter"></i></a></li>
-                                        <li><a href=""><i class="fab fa-google-plus-g"></i></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="team-block-one">
-                        <div class="inner-box">
-                            <figure class="image-box"><img src="src/images/team/team-3.jpg" alt=""></figure>
-                            <div class="lower-content">
-                                <div class="inner">
-                                    <h4><a href="agents-details.html">Mariana Buenos</a></h4>
-                                    <span class="designation">Senior Agent</span>
-                                    <ul class="social-links clearfix">
-                                        <li><a href=""><i class="fab fa-facebook-f"></i></a></li>
-                                        <li><a href=""><i class="fab fa-twitter"></i></a></li>
-                                        <li><a href=""><i class="fab fa-google-plus-g"></i></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="team-block-one">
-                        <div class="inner-box">
-                            <figure class="image-box"><img src="src/images/team/team-4.jpg" alt=""></figure>
-                            <div class="lower-content">
-                                <div class="inner">
-                                    <h4><a href="agents-details.html">Stephen Fowler</a></h4>
-                                    <span class="designation">Senior Agent</span>
-                                    <ul class="social-links clearfix">
-                                        <li><a href=""><i class="fab fa-facebook-f"></i></a></li>
-                                        <li><a href=""><i class="fab fa-twitter"></i></a></li>
-                                        <li><a href=""><i class="fab fa-google-plus-g"></i></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="team-block-one">
-                        <div class="inner-box">
-                            <figure class="image-box"><img src="src/images/team/team-5.jpg" alt=""></figure>
-                            <div class="lower-content">
-                                <div class="inner">
-                                    <h4><a href="agents-details.html">Daisy Phillips</a></h4>
-                                    <span class="designation">Senior Agent</span>
-                                    <ul class="social-links clearfix">
-                                        <li><a href=""><i class="fab fa-facebook-f"></i></a></li>
-                                        <li><a href=""><i class="fab fa-twitter"></i></a></li>
-                                        <li><a href=""><i class="fab fa-google-plus-g"></i></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <?php
+                    }
+
+                    ?>
                 </div>
             </div>
         </section>

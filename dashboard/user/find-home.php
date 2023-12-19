@@ -245,14 +245,6 @@ include_once 'header.php';
                                 ?>
                             </div>
                         </div>
-                        <div class="pagination-wrapper">
-                            <ul class="pagination clearfix">
-                                <li><a href="property-list-3.html" class="current">1</a></li>
-                                <li><a href="property-list-3.html">2</a></li>
-                                <li><a href="property-list-3.html">3</a></li>
-                                <li><a href="property-list-3.html"><i class="fas fa-angle-right"></i></a></li>
-                            </ul>
-                        </div>
                     </div>
                 </section>
                 <!-- deals-style-two end -->
