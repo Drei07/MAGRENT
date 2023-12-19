@@ -511,7 +511,7 @@ include_once 'dashboard/user/authentication/user-forgot-password.php';
                                 <figure class="image-box"><img src="src/images/profile/<?php echo $agent_data['profile'] ?>" alt=""></figure>
                                 <div class="lower-content">
                                     <div class="inner">
-                                        <h4><a href="agents-details.html"><?php echo $agent_data['first_name'], $agent_data['last_name'] ?></a></h4>
+                                        <h4><a href="agents-details.html"><?php echo $agent_data['first_name'], ' ' .$agent_data['last_name'] ?></a></h4>
                                         <span class="designation">Senior Agent</span>
                                         <ul class="social-links clearfix">
                                             <li><a href=""><i class="fab fa-facebook-f"></i></a></li>

@@ -1,5 +1,6 @@
     
 <?php
+
     include_once 'settings-configuration.php';
     $config = new SystemConfig();
 ?>
