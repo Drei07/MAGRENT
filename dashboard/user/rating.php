@@ -196,7 +196,7 @@ $property_data = $stmt->fetch(PDO::FETCH_ASSOC);
 
         <div class="container mt-5 mb-5">
             <div class="card">
-                <div class="card-header">Sample Product</div>
+                <div class="card-header"><?php echo $property_data['property_name']?></div>
                 <div class="card-body">
                     <div class="row">
                         <div class="col-sm-4 text-center">
