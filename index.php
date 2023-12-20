@@ -339,7 +339,7 @@ include_once 'dashboard/user/authentication/user-forgot-password.php';
                         </div>
                     </div>
                 </div>
-                <div class="more-btn centred"><a href="property-details" class="theme-btn btn-one">View All Listing</a></div>
+                <div class="more-btn centred"><a href="property" class="theme-btn btn-one">View All Listing</a></div>
             </div>
         </section>
         <!-- feature-section end -->
@@ -490,46 +490,6 @@ include_once 'dashboard/user/authentication/user-forgot-password.php';
             </div>
         </section>
         <!-- deals-section end -->
-
-        <!-- team-section -->
-        <section class="team-section sec-pad centred bg-color-1">
-            <div class="pattern-layer" style="background-image: url(src/images/shape/shape-1.png);"></div>
-            <div class="auto-container">
-                <div class="sec-title">
-                    <h5>Our Agents</h5>
-                    <h2>Meet Our Excellent Agents</h2>
-                </div>
-                <div class="single-item-carousel owl-carousel owl-theme owl-dots-none nav-style-one">
-                    <?php
-                    //user data
-                    $stmt = $user->runQuery("SELECT * FROM users WHERE user_type=:user_type");
-                    $stmt->execute(array(":user_type" => 2));
-                    while ($agent_data = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                    ?>
-                        <div class="team-block-one">
-                            <div class="inner-box">
-                                <figure class="image-box"><img src="src/images/profile/<?php echo $agent_data['profile'] ?>" alt=""></figure>
-                                <div class="lower-content">
-                                    <div class="inner">
-                                        <h4><a href="agents-details.html"><?php echo $agent_data['first_name'], ' ' .$agent_data['last_name'] ?></a></h4>
-                                        <span class="designation">Senior Agent</span>
-                                        <ul class="social-links clearfix">
-                                            <li><a href=""><i class="fab fa-facebook-f"></i></a></li>
-                                            <li><a href=""><i class="fab fa-twitter"></i></a></li>
-                                            <li><a href=""><i class="fab fa-google-plus-g"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    <?php
-                    }
-
-                    ?>
-                </div>
-            </div>
-        </section>
-        <!-- team-section end -->
 
         <!-- main-footer -->
         <footer class="main-footer">

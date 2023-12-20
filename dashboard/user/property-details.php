@@ -133,13 +133,7 @@ $property_viewing_time_data = $stmt->fetch(PDO::FETCH_ASSOC);
                                 <div class="collapse navbar-collapse show clearfix" id="navbarSupportedContent">
                                     <ul class="navigation clearfix">
                                         <li class=""><a href="./"><span>Home</span></a></li>
-                                        <li class=""><a href="package"><span>Package</span></a></li>
-                                        <li class="dropdown current"><a href="#"><span>Property</span></a>
-                                            <ul>
-                                                <li><a href="property">Property</a></li>
-                                                <li><a href="property-registration">Property Registration</a></li>
-                                            </ul>
-                                        </li>
+                                        <li class="current"><a href="find-home"><span>Find A Home</span></a></li>
                                         <li class=""><a href="about-us"><span>About Us</span></a></li>
                                         <li class=""><a href="contact-us"><span>Contact Us</span></a></li>
                                         <li class=""><a href="settings"><span>Settings</span></a></li>
@@ -239,8 +233,7 @@ $property_viewing_time_data = $stmt->fetch(PDO::FETCH_ASSOC);
                             </div>
                         </div>
                         <ul class="other-option pull-right clearfix">
-                                <!-- <button type="submit" onclick="setSessionValues(<?php echo $property_data['id'] ?>)" class="theme-btn btn-one">Edit Details</button> -->
-                                <!-- <li><a href="controller/property-controller?property_id=<?php echo $propertyId ?>&delete_property=1" class="delete_property"><i class='bx bxs-trash' ></i></a></li> -->
+                                <button type="submit" onclick="setSessionValues(<?php echo $property_data['id'] ?>)" class="theme-btn btn-one"><i class='bx bxs-star-half' ></i> Rate</button>
                         </ul>
                     </div>
                 </div>
@@ -438,8 +431,6 @@ $property_viewing_time_data = $stmt->fetch(PDO::FETCH_ASSOC);
                                     <div class="inner">
                                         <h6><?php echo $agent_user_fullname ?></h6><br>
                                         <ul class="info clearfix">
-                                            <li><i class="fas fa-map-marker-alt"></i>84 St. John Wood High Street,
-                                                St Johns Wood</li>
                                             <li><i class="fas fa-phone"></i><a><?php echo $contact_number ?></a></li>
                                         </ul>
                                     </div>
@@ -545,15 +536,15 @@ $property_viewing_time_data = $stmt->fetch(PDO::FETCH_ASSOC);
         }
 
         function setSessionValues(propertyId) {
-			fetch('edit-property-details.php', {
+			fetch('rating', {
 					method: 'POST',
 					headers: {
 						'Content-Type': 'application/x-www-form-urlencoded',
 					},
-					body: 'property_id=' + encodeURIComponent(propertyId),
+					body: 'property_rating_id=' + encodeURIComponent(propertyId),
 				})
 				.then(response => {
-					window.location.href = 'edit-property-details';
+					window.location.href = 'rating';
 				})
 				.catch(error => {
 					console.error('Error:', error);

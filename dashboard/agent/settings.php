@@ -177,7 +177,7 @@ include_once 'header.php';
                         <li class="tab-btn active-btn" data-tab="#tab-1"><span>1</span>Profile Information</li>
                         <li class="tab-btn" data-tab="#tab-2"><span>2</span>Profile Picture</li>
                         <li class="tab-btn" data-tab="#tab-3"><span>3</span>Password</li>
-                        <li class="tab-btn" data-tab="#tab-4"><span>4</span>Billing</li>
+                        <li class="tab-btn" data-tab="#tab-4"><span>4</span>Credits</li>
                     </ul>
                     <div class="tabs-content">
                         <form action="controller/profile-controller.php?id=<?php echo $user_id ?>" id="propertyForm" method="POST" class="needs-validation" novalidate enctype="multipart/form-data">
@@ -333,6 +333,40 @@ include_once 'header.php';
                                 </div>
                             </div>
                         </form>
+
+                        <div class="tab" id="tab-4">
+                            <div class="property-details">
+                                <h4><i class='bx bxs-coin'></i> Available Credits</h4>
+                                
+                                    <?php
+                                    // Assuming you have a User class with a method runQuery for database queries
+                                    // Replace User with your actual class name
+
+                                    // Get the user's package information
+                                    $stmt = $user->runQuery("SELECT * FROM users WHERE id=:user_id");
+                                    $stmt->execute(array(":user_id" => $user_id));
+                                    $user_data = $stmt->fetch(PDO::FETCH_ASSOC);
+
+                                    $user_package_type = $user_data['package_id'];
+
+                                    $stmt_package = $user->runQuery('SELECT * FROM package WHERE id=:id');
+                                    $stmt_package->execute(array(":id" => $user_package_type));
+                                    $package_data = $stmt_package->fetch(PDO::FETCH_ASSOC);
+
+                                    $number_of_post_allowed = $package_data['number_of_post'];
+
+                                    // Get the count of already posted properties
+                                    $stmt_property_post = $user->runQuery('SELECT COUNT(*) as posted_count FROM property WHERE user_id=:user_id');
+                                    $stmt_property_post->execute(array(":user_id" => $user_id));
+                                    $property_post_data = $stmt_property_post->fetch(PDO::FETCH_ASSOC);
+
+                                    $remaining_credits = $number_of_post_allowed - $property_post_data['posted_count'];
+
+                                    // Now $remaining_credits contains the number of remaining credits for property posting
+                                    ?>
+                                <h1 class="credits"><?php echo $remaining_credits; ?></h1>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

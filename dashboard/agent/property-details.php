@@ -428,9 +428,7 @@ $property_viewing_time_data = $stmt->fetch(PDO::FETCH_ASSOC);
                                     <div class="inner">
                                         <h6><?php echo $user_fullname ?></h6><br>
                                         <ul class="info clearfix">
-                                            <li><i class="fas fa-map-marker-alt"></i>84 St. John Wood High Street,
-                                                St Johns Wood</li>
-                                            <li><i class="fas fa-phone"></i><a href="tel:03030571965">030 3057 1965</a></li>
+                                            <li><i class="fas fa-phone"></i><a><?php echo $user_phone_number?></a></li>
                                         </ul>
                                     </div>
                                 </div>

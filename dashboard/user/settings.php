@@ -3,11 +3,13 @@ include_once 'header.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <?php include_once '../../configuration/header2.php'; ?>
     <title>MAGRENT | Settings</title>
 </head>
 <!-- page wrapper -->
+
 <body>
     <div class="boxed_wrapper">
         <!-- preloader -->
@@ -60,7 +62,7 @@ include_once 'header.php';
                             <li><a href="profile"><i class="fas fa-user"></i>&nbsp;&nbsp;<?php echo $user_email ?></a></li>
                         </ul>
                         <div class="sign-box">
-                        <a href="authentication/user-signout" class="btn-signout"><i class="fa fa-sign-out"></i>Sign out</a>
+                            <a href="authentication/user-signout" class="btn-signout"><i class="fa fa-sign-out"></i>Sign out</a>
                         </div>
                     </div>
                 </div>
@@ -157,6 +159,179 @@ include_once 'header.php';
             </div>
         </section>
         <!--End Page Title-->
+
+        <!-- property-registration-section -->
+        <section class="myprofile-section sec-pad">
+            <div class="auto-container">
+                <div class="title">
+                    <h3>Profile Management</h3>
+                </div>
+                <div class="tabs-box">
+                    <ul class="tab-btns tab-buttons clearfix">
+                        <li class="tab-btn active-btn" data-tab="#tab-1"><span>1</span>Profile Information</li>
+                        <li class="tab-btn" data-tab="#tab-2"><span>2</span>Profile Picture</li>
+                        <li class="tab-btn" data-tab="#tab-3"><span>3</span>Password</li>
+                    </ul>
+                    <div class="tabs-content">
+                        <form action="controller/profile-controller.php?id=<?php echo $user_id ?>" id="propertyForm" method="POST" class="needs-validation" novalidate enctype="multipart/form-data">
+                            <div class="tab active-tab" id="tab-1">
+                                <div class="property-details">
+                                    <h4><i class='bx bxs-edit'></i>Edit Profile</h4>
+                                    <div class="inner-box default-form">
+                                        <div class="row clearfix">
+                                            <div class="col-lg-4 col-md-6 col-sm-12 column">
+                                                <div class="field-input">
+                                                    <label>First Name<span style="font-size:17px; margin-top: 2rem; color:red; opacity:0.8;">*</span></label>
+                                                    <input type="text" class="form-control" name="first_name" value="<?php echo $user_fname  ?>" required>
+                                                    <div class="invalid-feedback">
+                                                        Please provide an First Name.
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4 col-md-6 col-sm-12 column">
+                                                <div class="field-input">
+                                                    <label>Middle Name <span style="font-size:17px; margin-top: 2rem; color:red; opacity:0.8;">*</span></label>
+                                                    <input type="text" class="form-control" name="middle_name" value="<?php echo $user_mname  ?>" required>
+                                                    <div class="invalid-feedback">
+                                                        Please provide an Middle Name .
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4 col-md-6 col-sm-12 column">
+                                                <div class="field-input">
+                                                    <label>Last Name <span style="font-size:17px; margin-top: 2rem; color:red; opacity:0.8;">*</span></label>
+                                                    <input type="text" class="form-control" name="last_name" value="<?php echo $user_lname  ?>" required>
+                                                    <div class="invalid-feedback">
+                                                        Please provide an Last Name .
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4 col-md-6 col-sm-12 column">
+                                                <div class="field-input">
+                                                    <label>Sex</label>
+                                                    <div class="select-box">
+                                                        <select class="wide" name="sex">
+                                                            <option value="<?php echo $user_sex ?>"><?php echo $user_sex ?></option>
+                                                            <option value="MALE">MALE</option>
+                                                            <option value="FEMALE ">FEMALE</option>
+                                                        </select>
+                                                        <div class="invalid-feedback">
+                                                            Please provide your Sex.
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4 col-md-6 col-sm-12 column">
+                                                <div class="field-input">
+                                                    <label>Birth Date</label>
+                                                    <input type="date" class="form-control" value="<?php echo $user_birth_date  ?>" autocapitalize="off" autocomplete="off" name="date_of_birth" id="date_of_birth" maxlength="10" pattern="^[a-zA-Z0-9]+@gmail\.com$" placeholder="Ex: mm/dd/yyyy" onkeyup="getAgeVal(0)" onblur="getAgeVal(0);">
+                                                    <div class="invalid-feedback">
+                                                        Please provide an Birth Date.
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4 col-md-6 col-sm-12 column" style="display: none;">
+                                                <div class="field-input">
+                                                    <label>Age</label>
+                                                    <input type="number" class="form-control" value="<?php echo $user_age ?>" autocapitalize="off" autocomplete="off" name="age" id="age">
+                                                    <div class="invalid-feedback">
+                                                        Please provide your Age.
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4 col-md-6 col-sm-12 column">
+                                                <div class="field-input">
+                                                    <label>Phone Number <span style="font-size:17px; margin-top: 2rem; color:red; opacity:0.8;">*</span></label>
+                                                    <input type="text" class="form-control numbers" value="<?php echo $user_phone_number ?>" name="phone_number" inputmode="numeric" minlength="10" maxlength="11" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" required>
+                                                    <div class="invalid-feedback">
+                                                        Please provide an Phone Number.
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="theme-btn btn-one" name="btn-update-profile" onclick="submitForm()">Update</button>
+                                </div>
+                            </div>
+                        </form>
+
+                        <form action="controller/profile-controller.php?id=<?php echo $user_id ?>" id="propertyForm" method="POST" class="needs-validation" novalidate enctype="multipart/form-data">
+                            <div class="tab" id="tab-2">
+                                <div class="gallery-box">
+                                    <h4><i class='bx bxs-edit'></i>Profile Management</h4>
+
+                                    <h6>Profile Picture <span style="font-size:17px; margin-top: 2rem; color:red; opacity:0.8;">*</span></h6>
+                                    <div class="upload-inner centred">
+                                        <i class="fal fa-cloud-upload"></i>
+                                        <div class="upload-box">
+                                            <input type="file" class="form-control" name="avatar" id="check11" style="height: 33px;" onchange="previewImage(event, 'image-preview-container-1', 'image-preview-1')">
+                                            <label for="check11">Click here to upload your image</label>
+                                            <!-- Image Preview Container -->
+                                            <div id="image-preview-container-1">
+                                                <?php
+                                                // Display the existing image if available
+                                                if (!empty($user_profile)) {
+                                                    $imagePath = "../../src/images/profile/" . $user_profile;
+                                                    echo "<img id='image-preview-1' src='$imagePath' style='max-width: 50%; margin: 10px; border-radius: 10px;'>";
+                                                }
+                                                ?> </div>
+                                            <div class="invalid-feedback">
+                                                Please provide an your profile picture.
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="theme-btn btn-one" name="btn-update-avatar" onclick="submitForm()">Update</button>
+                                </div>
+                            </div>
+                        </form>
+
+
+                        <form action="controller/profile-controller.php?id=<?php echo $user_id ?>" id="propertyForm" method="POST" class="needs-validation" novalidate enctype="multipart/form-data">
+                            <div class="tab" id="tab-3">
+                                <div class="property-details">
+                                    <h4><i class='bx bxs-edit'></i>Password Manager</h4>
+                                    <div class="inner-box default-form">
+                                        <div class="row clearfix">
+                                            <div class="col-lg-12 col-md-6 col-sm-12 column">
+                                                <div class="field-input">
+                                                    <label>Old Password<span style="font-size:17px; margin-top: 2rem; color:red; opacity:0.8;">*</span></label>
+                                                    <input type="text" class="form-control" name="old_password" required>
+                                                    <div class="invalid-feedback">
+                                                        Please provide an Old Password.
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-12 col-md-6 col-sm-12 column">
+                                                <div class="field-input">
+                                                    <label>New Password<span style="font-size:17px; margin-top: 2rem; color:red; opacity:0.8;">*</span></label>
+                                                    <input type="text" class="form-control" name="new_password" autocapitalize="on" autocorrect="off" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" placeholder="Enter your new password" required autofocus data-eye>
+                                                    <div class="invalid-feedback">
+                                                        Please provide an New Password.
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-12 col-md-6 col-sm-12 column">
+                                                <div class="field-input">
+                                                    <label>Confirm Password<span style="font-size:17px; margin-top: 2rem; color:red; opacity:0.8;">*</span></label>
+                                                    <input type="text" class="form-control" name="confirm_password" autocapitalize="on" autocorrect="off" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" placeholder="Re-enter your new password" required autofocus data-eye>
+                                                    <div class="invalid-feedback">
+                                                        Please provide an Confirm Password.
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <button type="submit" class="theme-btn btn-one" name="btn-update-password" onclick="submitForm()">Update</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- property-registration-section end -->
+
 
 
         <!-- main-footer -->

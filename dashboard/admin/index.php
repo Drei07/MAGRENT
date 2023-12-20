@@ -128,10 +128,107 @@ include_once 'header.php';
 									<h3>$count</h3>
 								";
 							?>
+						<p>Agent Accounts</p>
+					</span>
+				</li>
+
+				<li>
+					<i class='bx bx-user-circle'></i>
+					<span class="text">
+					<?php
+								$pdoQuery = "SELECT * FROM 	users WHERE user_type = :user_type";
+								$pdoResult1 = $pdoConnect->prepare($pdoQuery);
+								$pdoResult1->execute(array(":user_type" => 2));
+
+								$count = $pdoResult1->rowCount();
+
+								echo
+								"
+									<h3>$count</h3>
+								";
+							?>
+						<p>Pending Agent Accounts</p>
+					</span>
+				</li>
+
+				<li>
+					<i class='bx bx-user-circle'></i>
+					<span class="text">
+					<?php
+								$pdoQuery = "SELECT * FROM 	users WHERE user_type = :user_type";
+								$pdoResult1 = $pdoConnect->prepare($pdoQuery);
+								$pdoResult1->execute(array(":user_type" => 3));
+
+								$count = $pdoResult1->rowCount();
+
+								echo
+								"
+									<h3>$count</h3>
+								";
+							?>
 						<p>User Accounts</p>
 					</span>
 				</li>
+
+				<li>
+					<i class='bx bxs-building-house' ></i>
+					<span class="text">
+					<?php
+								$pdoQuery = "SELECT * FROM 	property";
+								$pdoResult1 = $pdoConnect->prepare($pdoQuery);
+								$pdoResult1->execute();
+
+								$count = $pdoResult1->rowCount();
+
+								echo
+								"
+									<h3>$count</h3>
+								";
+							?>
+						<p>Property</p>
+					</span>
+				</li>
+
+				<li>
+					<i class='bx bxs-credit-card' ></i>
+					<span class="text">
+					<?php
+								$pdoQuery = "SELECT * FROM 	payment WHERE status = :status";
+								$pdoResult1 = $pdoConnect->prepare($pdoQuery);
+								$pdoResult1->execute(array(":status" => "pending"));
+
+								$count = $pdoResult1->rowCount();
+
+								echo
+								"
+									<h3>$count</h3>
+								";
+							?>
+						<p>Pending Payment</p>
+					</span>
+				</li>
+
+
+				<li>
+					<i class='bx bxs-package' ></i>
+					<span class="text">
+					<?php
+								$pdoQuery = "SELECT * FROM 	package";
+								$pdoResult1 = $pdoConnect->prepare($pdoQuery);
+								$pdoResult1->execute();
+
+								$count = $pdoResult1->rowCount();
+
+								echo
+								"
+									<h3>$count</h3>
+								";
+							?>
+						<p>Package</p>
+					</span>
+				</li>
 			</ul>
+			
 		</main>
 		<!-- MAIN -->
 	</section>
