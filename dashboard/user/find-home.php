@@ -160,22 +160,91 @@ include_once 'header.php';
         </section>
         <!--End Page Title-->
 
-        <div class="page-content clearfix">
-            <div class="right-column pull-right">
+        <div class="auto-container" style="padding-top: 3rem;">
+            <div class="inner-container">
+                <div class="search-field">
+                    <div class="tabs-box">
+                        <div class="tabs-content info-group">
+                            <div class="tab active-tab" id="tab-1">
+                                <div class="inner-box">
+                                    <div class="top-search">
+                                        <form action="" method="post" class="search-form">
+                                            <div class="row clearfix">
+                                                <div class="col-lg-4 col-md-12 col-sm-12 column">
+                                                    <div class="form-group">
+                                                        <label>Search Property Name</label>
+                                                        <div class="field-input">
+                                                            <i class="fas fa-search"></i>
+                                                            <input type="search" name="search-field" id="search-input-property" placeholder="Search Property Name..." required="">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4 col-md-6 col-sm-12 column">
+                                                    <div class="form-group">
+                                                        <label>Property Type</label>
+                                                        <div class="select-box">
+                                                            <select class="wide" name="property_type" id="property-type">
+                                                                <option value="">All Property Type</option>
+                                                                <option value="Apartment">Apartment</option>
+                                                                <option value="House">House</option>
+                                                                <option value="Lady's Bed Space">Lady's Bed Space</option>
+                                                                <option value="Men's Bed Space">Men's Bed Space</option>
+                                                                <option value="Dormitory">Dormitory</option>
+                                                                <option value="Transient">Transient</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4 col-md-6 col-sm-12 column">
+                                                    <div class="form-group">
+                                                        <label>Bedrooms</label>
+                                                        <div class="select-box">
+                                                            <select class="wide" name="bedrooms" id="bedrooms">
+                                                                <option value="">Max Rooms</option>
+                                                                <option value="1">One Rooms</option>
+                                                                <option value="2">Two Rooms</option>
+                                                                <option value="3">Three Rooms</option>
+                                                                <option value="4">Four Rooms</option>
+                                                                <option value="5">Five Rooms</option>
+                                                                <option value="6">Six Rooms</option>
+                                                                <option value="7">Seven Rooms</option>
+                                                                <option value="8">Eight Rooms</option>
+                                                                <option value="9">Nine Rooms</option>
+                                                                <option value="10">Ten Rooms</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="search-btn">
+                                                <button type="button" onclick="searchProperties()"><i class="fas fa-search"></i>Search</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="switch_btn_one ">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="page-content clearfix">
                 <!-- deals-style-two -->
                 <section class="deals-style-two">
                     <div class="auto-container">
                         <div class="item-shorting clearfix">
-                            <div class="left-column pull-left">
-                                <h5>Search Reasults: <span>Showing 1-5 of 20 Listings</span></h5>
+                            <div class="left-column pull-left" id="search-results-container">
+                                <h5 id="search-results"><span>Showing 0 of 0 Listings</span></h5>
                             </div>
                         </div>
-
                         <div class="wrapper list">
                             <div class="deals-list-content list-item">
                                 <?php
                                 $stmt1 = $user->runQuery("SELECT * FROM property WHERE status=:status");
-                                $stmt1->execute(array(":status" => "active"));
+                                $stmt1->execute(array(":status" => "available"));
+                                $propertyCount = $stmt1->rowCount();
+
                                 if ($stmt1->rowCount() >= 1) {
                                     while ($property_data = $stmt1->fetch(PDO::FETCH_ASSOC)) {
                                         extract($property_data);
@@ -188,22 +257,58 @@ include_once 'header.php';
                                             <div class="inner-box">
                                                 <div class="image-box">
                                                     <figure class="image"><img src="../../src/images/property_gallery/<?php echo $property_gallery_data['picture_1'] ?>" style="height: 100%;" alt=""></figure>
-                                                    <div class="batch"><i class="icon-11"></i></div>
-                                                    <span class="category">Featured</span>
                                                 </div>
                                                 <div class="lower-content">
                                                     <div class="title-text">
-                                                        <h4><a href="" onclick="setSessionValues(<?php echo $property_data['id'] ?>)"><?php echo $property_data['property_name'] ?></a></h4>
+                                                        <h4><a href="" id="property_name" onclick="setSessionValues(<?php echo $property_data['id'] ?>)"><?php echo $property_data['property_name'] ?></a></h4>
                                                     </div>
                                                     <div class="price-box clearfix">
                                                         <div class="price-info pull-left">
                                                             <h6>Start From</h6>
                                                             <h4>₱ <?php echo number_format($property_data['property_price']); ?></h4>
                                                         </div>
-                                        
-
                                                     </div>
+                                                    <div class="lower-content">
+                                                        <h6 id="property_type" style="display: none;">
+                                                            <?php
+                                                            if ($property_data['property_type'] == 1) {
+                                                                echo "Apartment";
+                                                            } elseif ($property_data['property_type'] == 2) {
+                                                                echo "House";
+                                                            } elseif ($property_data['property_type'] == 3) {
+                                                                echo "Lady's Bed Space";
+                                                            } elseif ($property_data['property_type'] == 4) {
+                                                                echo "Men's Bed Space";
+                                                            } elseif ($property_data['property_type'] == 5) {
+                                                                echo "Dormitory";
+                                                            } elseif ($property_data['property_type'] == 5) {
+                                                                echo "Transient";
+                                                            } else {
+                                                                echo "";
+                                                            }
+                                                            ?>
+                                                        </h6>
+                                                        <h6>Property Type :
+                                                            <?php
+                                                            if ($property_data['property_type'] == 1) {
+                                                                echo "Apartment";
+                                                            } elseif ($property_data['property_type'] == 2) {
+                                                                echo "House";
+                                                            } elseif ($property_data['property_type'] == 3) {
+                                                                echo "Lady's Bed Space";
+                                                            } elseif ($property_data['property_type'] == 4) {
+                                                                echo "Men's Bed Space";
+                                                            } elseif ($property_data['property_type'] == 5) {
+                                                                echo "Dormitory";
+                                                            } elseif ($property_data['property_type'] == 5) {
+                                                                echo "Transient";
+                                                            } else {
+                                                                echo "";
+                                                            }
 
+                                                            ?>
+                                                        </h6>
+                                                    </div>
                                                     <p><?php
                                                         $description = $property_data['property_description'];
                                                         $wordLimit = 20; // Set your desired word limit
@@ -225,6 +330,7 @@ include_once 'header.php';
                                                         ?></p>
 
                                                     <ul class="more-details clearfix">
+                                                        <li style="display: none;" id="bed_rooms"><?php echo $property_data['bedrooms'] ?></li>
                                                         <li><i class="icon-14"></i><?php echo $property_data['bedrooms'] ?> Beds</li>
                                                         <li><i class="icon-15"></i><?php echo $property_data['bathrooms'] ?> Baths</li>
                                                     </ul>
@@ -238,17 +344,26 @@ include_once 'header.php';
                                     }
                                 } else {
                                     ?>
-                                    <!-- error message -->
                                 <?php
                                 }
 
                                 ?>
                             </div>
+
+                        </div>
+                        <div class="pagination-wrapper">
+                            <ul id="pagination" class="pagination clearfix">
+                                <li><a href="property-list.html" class="current">1</a></li>
+                                <li><a href="property-list.html">2</a></li>
+                                <li><a href="property-list.html">3</a></li>
+                                <li><a href="property-list.html"><i class="fas fa-angle-right"></i></a></li>
+                            </ul>
                         </div>
                     </div>
                 </section>
                 <!-- deals-style-two end -->
             </div>
+
         </div>
         <!-- page-content end -->
 
@@ -325,21 +440,60 @@ include_once 'header.php';
     <?php include_once '../../configuration/footer2.php'; ?>
     <script>
         function setSessionValues(propertyId) {
-			fetch('property-details.php', {
-					method: 'POST',
-					headers: {
-						'Content-Type': 'application/x-www-form-urlencoded',
-					},
-					body: 'property_id=' + encodeURIComponent(propertyId),
-				})
-				.then(response => {
-					window.location.href = 'property-details';
-				})
-				.catch(error => {
-					console.error('Error:', error);
-				});
-		}
+            fetch('property-details.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: 'property_id=' + encodeURIComponent(propertyId),
+                })
+                .then(response => {
+                    window.location.href = 'property-details';
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        }
 
+        // Function to handle property search
+        function searchProperties() {
+            var searchInput = document.getElementById('search-input-property').value.trim();
+            var propertyType = document.getElementById('property-type').value;
+            var bedRooms = document.getElementById('bedrooms').value;
+            var propertyItems = document.querySelectorAll('.deals-block-one');
+
+            propertyItems.forEach(function(item) {
+                var propertyName = item.querySelector('#property_name').innerText.toLowerCase();
+                var propertyTypeText = item.querySelector('#property_type').innerText.toLowerCase();
+                var bedroomsTypeText = item.querySelector('#bed_rooms').innerText.toLowerCase();
+
+
+
+                // Check if the property name and type match the search criteria
+                var matchesSearch = propertyName.includes(searchInput.toLowerCase()) && (propertyType === '' || propertyTypeText.includes(propertyType.toLowerCase())) && (bedRooms === '' || bedroomsTypeText.includes(bedRooms.toLowerCase()));
+
+                // Toggle the visibility of the property item based on the search result
+                item.style.display = matchesSearch ? 'block' : 'none';
+            });
+
+            updateSearchResults();
+
+        }
+
+        function updateSearchResults() {
+            var visibleListings = document.querySelectorAll('.deals-block-one:not([style*="display: none"])').length;
+            var totalListings = document.querySelectorAll('.deals-block-one').length;
+
+            var searchResultsContainer = document.getElementById('search-results-container');
+            var searchResultsElement = document.getElementById('search-results');
+
+            searchResultsElement.innerText = 'Showing ' + visibleListings + ' of ' + totalListings + ' Listings';
+        }
+
+        // Call the updateSearchResults function once the page loads and property list is displayed
+        window.onload = function() {
+            updateSearchResults();
+        }
     </script>
     <?php include_once '../../configuration/sweetalert.php'; ?>
 

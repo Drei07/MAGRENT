@@ -89,7 +89,7 @@ $packageData = $stmt->fetch(PDO::FETCH_ASSOC);
                 <div class="outer-box">
                     <div class="main-box">
                         <div class="logo-box">
-                            <figure class="logo"><a href="./"><img src="../../src/images/main_logo/<?php echo $config->getSystemLogo() ?>" alt=""></a></figure>
+                            <figure class="logo"><a href="property"><img src="../../src/images/main_logo/<?php echo $config->getSystemLogo() ?>" alt=""></a></figure>
                         </div>
                         <div class="menu-area clearfix">
                             <!--Mobile Navigation Toggler-->
@@ -101,14 +101,14 @@ $packageData = $stmt->fetch(PDO::FETCH_ASSOC);
                             <nav class="main-menu navbar-expand-md navbar-light">
                                 <div class="collapse navbar-collapse show clearfix" id="navbarSupportedContent">
                                     <ul class="navigation clearfix">
-                                        <li class=""><a href="./"><span>Home</span></a></li>
-                                        <li class="current"><a href="package"><span>Package</span></a></li>
                                         <li class="dropdown"><a href="#"><span>Property</span></a>
                                             <ul>
                                                 <li><a href="property">Property</a></li>
                                                 <li><a href="property-registration">Property Registration</a></li>
+                                                <li><a href="property-reservation?status=??status=?">Property Reservation</a></li>
                                             </ul>
-                                        </li>
+                                        </li> 
+                                        <li class="current"><a href="package"><span>Package</span></a></li>
                                         <li class=""><a href="about-us"><span>About Us</span></a></li>
                                         <li class=""><a href="contact-us"><span>Contact Us</span></a></li>
                                         <li class=""><a href="settings"><span>Settings</span></a></li>
@@ -125,7 +125,7 @@ $packageData = $stmt->fetch(PDO::FETCH_ASSOC);
                 <div class="outer-box">
                     <div class="main-box">
                         <div class="logo-box">
-                            <figure class="logo"><a href="./"><img src="../../src/images/main_logo/<?php echo $config->getSystemLogo() ?>" alt=""></a></figure>
+                            <figure class="logo"><a href="property"><img src="../../src/images/main_logo/<?php echo $config->getSystemLogo() ?>" alt=""></a></figure>
                         </div>
                         <div class="menu-area clearfix">
                             <nav class="main-menu clearfix">
@@ -173,7 +173,7 @@ $packageData = $stmt->fetch(PDO::FETCH_ASSOC);
                 <div class="content-box clearfix">
                     <h1>Payment</h1>
                     <ul class="bread-crumb clearfix">
-                        <li><a href="./">Home</a></li>
+                        <li><a href="property">Home</a></li>
                         <li><a href="package">Package</a></li>
                         <li>Payment</li>
                     </ul>

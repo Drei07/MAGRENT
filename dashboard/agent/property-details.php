@@ -9,6 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $_SESSION['property_id'] = $propertyId;
 }
 
+
 // Retrieve the values from session variables
 $propertyId = isset($_SESSION['property_id']) ? $_SESSION['property_id'] : '';
 
@@ -44,7 +45,26 @@ $property_viewing_time_data = $stmt->fetch(PDO::FETCH_ASSOC);
 <head>
     <?php include_once '../../configuration/header2.php'; ?>
     <title>MAGRENT | Property Details</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
+<!-- page wrapper -->
+<style>
+    .progress-label-left {
+        float: left;
+        margin-right: 0.5em;
+        line-height: 1em;
+    }
+
+    .progress-label-right {
+        float: right;
+        margin-left: 0.3em;
+        line-height: 1em;
+    }
+
+    .star-light {
+        color: #e9ecef;
+    }
+</style>
 <!-- page wrapper -->
 
 <body>
@@ -109,7 +129,7 @@ $property_viewing_time_data = $stmt->fetch(PDO::FETCH_ASSOC);
                 <div class="outer-box">
                     <div class="main-box">
                         <div class="logo-box">
-                            <figure class="logo"><a href="./"><img src="../../src/images/main_logo/<?php echo $config->getSystemLogo() ?>" alt=""></a></figure>
+                            <figure class="logo"><a href="property"><img src="../../src/images/main_logo/<?php echo $config->getSystemLogo() ?>" alt=""></a></figure>
                         </div>
                         <div class="menu-area clearfix">
                             <!--Mobile Navigation Toggler-->
@@ -121,14 +141,14 @@ $property_viewing_time_data = $stmt->fetch(PDO::FETCH_ASSOC);
                             <nav class="main-menu navbar-expand-md navbar-light">
                                 <div class="collapse navbar-collapse show clearfix" id="navbarSupportedContent">
                                     <ul class="navigation clearfix">
-                                        <li class=""><a href="./"><span>Home</span></a></li>
-                                        <li class=""><a href="package"><span>Package</span></a></li>
                                         <li class="dropdown current"><a href="#"><span>Property</span></a>
                                             <ul>
                                                 <li><a href="property">Property</a></li>
                                                 <li><a href="property-registration">Property Registration</a></li>
+                                                <li><a href="property-reservation?status=??status=?">Property Reservation</a></li>
                                             </ul>
                                         </li>
+                                        <li class=""><a href="package"><span>Package</span></a></li>
                                         <li class=""><a href="about-us"><span>About Us</span></a></li>
                                         <li class=""><a href="contact-us"><span>Contact Us</span></a></li>
                                         <li class=""><a href="settings"><span>Settings</span></a></li>
@@ -193,7 +213,7 @@ $property_viewing_time_data = $stmt->fetch(PDO::FETCH_ASSOC);
                 <div class="content-box clearfix">
                     <h1>Property Details</h1>
                     <ul class="bread-crumb clearfix">
-                        <li><a href="./">Home</a></li>
+                        <li><a href="property">Home</a></li>
                         <li>Property Details</li>
                     </ul>
                 </div>
@@ -205,21 +225,28 @@ $property_viewing_time_data = $stmt->fetch(PDO::FETCH_ASSOC);
         <section class="property-details property-details-one">
             <div class="auto-container">
                 <div class="top-details clearfix">
-                    <div class="left-column pull-left clearfix">
+                <div class="left-column pull-left clearfix">
                         <h3><?php echo $property_data['property_name'] ?></h3>
-                        <div class="author-info clearfix">
-                            <div class="author-box pull-left">
-                                <figure class="author-thumb"><img src="../../src/images/feature/author-1.jpg" alt=""></figure>
-                                <h6>Rating's</h6>
-                            </div>
-                            <ul class="rating clearfix pull-left">
-                                <li><i class="icon-39"></i></li>
-                                <li><i class="icon-39"></i></li>
-                                <li><i class="icon-39"></i></li>
-                                <li><i class="icon-39"></i></li>
-                                <li><i class="icon-40"></i></li>
-                            </ul>
-                        </div>
+                        <?php
+                            if ($property_data['units'] == !null) {
+                                $stmt_property_reservation = $user->runQuery('SELECT COUNT(*) as available_units FROM property_reservation WHERE property_id=:property_id AND status=:status');
+                                $stmt_property_reservation->execute(array(":property_id" => $propertyId, ":status" => "accept"));
+                                $property_reservation_data = $stmt_property_reservation->fetch(PDO::FETCH_ASSOC);
+
+                                $available_units = $property_data['units'] - $property_reservation_data['available_units'];
+
+                            ?>
+                                <div class="author-info clearfix">
+                                    <div class="author-box pull-left">
+                                        <h6>Available Unit's</h6>
+                                    </div>
+                                    <ul class="rating clearfix pull-left">
+                                        <li><?php echo $available_units ?></li>
+                                    </ul>
+                                </div>
+                            <?php
+                            }
+                            ?>
                     </div>
                     <div class="right-column pull-right clearfix">
                         <div class="price-inner clearfix">
@@ -228,12 +255,77 @@ $property_viewing_time_data = $stmt->fetch(PDO::FETCH_ASSOC);
                             </div>
                         </div>
                         <ul class="other-option pull-right clearfix">
-                                <!-- <button type="submit" onclick="setSessionValues(<?php echo $property_data['id'] ?>)" class="theme-btn btn-one">Edit Details</button> -->
-                                <!-- <li><a href="controller/property-controller?property_id=<?php echo $propertyId ?>&delete_property=1" class="delete_property"><i class='bx bxs-trash' ></i></a></li> -->
-                                <li><a onclick="setSessionValues(<?php echo $property_data['id'] ?>)" ><i class='bx bxs-edit'></i></a></li>
+                            <!-- <li><a href="controller/property-controller?property_id=<?php echo $propertyId ?>&delete_property=1" class="delete_property"><i class='bx bxs-trash' ></i></a></li> -->
+                            <li><a onclick="setSessionValues(<?php echo $property_data['id'] ?>)"><i class='bx bxs-edit'></i></a></li>
                         </ul>
                     </div>
                 </div>
+
+                <div class="container mt-5 mb-5">
+                    <div class="card">
+                        <div class="card-header"></div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-6 text-center">
+                                    <h1 class="text-warning mt-4 mb-4">
+                                        <b><span id="average_rating">0.0</span> / 5</b>
+                                    </h1>
+                                    <div class="mb-4">
+                                        <i class="fas fa-star star-light mr-1 main_star"></i>
+                                        <i class="fas fa-star star-light mr-1 main_star"></i>
+                                        <i class="fas fa-star star-light mr-1 main_star"></i>
+                                        <i class="fas fa-star star-light mr-1 main_star"></i>
+                                        <i class="fas fa-star star-light mr-1 main_star"></i>
+                                    </div>
+                                    <h3><span id="total_review">0</span> Review</h3>
+                                </div>
+                                <div class="col-sm-4">
+                                    <p>
+                                    <div class="progress-label-left"><b>5</b> <i class="fas fa-star text-warning"></i></div>
+
+                                    <div class="progress-label-right">(<span id="total_five_star_review">0</span>)</div>
+                                    <div class="progress">
+                                        <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" id="five_star_progress"></div>
+                                    </div>
+                                    </p>
+                                    <p>
+                                    <div class="progress-label-left"><b>4</b> <i class="fas fa-star text-warning"></i></div>
+
+                                    <div class="progress-label-right">(<span id="total_four_star_review">0</span>)</div>
+                                    <div class="progress">
+                                        <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" id="four_star_progress"></div>
+                                    </div>
+                                    </p>
+                                    <p>
+                                    <div class="progress-label-left"><b>3</b> <i class="fas fa-star text-warning"></i></div>
+
+                                    <div class="progress-label-right">(<span id="total_three_star_review">0</span>)</div>
+                                    <div class="progress">
+                                        <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" id="three_star_progress"></div>
+                                    </div>
+                                    </p>
+                                    <p>
+                                    <div class="progress-label-left"><b>2</b> <i class="fas fa-star text-warning"></i></div>
+
+                                    <div class="progress-label-right">(<span id="total_two_star_review">0</span>)</div>
+                                    <div class="progress">
+                                        <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" id="two_star_progress"></div>
+                                    </div>
+                                    </p>
+                                    <p>
+                                    <div class="progress-label-left"><b>1</b> <i class="fas fa-star text-warning"></i></div>
+
+                                    <div class="progress-label-right">(<span id="total_one_star_review">0</span>)</div>
+                                    <div class="progress">
+                                        <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" id="one_star_progress"></div>
+                                    </div>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="row clearfix">
                     <div class="col-lg-8 col-md-12 col-sm-12 content-side">
                         <div class="property-details-content">
@@ -247,10 +339,10 @@ $property_viewing_time_data = $stmt->fetch(PDO::FETCH_ASSOC);
 
                                 </div>
                             </div>
-                             <div class="discription-box content-widget">
+                            <div class="discription-box content-widget">
                                 <div class="title-box">
                                     <h4>Property Description</h4>
-                                    <ul class="other-option pull-right clearfix">       
+                                    <ul class="other-option pull-right clearfix">
                                 </div>
                                 <div class="text">
                                     <p><?php echo $property_data['property_description'] ?></p>
@@ -261,9 +353,6 @@ $property_viewing_time_data = $stmt->fetch(PDO::FETCH_ASSOC);
                                     <h4>Property Details</h4>
                                 </div>
                                 <ul class="list clearfix">
-                                    <li>Garage Size: <span><?php echo $property_data['garage_size'] ?> Sq Ft</span></li>
-                                    <li>Property Price: <span>$30,000</span></li>
-                                    <li>Bedrooms: <span><?php echo $property_data['bedrooms'] ?></span></li>
                                     <li>Property Type:<span>
                                             <?php
                                             if ($property_data['property_type'] == 1) {
@@ -283,15 +372,37 @@ $property_viewing_time_data = $stmt->fetch(PDO::FETCH_ASSOC);
                                             }
 
                                             ?>
-                                        </span></li>
+                                        </span>
+                                    </li>
+                                    <?php
+                                    if ($property_data['units'] == !null) {
+                                    ?>
+                                        <li>Number of Unit's <span><?php echo $property_data['units'] ?></span></li>
+                                    <?php
+                                    }
+                                    ?>
+                                    <li>Bedrooms: <span><?php echo $property_data['bedrooms'] ?></span></li>
                                     <li>Bathrooms: <span><?php echo $property_data['bathrooms'] ?></span></li>
-                                    <li>Property Size: <span><?php echo $property_data['property_size'] ?> Sq Ft</span></li>
                                     <li>Parking: <span><?php echo $property_data['parking'] ?></span></li>
+                                    <li>Garage Size: <span><?php echo $property_data['garage_size'] ?> Sq Ft</span></li>
+                                    <li>Property Size: <span><?php echo $property_data['property_size'] ?> Sq Ft</span></li>
+                                    <li> Pets:
+                                        <span>
+                                            <?php
+                                            if ($property_data['allowed_pets'] == 'YES') {
+                                                echo 'Pets are allowed';
+                                            } else if ($property_data['allowed_pets'] == 'NO') {
+                                                echo 'Pets are not allowed';
+                                            }
+                                            ?>
+                                        </span>
+                                    </li>
+
                                 </ul>
                             </div>
                             <div class="amenities-box content-widget">
                                 <div class="title-box">
-                                    <h4>Amenities</h4>
+                                    <h4>Inclusives</h4>
                                 </div>
                                 <ul class="list clearfix">
                                     <?php
@@ -311,62 +422,16 @@ $property_viewing_time_data = $stmt->fetch(PDO::FETCH_ASSOC);
                                                 $stmt2->execute(array(":id" => trim($amenity)));
                                                 $amenities_data = $stmt2->fetch(PDO::FETCH_ASSOC);
 
-                                                ?>
-                                                    <li><?php echo $amenities_data['amenities']?></li>
-                                                <?php
+                                    ?>
+                                                <li><?php echo $amenities_data['amenities'] ?></li>
+                                    <?php
                                             }
                                         }
                                     }
                                     ?>
                                 </ul>
                             </div>
-                            
-                            <div class="floorplan-inner content-widget">
-                                <div class="title-box">
-                                    <h4>Floor Plan</h4>
-                                </div>
-                                <ul class="accordion-box">
-                                    <li class="accordion block active-block">
-                                        <div class="acc-btn active">
-                                            <div class="icon-outer"><i class="fas fa-angle-down"></i></div>
-                                            <h5>First Floor</h5>
-                                        </div>
-                                        <div class="acc-content current">
-                                            <div class="content-box">
-                                                <figure class="image-box">
-                                                    <img src="../../src/images/property_floorplan/<?php echo $property_floor_plan_data['first_floor'] ?>" alt="">
-                                                </figure>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="accordion block">
-                                        <div class="acc-btn">
-                                            <div class="icon-outer"><i class="fas fa-angle-down"></i></div>
-                                            <h5>Second Floor</h5>
-                                        </div>
-                                        <div class="acc-content">
-                                            <div class="content-box">
-                                                <figure class="image-box">
-                                                    <img src="../../src/images/property_floorplan/<?php echo $property_floor_plan_data['second_floor'] ?>" alt="">
-                                                </figure>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="accordion block">
-                                        <div class="acc-btn">
-                                            <div class="icon-outer"><i class="fas fa-angle-down"></i></div>
-                                            <h5>Third Floor</h5>
-                                        </div>
-                                        <div class="acc-content">
-                                            <div class="content-box">
-                                                <figure class="image-box">
-                                                    <img src="../../src/images/property_floorplan/<?php echo $property_floor_plan_data['third_floor'] ?>" alt="">
-                                                </figure>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
+
                             <div class="location-box content-widget">
                                 <div class="title-box">
                                     <h4>Location</h4>
@@ -381,43 +446,43 @@ $property_viewing_time_data = $stmt->fetch(PDO::FETCH_ASSOC);
                                     <h4>Property Viewing Schedule</h4>
                                 </div>
                                 <div class="form-inner">
-                                <h6>Visiting Rules:</h6>
-                                <p><?php echo $property_viewing_time_data['visiting_rules'] ?></p><br>
-                                <h6>Visitation Time From:</h6>
-                                <p><?php echo date("h:i A", strtotime($property_viewing_time_data['visitation_hours_from'])); ?></p><br>
-                                <h6>Visitation Time To:</h6>
-                                <p><?php echo date("h:i A", strtotime($property_viewing_time_data['visitation_hours_to']));?></p><br>
+                                    <h6>Visiting Rules:</h6>
+                                    <p><?php echo $property_viewing_time_data['visiting_rules'] ?></p><br>
+                                    <h6>Visitation Time From:</h6>
+                                    <p><?php echo date("h:i A", strtotime($property_viewing_time_data['visitation_hours_from'])); ?></p><br>
+                                    <h6>Visitation Time To:</h6>
+                                    <p><?php echo date("h:i A", strtotime($property_viewing_time_data['visitation_hours_to'])); ?></p><br>
                                 </div>
                                 <div class="amenities-box">
-                                <ul class="list clearfix">
-                                    <?php
-                                    $stmt3 = $user->runQuery("SELECT * FROM property_viewing_time WHERE property_id=:id");
-                                    $stmt3->execute(array(":id" => $propertyId));
+                                    <ul class="list clearfix">
+                                        <?php
+                                        $stmt3 = $user->runQuery("SELECT * FROM property_viewing_time WHERE property_id=:id");
+                                        $stmt3->execute(array(":id" => $propertyId));
 
-                                    if ($stmt3->rowCount() >= 1) {
-                                        while ($property_viewing_time_data = $stmt3->fetch(PDO::FETCH_ASSOC)) {
-                                            // Explode the values from the amenities column
-                                            $visitationDaysArray = explode(',', $property_viewing_time_data['visitation_days']);
+                                        if ($stmt3->rowCount() >= 1) {
+                                            while ($property_viewing_time_data = $stmt3->fetch(PDO::FETCH_ASSOC)) {
+                                                // Explode the values from the amenities column
+                                                $visitationDaysArray = explode(',', $property_viewing_time_data['visitation_days']);
 
-                                            // Iterate through the exploded values
-                                            foreach ($visitationDaysArray as $days) {
-                                                // Use each amenity value as needed
-                                                // echo "Amenity: " . trim($amenity) . "<br>";
-                                                $stmt5 = $user->runQuery("SELECT * FROM day WHERE id=:id");
-                                                $stmt5->execute(array(":id" => trim($days)));
-                                                $days_data = $stmt5->fetch(PDO::FETCH_ASSOC);
+                                                // Iterate through the exploded values
+                                                foreach ($visitationDaysArray as $days) {
+                                                    // Use each amenity value as needed
+                                                    // echo "Amenity: " . trim($amenity) . "<br>";
+                                                    $stmt5 = $user->runQuery("SELECT * FROM day WHERE id=:id");
+                                                    $stmt5->execute(array(":id" => trim($days)));
+                                                    $days_data = $stmt5->fetch(PDO::FETCH_ASSOC);
 
-                                                ?>
-                                                    <li><?php echo $days_data['day']?></li>
-                                                <?php
+                                        ?>
+                                                    <li><?php echo $days_data['day'] ?></li>
+                                        <?php
+                                                }
                                             }
                                         }
-                                    }
-                                    ?>
-                                </ul>
+                                        ?>
+                                    </ul>
+                                </div>
                             </div>
-                            </div>
-                            
+
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-12 col-sm-12 sidebar-side">
@@ -426,15 +491,26 @@ $property_viewing_time_data = $stmt->fetch(PDO::FETCH_ASSOC);
                                 <div class="author-box">
                                     <figure class="author-thumb"><img src="../../src/images/profile/<?php echo $user_profile ?>" alt=""></figure>
                                     <div class="inner">
-                                        <h6><?php echo $user_fullname ?></h6><br>
+                                        <h4><?php echo $user_fullname ?></h4>
                                         <ul class="info clearfix">
-                                            <li><i class="fas fa-phone"></i><a><?php echo $user_phone_number?></a></li>
+                                            <li><i class="fas fa-map-marker-alt"></i><?php echo $property_location_data['address'] ?></li>
+                                            <li><i class="fas fa-phone"></i><a href="tel:03030571965"><?php echo $user_phone_number ?></a></li>
                                         </ul>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+
+                    <div class="reviews">
+                        <h1>Property Reviews</h1>
+                        <div class="line"></div>
+                    </div>
+
+                    <div class="container mt-2 mb-2">
+                        <div class="mt-5" id="review_content"></div>
+                    </div>
+
                 </div>
             </div>
         </section>
@@ -533,20 +609,121 @@ $property_viewing_time_data = $stmt->fetch(PDO::FETCH_ASSOC);
         }
 
         function setSessionValues(propertyId) {
-			fetch('edit-property-details.php', {
-					method: 'POST',
-					headers: {
-						'Content-Type': 'application/x-www-form-urlencoded',
-					},
-					body: 'property_id=' + encodeURIComponent(propertyId),
-				})
-				.then(response => {
-					window.location.href = 'edit-property-details';
-				})
-				.catch(error => {
-					console.error('Error:', error);
-				});
-		}
+            fetch('edit-property-details.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: 'property_id=' + encodeURIComponent(propertyId),
+                })
+                .then(response => {
+                    window.location.href = 'edit-property-details';
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        }
+
+            //Rating and Review
+            load_rating_data();
+
+            function load_rating_data() {
+
+                var property_id = <?php echo $propertyId ?>; // Assuming $propertyId is defined in your PHP code
+                var user_id = <?php  echo $user_id?>
+
+                $.ajax({
+                    url: "rating-data.php",
+                    method: "POST",
+                    data: {
+                        action: 'load_data',
+                        property_id: property_id,
+                        user_id: user_id
+
+                    },
+                    dataType: "JSON",
+                    success: function(data) {
+                        $('#average_rating').text(data.average_rating);
+                        $('#total_review').text(data.total_review);
+
+                        var count_star = 0;
+
+                        $('.main_star').each(function() {
+                            count_star++;
+                            if (Math.ceil(data.average_rating) >= count_star) {
+                                $(this).addClass('text-warning');
+                                $(this).addClass('star-light');
+                            }
+                        });
+
+                        $('#total_five_star_review').text(data.five_star_review);
+
+                        $('#total_four_star_review').text(data.four_star_review);
+
+                        $('#total_three_star_review').text(data.three_star_review);
+
+                        $('#total_two_star_review').text(data.two_star_review);
+
+                        $('#total_one_star_review').text(data.one_star_review);
+
+                        $('#five_star_progress').css('width', (data.five_star_review / data.total_review) * 100 + '%');
+
+                        $('#four_star_progress').css('width', (data.four_star_review / data.total_review) * 100 + '%');
+
+                        $('#three_star_progress').css('width', (data.three_star_review / data.total_review) * 100 + '%');
+
+                        $('#two_star_progress').css('width', (data.two_star_review / data.total_review) * 100 + '%');
+
+                        $('#one_star_progress').css('width', (data.one_star_review / data.total_review) * 100 + '%');
+
+                        if (data.review_data.length > 0) {
+                            var html = '';
+
+                            for (var count = 0; count < data.review_data.length; count++) {
+                                html += '<div class="row mb-3">';
+
+                                html += '<div class="col-sm-1"><div class="rounded-circle bg-danger text-white pt-2 pb-2"><h3 class="text-center">' + data.review_data[count].char_user_name.charAt(0) + '</h3></div></div>';
+
+                                html += '<div class="col-sm-11">';
+
+                                html += '<div class="card">';
+
+                                html += '<div class="card-header"><b>' + data.review_data[count].user_name + '</b></div>';
+
+                                html += '<div class="card-body">';
+
+                                for (var star = 1; star <= 5; star++) {
+                                    var class_name = '';
+
+                                    if (data.review_data[count].rating >= star) {
+                                        class_name = 'text-warning';
+                                    } else {
+                                        class_name = 'star-light';
+                                    }
+
+                                    html += '<i class="fas fa-star ' + class_name + ' mr-1"></i>';
+                                }
+
+                                html += '<br />';
+
+                                html += data.review_data[count].user_review;
+
+                                html += '</div>';
+
+                                html += '<div class="card-footer text-right">On ' + data.review_data[count].datetime + '</div>';
+
+                                html += '</div>';
+
+                                html += '</div>';
+
+                                html += '</div>';
+                            }
+
+                            $('#review_content').html(html);
+                        }
+                    }
+                })
+            }
 
     </script>
     <?php include_once '../../configuration/sweetalert.php'; ?>

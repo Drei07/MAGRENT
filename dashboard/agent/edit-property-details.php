@@ -124,7 +124,7 @@ $property_floor_plan_data = $stmt->fetch(PDO::FETCH_ASSOC);
                 <div class="outer-box">
                     <div class="main-box">
                         <div class="logo-box">
-                            <figure class="logo"><a href="./"><img src="../../src/images/main_logo/<?php echo $config->getSystemLogo() ?>" alt=""></a></figure>
+                            <figure class="logo"><a href="property"><img src="../../src/images/main_logo/<?php echo $config->getSystemLogo() ?>" alt=""></a></figure>
                         </div>
                         <div class="menu-area clearfix">
                             <!--Mobile Navigation Toggler-->
@@ -136,14 +136,14 @@ $property_floor_plan_data = $stmt->fetch(PDO::FETCH_ASSOC);
                             <nav class="main-menu navbar-expand-md navbar-light">
                                 <div class="collapse navbar-collapse show clearfix" id="navbarSupportedContent">
                                     <ul class="navigation clearfix">
-                                        <li class=""><a href="./"><span>Home</span></a></li>
-                                        <li class=""><a href="package"><span>Package</span></a></li>
-                                        <li class="dropdown current"><a href="#"><span>Property</span></a>
+                                        <li class="dropdown"><a href="#"><span>Property</span></a>
                                             <ul>
                                                 <li><a href="property">Property</a></li>
                                                 <li><a href="property-registration">Property Registration</a></li>
+                                                <li><a href="property-reservation?status=??status=?">Property Reservation</a></li>
                                             </ul>
                                         </li>
+                                        <li class=""><a href="package"><span>Package</span></a></li>
                                         <li class=""><a href="about-us"><span>About Us</span></a></li>
                                         <li class=""><a href="contact-us"><span>Contact Us</span></a></li>
                                         <li class=""><a href="settings"><span>Settings</span></a></li>
@@ -210,7 +210,7 @@ $property_floor_plan_data = $stmt->fetch(PDO::FETCH_ASSOC);
                 <div class="content-box clearfix">
                     <h1>Edit Property Details</h1>
                     <ul class="bread-crumb clearfix">
-                        <li><a href="./">Home</a></li>
+                        <li><a href="property">Home</a></li>
                         <li><a href="property-details">Property Details</a></li>
                         <li>Edit</li>
 
@@ -232,7 +232,6 @@ $property_floor_plan_data = $stmt->fetch(PDO::FETCH_ASSOC);
                         <li class="tab-btn" data-tab="#tab-2"><span>2</span>Gallery</li>
                         <li class="tab-btn" data-tab="#tab-3"><span>3</span>Property Viewing</li>
                         <li class="tab-btn" data-tab="#tab-4"><span>4</span>Location</li>
-                        <li class="tab-btn" data-tab="#tab-5"><span>5</span>Floor Plan</li>
                     </ul>
                     <form action="controller/property-controller.php?property_id=<?php echo $property_data['id'] ?>" id="propertyForm" method="POST" class="needs-validation" novalidate enctype="multipart/form-data">
                         <div class="tabs-content">
@@ -241,6 +240,114 @@ $property_floor_plan_data = $stmt->fetch(PDO::FETCH_ASSOC);
                                     <h4><i class="icon-19"></i>Property Details:</h4>
                                     <div class="inner-box default-form">
                                         <div class="row clearfix">
+                                            <div class="col-lg-4 col-md-6 col-sm-12 column">
+                                                <div class="field-input">
+                                                    <?php
+                                                    if ($property_data['status'] == "available") {
+                                                        $status = "Available"
+
+                                                    ?>
+                                                        <label>Property Status : <span style="font-size:17px; margin-top: 2rem; color:green; opacity:0.8;">Available</span></label>
+                                                        <div class="select-box">
+                                                            <select class="wide" name="status" required>
+                                                                <option selected value="<?php echo $property_data['status'] ?>"><?php echo $status ?></option>
+                                                                <option value="available">Available</option>
+                                                                <option value="not_available">Not Available</option>
+                                                            </select>
+                                                            <div class="invalid-feedback">
+                                                                Please select property Status.
+                                                            </div>
+                                                        </div>
+                                                    <?php
+                                                    }else if ($property_data['status'] == "not_available"){
+                                                        $status = "Not Available"
+                                                    ?>
+                                                        <label>Property Status : <span style="font-size:17px; margin-top: 2rem; color:red; opacity:0.8;">Not Available</span></label>
+                                                        <div class="select-box">
+                                                            <select class="wide" name="status" required>
+                                                                <option selected value="<?php echo $property_data['status'] ?>"><?php echo $status ?></option>
+                                                                <option value="available">Available</option>
+                                                                <option value="not_available">Not Available</option>
+                                                            </select>
+                                                            <div class="invalid-feedback">
+                                                                Please select property Status.
+                                                            </div>
+                                                        </div>
+                                                    <?php
+                                                    }
+                                                    ?>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4 col-md-6 col-sm-12 column">
+                                                <div class="field-input">
+                                                    <label>Property Type <span style="font-size:17px; margin-top: 2rem; color:red; opacity:0.8;">*</span></label>
+                                                    <div class="select-box">
+                                                        <select class="wide" required name="property_type">
+                                                            <option selected value="<?php echo $property_data['property_type'] ?>">
+                                                                <?php
+                                                                if ($property_data['property_type'] == 1) {
+                                                                    echo 'Apartment';
+                                                                } elseif ($property_data['property_type'] == 2) {
+                                                                    echo 'House';
+                                                                } elseif ($property_data['property_type'] == 3) {
+                                                                    echo 'Ladys Bed Space';
+                                                                } elseif ($property_data['property_type'] == 4) {
+                                                                    echo 'Mens Bed Space';
+                                                                } elseif ($property_data['property_type'] == 5) {
+                                                                    echo 'Dormitory';
+                                                                } elseif ($property_data['property_type'] == 6) {
+                                                                    echo 'Transient';
+                                                                } else {
+                                                                    echo 'Property Type';
+                                                                }
+                                                                ?>
+                                                            </option>
+                                                            <option value="1">Apartment</option>
+                                                            <option value="2">House</option>
+                                                            <option value="3">Lady's Bed Space</option>
+                                                            <option value="4">Men's Bed Space</option>
+                                                            <option value="5">Dormitory</option>
+                                                            <option value="6">Transient</option>
+
+                                                        </select>
+                                                        <div class="invalid-feedback">Example invalid select feedback</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <?php
+                                            if ($property_data['property_type'] == 1) {
+                                            ?>
+                                                <div class="col-lg-4 col-md-6 col-sm-12 column">
+                                                    <div class="field-input">
+                                                        <label>Unit's <span style="font-size:17px; margin-top: 2rem; color:red; opacity:0.8;">*</span></label>
+                                                        <div class="select-box">
+                                                            <select class="wide" name="units" id="units">
+                                                                <option value="<?php echo $property_data['units'] ?>"><?php echo $property_data['units'] ?></option>
+                                                                <option value="1">1</option>
+                                                                <option value="2">2</option>
+                                                                <option value="3">3</option>
+                                                                <option value="4">4</option>
+                                                                <option value="5">5</option>
+                                                                <option value="6">6</option>
+                                                                <option value="7">7</option>
+                                                                <option value="8">8</option>
+                                                                <option value="9">9</option>
+                                                                <option value="10">10</option>
+                                                                <option value="11">11</option>
+                                                                <option value="12">12</option>
+                                                                <option value="13">13</option>
+                                                                <option value="14">14</option>
+                                                                <option value="15">15</option>
+                                                            </select>
+                                                            <div class="invalid-feedback">
+                                                                Please provide how many unit's.
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            <?php
+                                            }
+                                            ?>
                                             <div class="col-lg-4 col-md-6 col-sm-12 column">
                                                 <div class="field-input">
                                                     <label>Property Name<span style="font-size:17px; margin-top: 2rem; color:red; opacity:0.8;">*</span></label>
@@ -316,42 +423,6 @@ $property_floor_plan_data = $stmt->fetch(PDO::FETCH_ASSOC);
                                             </div>
                                             <div class="col-lg-4 col-md-6 col-sm-12 column">
                                                 <div class="field-input">
-                                                    <label>Property Type <span style="font-size:17px; margin-top: 2rem; color:red; opacity:0.8;">*</span></label>
-                                                    <div class="select-box">
-                                                        <select class="wide" required name="property_type">
-                                                            <option selected value="<?php echo $property_data['property_type'] ?>">
-                                                            <?php
-                                                                if ($property_data['property_type'] == 1) {
-                                                                    echo 'Apartment';
-                                                                } elseif ($property_data['property_type'] == 2) {
-                                                                    echo 'House';
-                                                                } elseif ($property_data['property_type'] == 3) {
-                                                                    echo 'Ladys Bed Space';
-                                                                } elseif ($property_data['property_type'] == 4) {
-                                                                    echo 'Mens Bed Space';
-                                                                } elseif ($property_data['property_type'] == 5) {
-                                                                    echo 'Dormitory';
-                                                                } elseif ($property_data['property_type'] == 6) {
-                                                                    echo 'Transient';
-                                                                } else {
-                                                                    echo 'Property Type';
-                                                                } 
-                                                            ?>
-                                                            </option>
-                                                            <option value="1">Apartment</option>
-                                                            <option value="2">House</option>
-                                                            <option value="3">Lady's Bed Space</option>
-                                                            <option value="4">Men's Bed Space</option>
-                                                            <option value="5">Dormitory</option>
-                                                            <option value="6">Transient</option>
-
-                                                        </select>
-                                                        <div class="invalid-feedback">Example invalid select feedback</div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-4 col-md-6 col-sm-12 column">
-                                                <div class="field-input">
                                                     <label>Parking </label>
                                                     <div class="select-box">
                                                         <select class="wide" name="parking" required>
@@ -383,6 +454,21 @@ $property_floor_plan_data = $stmt->fetch(PDO::FETCH_ASSOC);
                                                     <input type="text" class="form-control numbers" name="garage_size" value="<?php echo $property_data['garage_size'] ?>" inputmode="numeric">
                                                     <div class="invalid-feedback">
                                                         Please provide an garage size in SqFt.
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4 col-md-6 col-sm-12 column">
+                                                <div class="field-input">
+                                                    <label>Allowed Pet's? <span style="font-size:17px; margin-top: 2rem; color:red; opacity:0.8;">*</span></label>
+                                                    <div class="select-box">
+                                                        <select class="wide" name="allowed_pets" required>
+                                                            <option value="<?php echo $property_data['allowed_pets'] ?>"><?php echo $property_data['allowed_pets'] ?></option>
+                                                            <option value="YES">YES</option>
+                                                            <option value="NO">NO</option>
+                                                        </select>
+                                                        <div class="invalid-feedback">
+                                                            Please select an option.
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -425,117 +511,117 @@ $property_floor_plan_data = $stmt->fetch(PDO::FETCH_ASSOC);
                                 <div class="gallery-box">
                                     <h4><i class="icon-16"></i>Property Gallery</h4>
 
-                                        <h6>Picture 1 <span style="font-size:17px; margin-top: 2rem; color:red; opacity:0.8;">*</span></h6>
-                                        <div class="upload-inner centred">
-                                            <i class="fal fa-cloud-upload"></i>
-                                            <div class="upload-box">
-                                                <input type="file" class="form-control" name="picture1"  id="check11" style="height: 33px;" onchange="previewImage(event, 'image-preview-container-1', 'image-preview-1')">
-                                                <label for="check11">Click here to upload your image</label>
-                                                <!-- Image Preview Container -->
-                                                <div id="image-preview-container-1">
-                                                    <?php
-                                                    // Display the existing image if available
-                                                    if (!empty($property_image_data['picture_1'])) {
-                                                        $imagePath = "../../src/images/property_gallery/" . $property_image_data['picture_1'];
-                                                        echo "<img id='image-preview-1' src='$imagePath' style='max-width: 50%; margin: 10px; border-radius: 10px;'>";
-                                                    }
-                                                    ?>
-                                                </div>
-                                                <div class="invalid-feedback">
-                                                    Please provide an picture 1.
-                                                </div>
+                                    <h6>Picture 1 <span style="font-size:17px; margin-top: 2rem; color:red; opacity:0.8;">*</span></h6>
+                                    <div class="upload-inner centred">
+                                        <i class="fal fa-cloud-upload"></i>
+                                        <div class="upload-box">
+                                            <input type="file" class="form-control" name="picture1" id="check11" style="height: 33px;" onchange="previewImage(event, 'image-preview-container-1', 'image-preview-1')">
+                                            <label for="check11">Click here to upload your image</label>
+                                            <!-- Image Preview Container -->
+                                            <div id="image-preview-container-1">
+                                                <?php
+                                                // Display the existing image if available
+                                                if (!empty($property_image_data['picture_1'])) {
+                                                    $imagePath = "../../src/images/property_gallery/" . $property_image_data['picture_1'];
+                                                    echo "<img id='image-preview-1' src='$imagePath' style='max-width: 50%; margin: 10px; border-radius: 10px;'>";
+                                                }
+                                                ?>
+                                            </div>
+                                            <div class="invalid-feedback">
+                                                Please provide an picture 1.
                                             </div>
                                         </div>
+                                    </div>
 
-                                        <h6>Picture 2 <span style="font-size:17px; margin-top: 2rem; color:red; opacity:0.8;">*</span></h6>
-                                        <div class="upload-inner centred">
-                                            <i class="fal fa-cloud-upload"></i>
-                                            <div class="upload-box">
-                                                <input type="file" class="form-control" name="picture2"  id="check12" style="height: 33px;" onchange="previewImage(event, 'image-preview-container-2', 'image-preview-2')">
-                                                <label for="check12">Click here to upload your image</label>
-                                                <!-- Image Preview Container -->
-                                                <div id="image-preview-container-2">
-                                                    <?php
-                                                    // Display the existing image if available
-                                                    if (!empty($property_image_data['picture_2'])) {
-                                                        $imagePath = "../../src/images/property_gallery/" . $property_image_data['picture_2'];
-                                                        echo "<img id='image-preview-2' src='$imagePath' style='max-width: 50%; margin: 10px; border-radius: 10px;'>";
-                                                    }
-                                                    ?>
-                                                </div>
-                                                <div class="invalid-feedback">
-                                                    Please provide an picture 2.
-                                                </div>
+                                    <h6>Picture 2 <span style="font-size:17px; margin-top: 2rem; color:red; opacity:0.8;">*</span></h6>
+                                    <div class="upload-inner centred">
+                                        <i class="fal fa-cloud-upload"></i>
+                                        <div class="upload-box">
+                                            <input type="file" class="form-control" name="picture2" id="check12" style="height: 33px;" onchange="previewImage(event, 'image-preview-container-2', 'image-preview-2')">
+                                            <label for="check12">Click here to upload your image</label>
+                                            <!-- Image Preview Container -->
+                                            <div id="image-preview-container-2">
+                                                <?php
+                                                // Display the existing image if available
+                                                if (!empty($property_image_data['picture_2'])) {
+                                                    $imagePath = "../../src/images/property_gallery/" . $property_image_data['picture_2'];
+                                                    echo "<img id='image-preview-2' src='$imagePath' style='max-width: 50%; margin: 10px; border-radius: 10px;'>";
+                                                }
+                                                ?>
+                                            </div>
+                                            <div class="invalid-feedback">
+                                                Please provide an picture 2.
                                             </div>
                                         </div>
+                                    </div>
 
-                                        <h6>Picture 3 <span style="font-size:17px; margin-top: 2rem; color:red; opacity:0.8;">*</span></h6>
-                                        <div class="upload-inner centred">
-                                            <i class="fal fa-cloud-upload"></i>
-                                            <div class="upload-box">
-                                                <input type="file" class="form-control" name="picture3"  id="check13" style="height: 33px;" onchange="previewImage(event, 'image-preview-container-3', 'image-preview-3')">
-                                                <label for="check13">Click here to upload your image</label>
-                                                <!-- Image Preview Container -->
-                                                <div id="image-preview-container-3">
-                                                    <?php
-                                                    // Display the existing image if available
-                                                    if (!empty($property_image_data['picture_3'])) {
-                                                        $imagePath = "../../src/images/property_gallery/" . $property_image_data['picture_3'];
-                                                        echo "<img id='image-preview-3' src='$imagePath' style='max-width: 50%; margin: 10px; border-radius: 10px;'>";
-                                                    }
-                                                    ?>
-                                                </div>
-                                                <div class="invalid-feedback">
-                                                    Please provide an picture 3.
-                                                </div>
+                                    <h6>Picture 3 <span style="font-size:17px; margin-top: 2rem; color:red; opacity:0.8;">*</span></h6>
+                                    <div class="upload-inner centred">
+                                        <i class="fal fa-cloud-upload"></i>
+                                        <div class="upload-box">
+                                            <input type="file" class="form-control" name="picture3" id="check13" style="height: 33px;" onchange="previewImage(event, 'image-preview-container-3', 'image-preview-3')">
+                                            <label for="check13">Click here to upload your image</label>
+                                            <!-- Image Preview Container -->
+                                            <div id="image-preview-container-3">
+                                                <?php
+                                                // Display the existing image if available
+                                                if (!empty($property_image_data['picture_3'])) {
+                                                    $imagePath = "../../src/images/property_gallery/" . $property_image_data['picture_3'];
+                                                    echo "<img id='image-preview-3' src='$imagePath' style='max-width: 50%; margin: 10px; border-radius: 10px;'>";
+                                                }
+                                                ?>
+                                            </div>
+                                            <div class="invalid-feedback">
+                                                Please provide an picture 3.
                                             </div>
                                         </div>
+                                    </div>
 
-                                        <h6>Picture 4 <span style="font-size:17px; margin-top: 2rem; color:red; opacity:0.8;">*</span></h6>
-                                        <div class="upload-inner centred">
-                                            <i class="fal fa-cloud-upload"></i>
-                                            <div class="upload-box">
-                                                <input type="file" class="form-control" name="picture4"  id="check14" style="height: 33px;" onchange="previewImage(event, 'image-preview-container-4', 'image-preview-4')">
-                                                <label for="check14">Click here to upload your image</label>
-                                                <!-- Image Preview Container -->
-                                                <div id="image-preview-container-4">
-                                                    <?php
-                                                    // Display the existing image if available
-                                                    if (!empty($property_image_data['picture_4'])) {
-                                                        $imagePath = "../../src/images/property_gallery/" . $property_image_data['picture_4'];
-                                                        echo "<img id='image-preview-4' src='$imagePath' style='max-width: 50%; margin: 10px; border-radius: 10px;'>";
-                                                    }
-                                                    ?>
-                                                </div>
-                                                <div class="invalid-feedback">
-                                                    Please provide an picture 4.
-                                                </div>
+                                    <h6>Picture 4 <span style="font-size:17px; margin-top: 2rem; color:red; opacity:0.8;">*</span></h6>
+                                    <div class="upload-inner centred">
+                                        <i class="fal fa-cloud-upload"></i>
+                                        <div class="upload-box">
+                                            <input type="file" class="form-control" name="picture4" id="check14" style="height: 33px;" onchange="previewImage(event, 'image-preview-container-4', 'image-preview-4')">
+                                            <label for="check14">Click here to upload your image</label>
+                                            <!-- Image Preview Container -->
+                                            <div id="image-preview-container-4">
+                                                <?php
+                                                // Display the existing image if available
+                                                if (!empty($property_image_data['picture_4'])) {
+                                                    $imagePath = "../../src/images/property_gallery/" . $property_image_data['picture_4'];
+                                                    echo "<img id='image-preview-4' src='$imagePath' style='max-width: 50%; margin: 10px; border-radius: 10px;'>";
+                                                }
+                                                ?>
+                                            </div>
+                                            <div class="invalid-feedback">
+                                                Please provide an picture 4.
                                             </div>
                                         </div>
+                                    </div>
 
-                                        <h6>Picture 5 <span style="font-size:17px; margin-top: 2rem; color:red; opacity:0.8;">*</span></h6>
-                                        <div class="upload-inner centred">
-                                            <i class="fal fa-cloud-upload"></i>
-                                            <div class="upload-box">
-                                                <input type="file" class="form-control" name="picture5"  id="check15" style="height: 33px;" onchange="previewImage(event, 'image-preview-container-5', 'image-preview-5')">
-                                                <label for="check15">Click here to upload your image</label>
-                                                <!-- Image Preview Container -->
-                                                <div id="image-preview-container-5">
-                                                    <?php
-                                                    // Display the existing image if available
-                                                    if (!empty($property_image_data['picture_5'])) {
-                                                        $imagePath = "../../src/images/property_gallery/" . $property_image_data['picture_5'];
-                                                        echo "<img id='image-preview-5' src='$imagePath' style='max-width: 50%; margin: 10px; border-radius: 10px;'>";
-                                                    }
-                                                    ?>
-                                                </div>
-                                                <div class="invalid-feedback">
-                                                    Please provide an picture 5.
-                                                </div>
+                                    <h6>Picture 5 <span style="font-size:17px; margin-top: 2rem; color:red; opacity:0.8;">*</span></h6>
+                                    <div class="upload-inner centred">
+                                        <i class="fal fa-cloud-upload"></i>
+                                        <div class="upload-box">
+                                            <input type="file" class="form-control" name="picture5" id="check15" style="height: 33px;" onchange="previewImage(event, 'image-preview-container-5', 'image-preview-5')">
+                                            <label for="check15">Click here to upload your image</label>
+                                            <!-- Image Preview Container -->
+                                            <div id="image-preview-container-5">
+                                                <?php
+                                                // Display the existing image if available
+                                                if (!empty($property_image_data['picture_5'])) {
+                                                    $imagePath = "../../src/images/property_gallery/" . $property_image_data['picture_5'];
+                                                    echo "<img id='image-preview-5' src='$imagePath' style='max-width: 50%; margin: 10px; border-radius: 10px;'>";
+                                                }
+                                                ?>
+                                            </div>
+                                            <div class="invalid-feedback">
+                                                Please provide an picture 5.
                                             </div>
                                         </div>
+                                    </div>
 
-                                        
+
 
                                     <a class="theme-btn btn-one tab-buttons">
                                         <li class="tab-btn" data-tab="#tab-3">Next</li>
@@ -551,7 +637,7 @@ $property_floor_plan_data = $stmt->fetch(PDO::FETCH_ASSOC);
                                             <div class="col-lg-12 col-md-12 col-sm-12 column">
                                                 <div class="field-input">
                                                     <label>Visiting Rules<span style="font-size:17px; margin-top: 2rem; color:red; opacity:0.8;">*</span></label>
-                                                    <textarea class="form-control" autocapitalize="on" autocomplete="off" name="visiting_rules" value="<?php echo $property_viewing_time_data['visiting_rules']?>" rows="4" cols="40" required><?php echo $property_viewing_time_data['visiting_rules']?></textarea>
+                                                    <textarea class="form-control" autocapitalize="on" autocomplete="off" name="visiting_rules" value="<?php echo $property_viewing_time_data['visiting_rules'] ?>" rows="4" cols="40" required><?php echo $property_viewing_time_data['visiting_rules'] ?></textarea>
                                                     <div class="invalid-feedback">
                                                         Please provide visiting rules.
                                                     </div>
@@ -563,7 +649,7 @@ $property_floor_plan_data = $stmt->fetch(PDO::FETCH_ASSOC);
                                             <div class="field-input">
 
                                                 <label>From<span style="font-size:17px; margin-top: 2rem; color:red; opacity:0.8;">*</span></label>
-                                                <input type="time" class="form-control" autocomplete="off" name="visitation_hours_from" value="<?php echo $property_viewing_time_data['visitation_hours_from']?>" required>
+                                                <input type="time" class="form-control" autocomplete="off" name="visitation_hours_from" value="<?php echo $property_viewing_time_data['visitation_hours_from'] ?>" required>
                                                 <div class="invalid-feedback">
                                                     Please provide visiting time from.
                                                 </div>
@@ -571,7 +657,7 @@ $property_floor_plan_data = $stmt->fetch(PDO::FETCH_ASSOC);
                                                 </br>
 
                                                 <label>To<span style="font-size:17px; margin-top: 2rem; color:red; opacity:0.8;">*</span></label>
-                                                <input type="time" class="form-control" autocomplete="off" name="visitation_hours_to" value="<?php echo $property_viewing_time_data['visitation_hours_to']?>" required>
+                                                <input type="time" class="form-control" autocomplete="off" name="visitation_hours_to" value="<?php echo $property_viewing_time_data['visitation_hours_to'] ?>" required>
                                                 <div class="invalid-feedback">
                                                     Please provide visiting time to.
                                                 </div>
@@ -640,88 +726,8 @@ $property_floor_plan_data = $stmt->fetch(PDO::FETCH_ASSOC);
 
                                         </div>
                                     </div>
-                                    <a class="theme-btn btn-one tab-buttons">
-                                        <li class="tab-btn" data-tab="#tab-5">Next</li>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="tab" id="tab-5">
-                                <div class="gallery-box">
-                                    <h4><i class="icon-16"></i>Floor Plan:</h4>
+                                    <button type="submit" class="theme-btn btn-one" name="btn-edit-property" onclick="submitForm()">Update</button>
 
-                                    <h6>First Floor</h6>
-                                    <div class="upload-inner centred">
-                                        <i class="fal fa-cloud-upload"></i>
-                                        <div class="upload-box">
-                                            <input type="file" class="form-control" name="first_floor" value="<?php echo $property_floor_plan_data['first_floor'] ?>" id="check23" style="height: 33px;" onchange="previewImage(event, 'image-preview-container-6', 'image-preview-6')">
-                                            <label for="check23">Click here to upload your floor plan</label>
-                                            <!-- Image Preview Container -->
-                                            <div id="image-preview-container-6">
-                                                <?php
-                                                    // Display the existing image if available
-                                                if (!empty($property_floor_plan_data['first_floor'])) {
-                                                    $imagePath = "../../src/images/property_floorplan/" . $property_floor_plan_data['first_floor'];
-                                                    echo "<img id='image-preview-6' src='$imagePath' style='max-width: 50%; margin: 10px; border-radius: 10px;'>";
-                                                }
-                                                ?>
-                                            </div>
-                                            <div class="invalid-feedback">
-                                                Please provide an image of first floor.
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <h6>Second Floor</h6>
-                                    <div class="upload-inner centred">
-                                        <i class="fal fa-cloud-upload"></i>
-                                        <div class="upload-box">
-                                            <input type="file" class="form-control" name="second_floor" id="check24" style="height: 33px;" onchange="previewImage(event, 'image-preview-container-7', 'image-preview-7')">
-                                            <label for="check24">Click here to upload your floor plan</label>
-                                            <!-- Image Preview Container -->
-                                            <div id="image-preview-container-7">
-                                                <?php
-                                                    // Display the existing image if available
-                                                if (!empty($property_floor_plan_data['second_floor'])) {
-                                                    $imagePath = "../../src/images/property_floorplan/" . $property_floor_plan_data['second_floor'];
-                                                    echo "<img id='image-preview-7' src='$imagePath' style='max-width: 50%; margin: 10px; border-radius: 10px;'>";
-                                                }
-                                                else{
-                                                    echo "<img id='image-preview-7' style='max-width: 50%; margin: 10px; border-radius: 10px;'> ";
-                                                }
-                                                ?>
-                                                            <span id="close-button" style="position: absolute; top: 5px; right: 5px; cursor: pointer;" onclick="closePreview('image-preview-container-7', 'check24')">X</span>
-                                            
-                                                </div>
-                                            <div class="invalid-feedback">
-                                                Please provide an image of second floor.
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <h6>Third Floor</h6>
-                                    <div class="upload-inner centred">
-                                        <i class="fal fa-cloud-upload"></i>
-                                        <div class="upload-box">
-                                            <input type="file" class="form-control" name="third_floor" value="<?php echo $property_floor_plan_data['second_floor'] ?>" id="check25" style="height: 33px;" onchange="previewImage(event, 'image-preview-container-8', 'image-preview-8')">
-                                            <label for="check25">Click here to upload your floor plan</label>
-                                            <!-- Image Preview Container -->
-                                            <div id="image-preview-container-8">
-                                                <?php
-                                                    // Display the existing image if available
-                                                if (!empty($property_floor_plan_data['third_floor'])) {
-                                                    $imagePath = "../../src/images/property_floorplan/" . $property_floor_plan_data['third_floor'];
-                                                    echo "<img id='image-preview-8' src='$imagePath' style='max-width: 50%; margin: 10px; border-radius: 10px;'>";
-                                                }
-                                                else{
-                                                    echo "<img id='image-preview-8' style='max-width: 50%; margin: 10px; border-radius: 10px;'> ";
-                                                }
-                                                ?>                                                                                        </div>
-                                            <div class="invalid-feedback">
-                                                Please provide an image of third floor.
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <button type="submit" class="theme-btn btn-one" name="btn-edit-property" onclick="submitForm()">Submit</button>
                                 </div>
                             </div>
                         </div>
@@ -822,7 +828,7 @@ $property_floor_plan_data = $stmt->fetch(PDO::FETCH_ASSOC);
                 // How far the maps zooms in.
                 zoom: 15,
                 // Current Lat and Long position of the pin/
-                center: new google.maps.LatLng(<?php echo $property_location_data['latitude']?>, <?php echo $property_location_data['longitude']?>),
+                center: new google.maps.LatLng(<?php echo $property_location_data['latitude'] ?>, <?php echo $property_location_data['longitude'] ?>),
                 // center : {
                 // 	lat: -34.397,
                 // 	lng: 150.644

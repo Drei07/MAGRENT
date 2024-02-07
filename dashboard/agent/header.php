@@ -31,3 +31,23 @@ $user_civil_status      = $user_data['civil_status'];
 $user_phone_number      = $user_data['phone_number'];
 $user_email             = $user_data['email'];
 $user_last_update       = $user_data['updated_at'];
+
+// retrieve user payment data
+$stmt1 = $user->runQuery("SELECT * FROM user_payment WHERE user_id=:id");
+$stmt1->execute(array(":id"=>$user_id));
+
+if ($stmt1) {
+    // Check if the query was successful
+    $user_payment_data = $stmt1->fetch(PDO::FETCH_ASSOC);
+
+    if ($user_payment_data) {
+        // Continue processing if payment data is found
+        $bank = $user_payment_data['bank'];
+        $account_name = $user_payment_data['account_name'];
+        $account_number = $user_payment_data['account_number'];
+    } else {
+        // Set default values or handle the case where no payment data is found.
+        $bank = $account_name = $account_number = "";
+    }
+}
+

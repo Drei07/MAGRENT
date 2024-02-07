@@ -200,6 +200,51 @@ class ProfileSettings
         header('Location: ../profile');
     }
 
+    public function updateUserPayment($user_id, $bank, $account_name, $account_number)
+    {
+        // Check if user payment data exists
+        $stmt = $this->runQuery("SELECT * FROM user_payment WHERE user_id=:user_id");
+        $stmt->bindParam(":user_id", $user_id);
+        $stmt->execute();
+        $user_payment_data = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+        if ($stmt->rowCount() > 0) {
+
+            $stmt1 = $this->runQuery('UPDATE user_payment SET bank=:bank, account_name=:account_name, account_number=:account_number WHERE user_id=:user_id');
+            $exec = $stmt1->execute(array(
+                ":user_id"         => $user_id,
+                ":bank"            => $bank,
+                ":account_name"    => $account_name,
+                ":account_number"  => $account_number
+            ));
+
+            if ($exec) {
+                $_SESSION['status_title'] = "Success!";
+                $_SESSION['status'] = "Successfully update payment method!";
+                $_SESSION['status_code'] = "success";
+                $_SESSION['status_timer'] = 40000;
+                header('Location: ../settings');
+                }
+        } else {
+            // User payment data doesn't exist, insert a new record
+            $stmt2 = $this->runQuery('INSERT INTO user_payment (user_id, bank, account_name, account_number) VALUES (:user_id, :bank, :account_name, :account_number)');
+            $exec = $stmt2->execute(array(
+                ":user_id"              => $user_id,
+                ":bank"            => $bank,
+                ":account_name"    => $account_name,
+                ":account_number"  => $account_number
+            ));
+
+            if ($exec) {
+                $_SESSION['status_title'] = "Success!";
+                $_SESSION['status'] = "Successfully add payment method!";
+                $_SESSION['status_code'] = "success";
+                $_SESSION['status_timer'] = 40000;
+                header('Location: ../settings');
+                }
+        }
+    }
+    
     public function runQuery($sql)
     {
         $stmt = $this->conn->prepare($sql);
@@ -245,4 +290,14 @@ if (isset($_GET['delete_avatar'])) {
 
     $ProfileSettings = new ProfileSettings();
     $ProfileSettings->updateAvatarToDefault($user_id);
+}
+
+if (isset($_POST['btn-update-payment'])) {
+    $user_id        = $_GET["id"];
+    $bank           = trim($_POST['bank']);
+    $account_name   = trim($_POST['account_name']);
+    $account_number = trim($_POST['account_number']);
+
+    $ProfileSettings = new ProfileSettings();
+    $ProfileSettings->updateUserPayment($user_id, $bank, $account_name, $account_number);
 }

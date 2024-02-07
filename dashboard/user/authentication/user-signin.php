@@ -38,7 +38,7 @@ if (isset($_POST['btn-signin'])) {
                     $_SESSION['status'] = "Welcome back! ";
                     $_SESSION['status_code'] = "success";
                     $_SESSION['status_timer'] = 10000;
-                    header("Location: ../../agent/");
+                    header("Location: ../../agent/property");
                     exit();
                 }
             } elseif ($existingData['user_type'] == 3) {

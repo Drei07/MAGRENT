@@ -88,6 +88,35 @@ body {
   }
 }
 
+:root {
+	--poppins: 'Poppins', sans-serif;
+	--lato: 'Lato', sans-serif;
+
+	--light: #F9F9F9;
+	--main: #2dbe6c;
+	--light-main: #e5f8ed;
+	--dark-main:#966abd;
+	--button:#000000;
+	--icon-pink:#0000;
+	--light-pink:#e37eba8e;
+	--light-blue: #add5fc;
+	--dark-blue: #3d36a3da;
+	--grey: #eee;
+	--dark-grey: #AAAAAA;
+	--light-black: rgb(34, 34, 34);
+	--dark: #342E37;
+	--red: #DB504A;
+	--yellow: #FFCE26;
+	--light-yellow: #FFF2C6;
+	--orange: #FD7238;
+	--light-orange: #FFE0D3;
+	--green: #81D43A;
+	--light-green: #e1f8cc;
+	--dark-red: rgb(209, 4, 4);
+	--dark-active: #15ce1e;
+	--pending: #ffc917;
+}
+
 /* sweet alert */
 .swal-text{
 	text-align: center;
@@ -1637,7 +1666,6 @@ div#mCSB_1_container{
   background: transparent;
   border-radius: 5px;
   padding: 0px 20px;
-  text-transform: uppercase;
 }
 
 .search-field .top-search .nice-select{
@@ -1730,6 +1758,8 @@ div#mCSB_1_container{
 
 .nice-select .list{
   padding: 20px 20px !important;
+  overflow: scroll;
+  max-height: 300px;
 }
 
 .search-field .top-search .search-btn{
@@ -5402,6 +5432,7 @@ div#mCSB_1_container{
   left: 0px;
   top: 0px;
   width: 300px;
+  height: 100%;
 }
 
 .page-content .outer-container{
@@ -5531,7 +5562,7 @@ div#mCSB_1_container{
   position: relative;
   display: block;
   overflow: hidden;
-  height: 355px;
+  height: 100%;
 }
 
 .deals-block-one .inner-box .image-box .image::after {
@@ -7126,7 +7157,8 @@ div#mCSB_1_container{
   position: relative;
   display: inline-block;
   float: left;
-  font-size: 15px;
+  font-size: 25px;
+  font-weight: bold;
   line-height: 40px;
   margin-right: 4px;
   color: #f2b241;
@@ -7173,7 +7205,7 @@ div#mCSB_1_container{
 }
 
 .property-details .top-details .right-column .price-inner .price-box h3{
-  font-size: 24px;
+  font-size: 35px;
   line-height: 26px;
   font-weight: 500;
 }
@@ -9861,3 +9893,24 @@ div#mCSB_1_container{
   padding: 2rem;
   font-size: 10rem;
 }
+
+/* property reviews */
+.reviews{
+  padding: 1rem;
+  padding-top: 3rem;
+}
+.reviews h1{
+  font-size: 25px;
+  line-height: 30px;
+  font-weight: 500;
+}
+.reviews .line {
+  width: 100%; /* Set the desired width of the line */
+  height: 2px; /* Set the desired height/thickness of the line */
+  background-color: #e5e7ec; 
+  margin-top: 10px;
+}
+
+
+
+

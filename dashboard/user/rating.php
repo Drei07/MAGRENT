@@ -196,7 +196,7 @@ $property_data = $stmt->fetch(PDO::FETCH_ASSOC);
 
         <div class="container mt-5 mb-5">
             <div class="card">
-                <div class="card-header"><?php echo $property_data['property_name']?></div>
+                <div class="card-header"><?php echo $property_data['property_name'] ?></div>
                 <div class="card-body">
                     <div class="row">
                         <div class="col-sm-4 text-center">
@@ -423,45 +423,45 @@ $property_data = $stmt->fetch(PDO::FETCH_ASSOC);
             });
 
             $('#save_review').click(function() {
-    var user_name = $('#user_name').val();
-    var property_id = $('#property_id').val();
-    var user_review = $('#user_review').val();
+                var user_name = $('#user_name').val();
+                var property_id = $('#property_id').val();
+                var user_review = $('#user_review').val();
 
-    if (user_review == '') {
-        alert("Please Fill Both Field");
-        return false;
-    } else {
-        $.ajax({
-            url: "sample_daata.php",
-            method: "POST",
-            data: {
-                rating_data: rating_data,
-                user_name: user_name,
-                property_id: property_id,
-                user_review: user_review
-            },
-            success: function(data) {
-                $('#review_modal').modal('hide');
-                load_rating_data();
+                if (user_review == '') {
+                    alert("Please Fill Both Field");
+                    return false;
+                } else {
+                    $.ajax({
+                        url: "sample_daata.php",
+                        method: "POST",
+                        data: {
+                            rating_data: rating_data,
+                            user_name: user_name,
+                            property_id: property_id,
+                            user_review: user_review
+                        },
+                        success: function(data) {
+                            $('#review_modal').modal('hide');
+                            load_rating_data();
 
-                swal({
-                    title: "<?php echo isset($_SESSION['status_title']); ?>",
-                    text: "<?php echo isset($_SESSION['status']); ?>",
-                    icon: "<?php echo isset($_SESSION['status_code']); ?>",
-                    timer: <?php echo isset($_SESSION['status_timer']); ?>,
-                });
-                location.reload();
+                            swal({
+                                title: "<?php echo isset($_SESSION['status_title']); ?>",
+                                text: "<?php echo isset($_SESSION['status']); ?>",
+                                icon: "<?php echo isset($_SESSION['status_code']); ?>",
+                                timer: <?php echo isset($_SESSION['status_timer']); ?>,
+                            });
+                            location.reload();
 
-            }
-        });
-    }
-});
+                        }
+                    });
+                }
+            });
 
 
             load_rating_data();
 
             function load_rating_data() {
-                
+
                 var property_id = <?php echo $propertyId ?>; // Assuming $propertyId is defined in your PHP code
 
                 $.ajax({

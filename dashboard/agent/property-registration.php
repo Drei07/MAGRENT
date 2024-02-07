@@ -1,5 +1,31 @@
 <?php
 include_once 'header.php';
+
+$stmt_users = $user->runQuery('SELECT * FROM users WHERE id=:id');
+$stmt_users->execute(array(":id" => $user_id));
+$user_data = $stmt_users->fetch(PDO::FETCH_ASSOC);
+
+$user_package_type = $user_data['package_id'];
+
+$stmt_package = $user->runQuery('SELECT * FROM package WHERE id=:id');
+$stmt_package->execute(array(":id" => $user_package_type));
+$package_data = $stmt_package->fetch(PDO::FETCH_ASSOC);
+
+$number_of_post = $package_data['number_of_post'];
+
+
+$stmt_property_post = $user->runQuery('SELECT * FROM property WHERE user_id=:id');
+$stmt_property_post->execute(array(":id" => $user_id));
+$property_post_data = $stmt_property_post->fetch(PDO::FETCH_ASSOC);
+
+if($stmt_property_post->rowCount() >= $number_of_post){
+    $_SESSION['status_title'] = "Oops!";
+    $_SESSION['status'] = "All Credits have been used, Please choose a package to get more credits, Thank you";
+    $_SESSION['status_code'] = "error";
+    $_SESSION['status_timer'] = 100000;
+    header('Location: package');
+    exit();
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -72,7 +98,7 @@ include_once 'header.php';
                 <div class="outer-box">
                     <div class="main-box">
                         <div class="logo-box">
-                            <figure class="logo"><a href="./"><img src="../../src/images/main_logo/<?php echo $config->getSystemLogo() ?>" alt=""></a></figure>
+                            <figure class="logo"><a href="property"><img src="../../src/images/main_logo/<?php echo $config->getSystemLogo() ?>" alt=""></a></figure>
                         </div>
                         <div class="menu-area clearfix">
                             <!--Mobile Navigation Toggler-->
@@ -84,14 +110,14 @@ include_once 'header.php';
                             <nav class="main-menu navbar-expand-md navbar-light">
                                 <div class="collapse navbar-collapse show clearfix" id="navbarSupportedContent">
                                     <ul class="navigation clearfix">
-                                        <li class=""><a href="./"><span>Home</span></a></li>
-                                        <li class=""><a href="package"><span>Package</span></a></li>
                                         <li class="dropdown current"><a href="#"><span>Property</span></a>
                                             <ul>
                                                 <li><a href="property">Property</a></li>
                                                 <li><a href="property-registration">Property Registration</a></li>
+                                                <li><a href="property-reservation?status=??status=?">Property Reservation</a></li>
                                             </ul>
-                                        </li>
+                                        </li> 
+                                        <li class=""><a href="package"><span>Package</span></a></li>
                                         <li class=""><a href="about-us"><span>About Us</span></a></li>
                                         <li class=""><a href="contact-us"><span>Contact Us</span></a></li>
                                         <li class=""><a href="settings"><span>Settings</span></a></li>
@@ -108,7 +134,7 @@ include_once 'header.php';
                 <div class="outer-box">
                     <div class="main-box">
                         <div class="logo-box">
-                            <figure class="logo"><a href="./"><img src="../../src/images/main_logo/<?php echo $config->getSystemLogo() ?>" alt=""></a></figure>
+                            <figure class="logo"><a href="property"><img src="../../src/images/main_logo/<?php echo $config->getSystemLogo() ?>" alt=""></a></figure>
                         </div>
                         <div class="menu-area clearfix">
                             <nav class="main-menu clearfix">
@@ -158,7 +184,7 @@ include_once 'header.php';
                 <div class="content-box clearfix">
                     <h1>Registration</h1>
                     <ul class="bread-crumb clearfix">
-                        <li><a href="./">Home</a></li>
+                        <li><a href="property">Home</a></li>
                         <li>Registration</li>
                     </ul>
                 </div>
@@ -178,7 +204,6 @@ include_once 'header.php';
                         <li class="tab-btn" data-tab="#tab-2"><span>2</span>Gallery</li>
                         <li class="tab-btn" data-tab="#tab-3"><span>3</span>Property Viewing</li>
                         <li class="tab-btn" data-tab="#tab-4"><span>4</span>Location</li>
-                        <li class="tab-btn" data-tab="#tab-5"><span>5</span>Floor Plan</li>
                     </ul>
                     <form action="controller/property-controller.php?id=<?php echo $user_id ?>" id="propertyForm" method="POST" class="needs-validation" novalidate enctype="multipart/form-data">
                         <div class="tabs-content">
@@ -187,6 +212,51 @@ include_once 'header.php';
                                     <h4><i class="icon-19"></i>Property Details:</h4>
                                     <div class="inner-box default-form">
                                         <div class="row clearfix">
+                                        <div class="col-lg-4 col-md-6 col-sm-12 column">
+                                                <div class="field-input">
+                                                    <label>Property Type <span style="font-size:17px; margin-top: 2rem; color:red; opacity:0.8;">*</span></label>
+                                                    <div class="select-box">
+                                                        <select class="wide" required name="property_type" id="property_type" onchange="toggleUnitsField()">
+                                                            <option value="">Property Type</option>
+                                                            <option value="1">Apartment</option>
+                                                            <option value="2">House</option>
+                                                            <option value="3">Lady's Bed Space</option>
+                                                            <option value="4">Men's Bed Space</option>
+                                                            <option value="5">Dormitory</option>
+                                                            <option value="6">Transient</option>
+                                                        </select>
+                                                        <div class="invalid-feedback">Example invalid select feedback</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4 col-md-6 col-sm-12 column" id="units_field" style="display: none;">
+                                                <div class="field-input" >
+                                                    <label>Unit's <span style="font-size:17px; margin-top: 2rem; color:red; opacity:0.8;">*</span></label>
+                                                    <div class="select-box">
+                                                        <select class="wide" name="units" id="units">
+                                                            <option value="">How many units?</option>
+                                                            <option value="1">1</option>
+                                                            <option value="2">2</option>
+                                                            <option value="3">3</option>
+                                                            <option value="4">4</option>
+                                                            <option value="5">5</option>
+                                                            <option value="6">6</option>
+                                                            <option value="7">7</option>
+                                                            <option value="8">8</option>
+                                                            <option value="9">9</option>
+                                                            <option value="10">10</option>
+                                                            <option value="11">11</option>
+                                                            <option value="12">12</option>
+                                                            <option value="13">13</option>
+                                                            <option value="14">14</option>
+                                                            <option value="15">15</option>
+                                                        </select>
+                                                        <div class="invalid-feedback">
+                                                            Please provide how many unit's.
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                             <div class="col-lg-4 col-md-6 col-sm-12 column">
                                                 <div class="field-input">
                                                     <label>Property Name<span style="font-size:17px; margin-top: 2rem; color:red; opacity:0.8;">*</span></label>
@@ -262,24 +332,6 @@ include_once 'header.php';
                                             </div>
                                             <div class="col-lg-4 col-md-6 col-sm-12 column">
                                                 <div class="field-input">
-                                                    <label>Property Type <span style="font-size:17px; margin-top: 2rem; color:red; opacity:0.8;">*</span></label>
-                                                    <div class="select-box">
-                                                        <select class="wide" required name="property_type">
-                                                            <option value="">Property Type</option>
-                                                            <option value="1">Apartment</option>
-                                                            <option value="2">House</option>
-                                                            <option value="3">Lady's Bed Space</option>
-                                                            <option value="4">Men's Bed Space</option>
-                                                            <option value="5">Dormitory</option>
-                                                            <option value="6">Transient</option>
-
-                                                        </select>
-                                                        <div class="invalid-feedback">Example invalid select feedback</div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-4 col-md-6 col-sm-12 column">
-                                                <div class="field-input">
                                                     <label>Parking </label>
                                                     <div class="select-box">
                                                         <select class="wide" name="parking" required>
@@ -314,6 +366,21 @@ include_once 'header.php';
                                                     </div>
                                                 </div>
                                             </div>
+                                            <div class="col-lg-4 col-md-6 col-sm-12 column">
+                                                <div class="field-input">
+                                                    <label>Allowed Pet's? <span style="font-size:17px; margin-top: 2rem; color:red; opacity:0.8;">*</span></label>
+                                                    <div class="select-box">
+                                                        <select class="wide" name="allowed_pets" required>
+                                                            <option value="">Select Option?</option>
+                                                            <option value="YES">YES</option>
+                                                            <option value="NO">NO</option>
+                                                        </select>
+                                                        <div class="invalid-feedback">
+                                                            Please select an option.
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                             <div class="col-lg-12 col-md-12 col-sm-12 column">
                                                 <div class="field-input">
                                                     <label>Property Description<span style="font-size:17px; margin-top: 2rem; color:red; opacity:0.8;">*</span></label>
@@ -329,79 +396,29 @@ include_once 'header.php';
                                     <h6>Inclusives <span style="font-size:17px; margin-top: 2rem; color:red; opacity:0.8;">*</span></h6>
 
                                     <ul class="other-option clearfix">
-                                        <li>
-                                            <div class="radio-box">
-                                                <input type="checkbox" name="amenities[]" value="1" id="amenities1">
-                                                <label for="amenities1">Air Conditioned</label>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="radio-box">
-                                                <input type="checkbox" name="amenities[]" value="2" id="amenities2">
-                                                <label for="amenities2">Swimming Pool</label>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="radio-box">
-                                                <input type="checkbox" name="amenities[]" value="3" id="amenities3">
-                                                <label for="amenities3">Washer & Dryer</label>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="radio-box">
-                                                <input type="checkbox" name="amenities[]" value="4" id="amenities4">
-                                                <label for="amenities4">Washing Machine</label>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="radio-box">
-                                                <input type="checkbox" name="amenities[]" value="5" id="amenities5">
-                                                <label for="amenities5">Gym</label>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="radio-box">
-                                                <input type="checkbox" name="amenities[]" value="6" id="amenities6">
-                                                <label for="amenities6">Basketball Court</label>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="radio-box">
-                                                <input type="checkbox" name="amenities[]" value="7" id="amenities7">
-                                                <label for="amenities7">Refrigerator</label>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="radio-box">
-                                                <input type="checkbox" name="amenities[]" value="8" id="amenities8">
-                                                <label for="amenities8">Internet</label>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="radio-box">
-                                                <input type="checkbox" name="amenities[]" value="9" id="amenities9">
-                                                <label for="amenities9">Kithchen</label>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="radio-box">
-                                                <input type="checkbox" name="amenities[]" value="10" id="amenities10">
-                                                <label for="amenities10">Closet</label>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="radio-box">
-                                                <input type="checkbox" name="amenities[]" value="11" id="amenities11" checked>
-                                                <label for="amenities11">Dining Table</label>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="radio-box">
-                                                <input type="checkbox" name="amenities[]" value="12" id="amenities12">
-                                                <label for="amenities12">Smart TV</label>
-                                            </div>
-                                        </li>
+                                        <?php
+                                            $stmt_amenities = $user->runQuery("SELECT * FROM amenities");
+                                            $stmt_amenities->execute();
+
+                                            if($stmt_amenities->rowCount() >= 1){
+                                                while($amenities_data = $stmt_amenities->fetch(PDO::FETCH_ASSOC)){
+                                                    ?>
+                                                        <li>
+                                                            <div class="radio-box">
+                                                                <input type="checkbox" name="amenities[]" value="<?php echo $amenities_data['id'] ?>" id="amenities<?php echo $amenities_data['id'] ?>">
+                                                                <label for="amenities<?php echo $amenities_data['id'] ?>"><?php echo $amenities_data['amenities'] ?></label>
+                                                            </div>
+                                                        </li>
+                                                    <?php
+
+                                                }
+
+                                            }
+                 
+                                        ?>
                                     </ul>
+
+
                                     <a class="theme-btn btn-one tab-buttons">
                                         <li type="submit" class="tab-btn active-btn" data-tab="#tab-2">Next</li>
                                     </a>
@@ -620,63 +637,8 @@ include_once 'header.php';
 
                                         </div>
                                     </div>
-                                    <a class="theme-btn btn-one tab-buttons">
-                                        <li class="tab-btn" data-tab="#tab-5">Next</li>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="tab" id="tab-5">
-                                <div class="gallery-box">
-                                    <h4><i class="icon-16"></i>Floor Plan:</h4>
-
-                                    <h6>First Floor</h6>
-                                    <div class="upload-inner centred">
-                                        <i class="fal fa-cloud-upload"></i>
-                                        <div class="upload-box">
-                                            <input type="file" class="form-control" name="first_floor" id="check23" style="height: 33px;" onchange="previewImage(event, 'image-preview-container-6', 'image-preview-6')">
-                                            <label for="check23">Click here to upload your floor plan</label>
-                                            <!-- Image Preview Container -->
-                                            <div id="image-preview-container-6">
-                                                <img id="image-preview-6" style="max-width: 50%; margin: 10px; border-radius: 10px;">
-                                            </div>
-                                            <div class="invalid-feedback">
-                                                Please provide an image of first floor.
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <h6>Second Floor</h6>
-                                    <div class="upload-inner centred">
-                                        <i class="fal fa-cloud-upload"></i>
-                                        <div class="upload-box">
-                                            <input type="file" class="form-control" name="second_floor" id="check24" style="height: 33px;" onchange="previewImage(event, 'image-preview-container-7', 'image-preview-7')">
-                                            <label for="check24">Click here to upload your floor plan</label>
-                                            <!-- Image Preview Container -->
-                                            <div id="image-preview-container-7">
-                                                <img id="image-preview-7" style="max-width: 50%; margin: 10px; border-radius: 10px;">
-                                            </div>
-                                            <div class="invalid-feedback">
-                                                Please provide an image of second floor.
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <h6>Third Floor</h6>
-                                    <div class="upload-inner centred">
-                                        <i class="fal fa-cloud-upload"></i>
-                                        <div class="upload-box">
-                                            <input type="file" class="form-control" name="third_floor" id="check25" style="height: 33px;" onchange="previewImage(event, 'image-preview-container-8', 'image-preview-8')">
-                                            <label for="check25">Click here to upload your floor plan</label>
-                                            <!-- Image Preview Container -->
-                                            <div id="image-preview-container-8">
-                                                <img id="image-preview-8" style="max-width: 50%; margin: 10px; border-radius: 10px;">
-                                            </div>
-                                            <div class="invalid-feedback">
-                                                Please provide an image of third floor.
-                                            </div>
-                                        </div>
-                                    </div>
                                     <button type="submit" class="theme-btn btn-one" name="btn-register-property" onclick="submitForm()">Register</button>
+
                                 </div>
                             </div>
                         </div>
@@ -917,6 +879,22 @@ include_once 'header.php';
 
         }
 
+
+    // Function to toggle the visibility of the Units field and set/remove the 'required' attribute
+    function toggleUnitsField() {
+        var propertyTypeSelect = document.getElementById('property_type');
+        var unitsField = document.getElementById('units_field');
+        var unitsSelect = document.getElementById('units');
+
+        // Check if the selected property type is either "Dormitory" or "Apartment"
+        if (propertyTypeSelect.value == 5 || propertyTypeSelect.value == 1) {
+            unitsField.style.display = 'block';
+            unitsSelect.setAttribute('required', 'required');
+        } else {
+            unitsField.style.display = 'none';
+            unitsSelect.removeAttribute('required');
+        }
+    }
     </script>
     <?php include_once '../../configuration/sweetalert.php'; ?>
 

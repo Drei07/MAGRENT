@@ -136,9 +136,9 @@ include_once 'header.php';
 					<i class='bx bx-user-circle'></i>
 					<span class="text">
 					<?php
-								$pdoQuery = "SELECT * FROM 	users WHERE user_type = :user_type";
+								$pdoQuery = "SELECT * FROM 	users WHERE user_type = :user_type AND status=:status";
 								$pdoResult1 = $pdoConnect->prepare($pdoQuery);
-								$pdoResult1->execute(array(":user_type" => 2));
+								$pdoResult1->execute(array(":user_type" => 2, ":status" => "N"));
 
 								$count = $pdoResult1->rowCount();
 

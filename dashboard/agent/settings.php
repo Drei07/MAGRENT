@@ -72,7 +72,7 @@ include_once 'header.php';
                 <div class="outer-box">
                     <div class="main-box">
                         <div class="logo-box">
-                            <figure class="logo"><a href="./"><img src="../../src/images/main_logo/<?php echo $config->getSystemLogo() ?>" alt=""></a></figure>
+                            <figure class="logo"><a href="property"><img src="../../src/images/main_logo/<?php echo $config->getSystemLogo() ?>" alt=""></a></figure>
                         </div>
                         <div class="menu-area clearfix">
                             <!--Mobile Navigation Toggler-->
@@ -84,17 +84,17 @@ include_once 'header.php';
                             <nav class="main-menu navbar-expand-md navbar-light">
                                 <div class="collapse navbar-collapse show clearfix" id="navbarSupportedContent">
                                     <ul class="navigation clearfix">
-                                        <li class=""><a href="./"><span>Home</span></a></li>
-                                        <li class=""><a href="package"><span>Package</span></a></li>
-                                        <li class="dropdown current"><a href="#"><span>Property</span></a>
+                                        <li class="dropdown"><a href="#"><span>Property</span></a>
                                             <ul>
                                                 <li><a href="property">Property</a></li>
                                                 <li><a href="property-registration">Property Registration</a></li>
+                                                <li><a href="property-reservation?status=?">Property Reservation</a></li>
                                             </ul>
                                         </li>
+                                        <li class=""><a href="package"><span>Package</span></a></li>
                                         <li class=""><a href="about-us"><span>About Us</span></a></li>
                                         <li class=""><a href="contact-us"><span>Contact Us</span></a></li>
-                                        <li class=""><a href="settings"><span>Settings</span></a></li>
+                                        <li class="dropdown current"><a href="settings"><span>Settings</span></a></li>
                                     </ul>
                                 </div>
                             </nav>
@@ -108,7 +108,7 @@ include_once 'header.php';
                 <div class="outer-box">
                     <div class="main-box">
                         <div class="logo-box">
-                            <figure class="logo"><a href="./"><img src="../../src/images/main_logo/<?php echo $config->getSystemLogo() ?>" alt=""></a></figure>
+                            <figure class="logo"><a href="property"><img src="../../src/images/main_logo/<?php echo $config->getSystemLogo() ?>" alt=""></a></figure>
                         </div>
                         <div class="menu-area clearfix">
                             <nav class="main-menu clearfix">
@@ -158,7 +158,7 @@ include_once 'header.php';
                 <div class="content-box clearfix">
                     <h1>Settings</h1>
                     <ul class="bread-crumb clearfix">
-                        <li><a href="./">Home</a></li>
+                        <li><a href="property">Home</a></li>
                         <li>Settings</li>
                     </ul>
                 </div>
@@ -177,7 +177,9 @@ include_once 'header.php';
                         <li class="tab-btn active-btn" data-tab="#tab-1"><span>1</span>Profile Information</li>
                         <li class="tab-btn" data-tab="#tab-2"><span>2</span>Profile Picture</li>
                         <li class="tab-btn" data-tab="#tab-3"><span>3</span>Password</li>
-                        <li class="tab-btn" data-tab="#tab-4"><span>4</span>Credits</li>
+                        <li class="tab-btn" data-tab="#tab-4"><span>4</span>Payment</li>
+                        <li class="tab-btn" data-tab="#tab-5"><span>5</span>Credits</li>
+
                     </ul>
                     <div class="tabs-content">
                         <form action="controller/profile-controller.php?id=<?php echo $user_id ?>" id="propertyForm" method="POST" class="needs-validation" novalidate enctype="multipart/form-data">
@@ -334,36 +336,101 @@ include_once 'header.php';
                             </div>
                         </form>
 
+                        <form action="controller/profile-controller.php?id=<?php echo $user_id ?>" id="propertyForm" method="POST" class="needs-validation" novalidate enctype="multipart/form-data">
                         <div class="tab" id="tab-4">
                             <div class="property-details">
+                                <h4><i class='bx bxs-credit-card'></i>Payment Setup</h4>
+                                <div class="inner-box default-form">
+                                    <div class="row clearfix">
+                                        <div class="col-lg-12 col-md-6 col-sm-12 column">
+                                            <div class="field-input">
+                                                <label>Select Bank</label>
+                                                <div class="select-box">
+                                                    <select class="wide" name="bank" required>
+                                                        <option value="<?php echo $bank ?>"><?php echo $bank ?></option>
+                                                        <option value="BDO (Banco de Oro)">BDO (Banco de Oro)</option>
+                                                        <option value="BPI (Bank of the Philippine Islands)">BPI (Bank of the Philippine Islands)</option>
+                                                        <option value="Metrobank">Metrobank</option>
+                                                        <option value="LandBank">LandBank</option>
+                                                        <option value="PNB (Philippine National Bank)">PNB (Philippine National Bank)</option>
+                                                        <option value="Security Bank">Security Bank</option>
+                                                        <option value="UnionBank">UnionBank</option>
+                                                        <option value="RCBC (Rizal Commercial Banking Corporation)">RCBC (Rizal Commercial Banking Corporation)</option>
+                                                        <option value="EastWest Bank">EastWest Bank</option>
+                                                        <option value="Chinabank">Chinabank</option>
+                                                        <option value="PSBank (Philippine Savings Bank)">PSBank (Philippine Savings Bank)</option>
+                                                        <option value="UCPB (United Coconut Planters Bank)">UCPB (United Coconut Planters Bank)</option>
+                                                        <option value="DBP (Development Bank of the Philippines)">DBP (Development Bank of the Philippines)</option>
+                                                        <option value="Maybank">Maybank</option>
+                                                        <option value="ING Bank">ING Bank</option>
+                                                        <option value="HSBC">HSBC</option>
+                                                        <option value="GCash">GCash</option>
+                                                        <option value="PayMaya">PayMaya</option>
+                                                        <option value="Paypal">Paypal</option>
+                                                    </select>
+                                                    <div class="invalid-feedback">
+                                                        Please select a bank.
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-6 col-md-6 col-sm-12 column">
+                                            <div class="field-input">
+                                                <label>Account Name<span style="font-size:17px; margin-top: 2rem; color:red; opacity:0.8;">*</span></label>
+                                                <input type="text" class="form-control" name="account_name" value="<?php echo $account_name  ?>" required>
+                                                <div class="invalid-feedback">
+                                                    Please provide an Account Name .
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6 col-sm-12 column">
+                                            <div class="field-input">
+                                                <label>Account Number<span style="font-size:17px; margin-top: 2rem; color:red; opacity:0.8;">*</span></label>
+                                                <input type="text" class="form-control" name="account_number" value="<?php echo $account_number  ?>" required>
+                                                <div class="invalid-feedback">
+                                                    Please provide an Account Number .
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <button type="submit" class="theme-btn btn-one" name="btn-update-payment" onclick="submitForm()">Update</button>
+                            </div>
+                        </div>
+                        </form>
+
+                        <div class="tab" id="tab-5">
+                            <div class="property-details">
                                 <h4><i class='bx bxs-coin'></i> Available Credits</h4>
-                                
-                                    <?php
-                                    // Assuming you have a User class with a method runQuery for database queries
-                                    // Replace User with your actual class name
 
-                                    // Get the user's package information
-                                    $stmt = $user->runQuery("SELECT * FROM users WHERE id=:user_id");
-                                    $stmt->execute(array(":user_id" => $user_id));
-                                    $user_data = $stmt->fetch(PDO::FETCH_ASSOC);
+                                <?php
+                                // Assuming you have a User class with a method runQuery for database queries
+                                // Replace User with your actual class name
 
-                                    $user_package_type = $user_data['package_id'];
+                                // Get the user's package information
+                                $stmt = $user->runQuery("SELECT * FROM users WHERE id=:user_id");
+                                $stmt->execute(array(":user_id" => $user_id));
+                                $user_data = $stmt->fetch(PDO::FETCH_ASSOC);
 
-                                    $stmt_package = $user->runQuery('SELECT * FROM package WHERE id=:id');
-                                    $stmt_package->execute(array(":id" => $user_package_type));
-                                    $package_data = $stmt_package->fetch(PDO::FETCH_ASSOC);
+                                $user_package_type = $user_data['package_id'];
 
-                                    $number_of_post_allowed = $package_data['number_of_post'];
+                                $stmt_package = $user->runQuery('SELECT * FROM package WHERE id=:id');
+                                $stmt_package->execute(array(":id" => $user_package_type));
+                                $package_data = $stmt_package->fetch(PDO::FETCH_ASSOC);
 
-                                    // Get the count of already posted properties
-                                    $stmt_property_post = $user->runQuery('SELECT COUNT(*) as posted_count FROM property WHERE user_id=:user_id');
-                                    $stmt_property_post->execute(array(":user_id" => $user_id));
-                                    $property_post_data = $stmt_property_post->fetch(PDO::FETCH_ASSOC);
+                                $number_of_post_allowed = $package_data['number_of_post'];
 
-                                    $remaining_credits = $number_of_post_allowed - $property_post_data['posted_count'];
+                                // Get the count of already posted properties
+                                $stmt_property_post = $user->runQuery('SELECT COUNT(*) as posted_count FROM property WHERE user_id=:user_id');
+                                $stmt_property_post->execute(array(":user_id" => $user_id));
+                                $property_post_data = $stmt_property_post->fetch(PDO::FETCH_ASSOC);
 
-                                    // Now $remaining_credits contains the number of remaining credits for property posting
-                                    ?>
+                                $remaining_credits = $number_of_post_allowed - $property_post_data['posted_count'];
+
+                                // Now $remaining_credits contains the number of remaining credits for property posting
+                                ?>
                                 <h1 class="credits"><?php echo $remaining_credits; ?></h1>
                             </div>
                         </div>
