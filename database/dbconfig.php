@@ -19,9 +19,9 @@ class Database
         } else {
             // Live server connection
             $this->host = "localhost";
-            $this->db_name = "u297724503_magrent2023";
-            $this->username = "u297724503_magrent2023";
-            $this->password = "Magrent2023";
+            $this->db_name = "u297724503_magrent_2023	";
+            $this->username = "u297724503_magrent_2023	";
+            $this->password = "Magrent_2023";
         }
     }
 
