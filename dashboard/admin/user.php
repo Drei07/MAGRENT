@@ -118,6 +118,8 @@ include_once 'header.php';
 					<div class="head">
 						<h3><i class='bx bxs-user-account' ></i> List of User Account</h3>
 					</div>
+					<button type="button" class="archives btn-dark"><a href="controller/export-controller" class="export" style="color: white;"><i class='bx bx-export'></i> Export</a></button>
+
                     <!-- BODY -->
                     <section class="data-table">
                         <div class="searchBx">

@@ -107,6 +107,26 @@ $('.view').on('click', function (e) {
 		});
 })
 
+//View Pending Account
+$('.export').on('click', function (e) {
+	e.preventDefault();
+	const href = $(this).attr('href')
+
+	swal({
+		title: "Export?",
+		text: "Do you want to export this data?",
+		icon: "warning",
+		buttons: true,
+		dangerMode: true,
+	})
+		.then((willDelete) => {
+			if (willDelete) {
+				document.location.href = href;
+			}
+		});
+})
+
+
 //Delete Profile
 $('.delete_agent_account').on('click', function (e) {
 	e.preventDefault();

@@ -206,12 +206,12 @@ include_once 'dashboard/user/authentication/user-forgot-password.php';
 
 
         <!-- feature-section -->
-        <section class="feature-section sec-pad bg-color-1">
+        <!-- <section class="feature-section sec-pad bg-color-1">
             <div class="auto-container">
                 <div class="sec-title centred">
                     <h5>Features</h5>
                     <h2>Featured Property</h2>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing sed do eiusmod tempor incididunt <br />labore dolore magna aliqua enim.</p>
+                    <p>Explore our curated selection of standout rental options handpicked by MagRent. Discover exquisite locations, exclusive offers, and the best of what we have to offer. Find your perfect getaway with MagRent today</p>
                 </div>
                 <div class="row clearfix">
 
@@ -341,11 +341,11 @@ include_once 'dashboard/user/authentication/user-forgot-password.php';
                 </div>
                 <div class="more-btn centred"><a href="property" class="theme-btn btn-one">View All Listing</a></div>
             </div>
-        </section>
+        </section> -->
         <!-- feature-section end -->
 
         <!-- deals-section -->
-        <section class="deals-section sec-pad">
+        <!-- <section class="deals-section sec-pad">
             <div class="auto-container">
                 <div class="sec-title">
                     <h5>Hot Property</h5>
@@ -488,7 +488,7 @@ include_once 'dashboard/user/authentication/user-forgot-password.php';
                 </div>
 
             </div>
-        </section>
+        </section> -->
         <!-- deals-section end -->
 
         <!-- main-footer -->

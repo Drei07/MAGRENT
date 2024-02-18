@@ -127,6 +127,7 @@ include_once 'header.php';
 						<button type="button" onclick="location.href='payment?status=accepted'" class="archives btn-info"><i class='bx bxs-check-circle'></i> Accepted</button>
 						<button type="button" onclick="location.href='payment?status=decline'" class="archives btn-success"><i class='bx bxs-shield-x'></i> Decline</button>
 						<button type="button" onclick="location.href='payment?status=expired'" class="archives btn-danger"><i class='bx bxs-calendar-x'></i> Expired</button>
+						<button type="button" class="archives btn-dark"><a href="controller/export-controller" class="export" style="color: white;"><i class='bx bx-export'></i> Export</a></button>
 
 						<!-- BODY -->
 						<section class="data-table">
@@ -151,6 +152,8 @@ include_once 'header.php';
 						<button type="button" onclick="location.href='payment?status=accepted'" class="archives btn-info"><i class='bx bxs-check-circle'></i> Accepted</button>
 						<button type="button" onclick="location.href='payment?status=decline'" class="archives btn-success"><i class='bx bxs-shield-x'></i> Decline</button>
 						<button type="button" onclick="location.href='payment?status=expired'" class="archives btn-danger"><i class='bx bxs-calendar-x'></i> Expired</button>
+						<button type="button" class="archives btn-dark"><a href="controller/export-controller" class="export" style="color: white;"><i class='bx bx-export'></i> Export</a></button>
+
 
 						<!-- BODY -->
 						<section class="data-table">
@@ -175,6 +178,8 @@ include_once 'header.php';
 						<button type="button" onclick="location.href='payment?status=accepted'" class="archives btn-info"><i class='bx bxs-check-circle'></i> Accepted</button>
 						<button type="button" onclick="location.href='payment?status=decline'" class="archives btn-success"><i class='bx bxs-shield-x'></i> Decline</button>
 						<button type="button" onclick="location.href='payment?status=expired'" class="archives btn-danger"><i class='bx bxs-calendar-x'></i> Expired</button>
+						<button type="button" class="archives btn-dark"><a href="controller/export-controller" class="export" style="color: white;"><i class='bx bx-export'></i> Export</a></button>
+
 
 						<!-- BODY -->
 						<section class="data-table">
@@ -199,6 +204,8 @@ include_once 'header.php';
 						<button type="button" onclick="location.href='payment?status=accepted'" class="archives btn-info"><i class='bx bxs-check-circle'></i> Accepted</button>
 						<button type="button" onclick="location.href='payment?status=decline'" class="archives btn-success"><i class='bx bxs-shield-x'></i> Decline</button>
 						<button type="button" onclick="location.href='payment?status=expired'" class="archives btn-danger"><i class='bx bxs-calendar-x'></i> Expired</button>
+						<button type="button" class="archives btn-dark"><a href="controller/export-controller" class="export" style="color: white;"><i class='bx bx-export'></i> Export</a></button>
+
 
 						<!-- BODY -->
 						<section class="data-table">
