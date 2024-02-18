@@ -105,7 +105,7 @@ $packageData = $stmt->fetch(PDO::FETCH_ASSOC);
                                             <ul>
                                                 <li><a href="property">Property</a></li>
                                                 <li><a href="property-registration">Property Registration</a></li>
-                                                <li><a href="property-reservation?status=??status=?">Property Reservation</a></li>
+                                                <li><a href="property-reservation?status=?">Property Reservation</a></li>
                                             </ul>
                                         </li> 
                                         <li class="current"><a href="package"><span>Package</span></a></li>
