@@ -161,7 +161,7 @@ class MainUrl {
             $this->url = "http://localhost/MAGRENT";
         } else {
             // Set the URL for the web host
-            $this->url = "https://trackeme.website";
+            $this->url = "https://magrent.website";
         }
     }
     
