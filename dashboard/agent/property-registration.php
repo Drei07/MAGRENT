@@ -417,8 +417,6 @@ if($stmt_property_post->rowCount() >= $number_of_post){
                  
                                         ?>
                                     </ul>
-
-
                                     <a class="theme-btn btn-one tab-buttons">
                                         <li type="submit" class="tab-btn active-btn" data-tab="#tab-2">Next</li>
                                     </a>

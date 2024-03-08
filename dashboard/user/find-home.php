@@ -260,7 +260,7 @@ include_once 'header.php';
                                                 </div>
                                                 <div class="lower-content">
                                                     <div class="title-text">
-                                                        <h4><a href="" id="property_name" onclick="setSessionValues(<?php echo $property_data['id'] ?>)"><?php echo $property_data['property_name'] ?></a></h4>
+                                                        <h4><a id="property_name" onclick="setSessionValues(<?php echo $property_data['id'] ?>)"><?php echo $property_data['property_name'] ?></a></h4>
                                                     </div>
                                                     <div class="price-box clearfix">
                                                         <div class="price-info pull-left">
@@ -322,7 +322,7 @@ include_once 'header.php';
                                                             $shortDescription = implode(' ', array_slice($words, 0, $wordLimit));
 
                                                             // Output the truncated description with "See more" link
-                                                            echo '<p>' . $shortDescription . '... <a href="" onclick="setSessionValues(' . $property_data['id'] . ')" style="color: #2dbe6c;">See more</a></p>';
+                                                            echo '<p>' . $shortDescription . '... <a onclick="setSessionValues(' . $property_data['id'] . ')" style="color: #2dbe6c;">See more</a></p>';
                                                         } else {
                                                             // If the description is within the word limit, display the full description
                                                             echo '<p>' . $description . '</p>';
@@ -335,7 +335,7 @@ include_once 'header.php';
                                                         <li><i class="icon-15"></i><?php echo $property_data['bathrooms'] ?> Baths</li>
                                                     </ul>
                                                     <div class="other-info-box clearfix" onclick="setSessionValues(<?php echo $property_data['id'] ?>)">
-                                                        <div class="btn-box pull-left"><a href="" onclick="setSessionValues(<?php echo $property_data['id'] ?>)" class="theme-btn btn-two">See Details</a></div>
+                                                        <div class="btn-box pull-left"><a onclick="setSessionValues(<?php echo $property_data['id'] ?>)" class="theme-btn btn-two">See Details</a></div>
                                                     </div>
                                                 </div>
                                             </div>

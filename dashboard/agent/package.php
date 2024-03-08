@@ -205,7 +205,7 @@ include_once 'header.php';
                                                     </ul>
                                                 </div>
                                                 <div class="table-footer"  onclick="setSessionValues(<?php echo $package_data['id'] ?>)">
-                                                    <a href="" onclick="setSessionValues(<?php echo $package_data['id'] ?>)" class="link-btn">Buy Now</a>
+                                                    <a onclick="setSessionValues(<?php echo $package_data['id'] ?>)" class="link-btn">Buy Now</a>
                                                 </div>
                                             </div>
                                         </div>

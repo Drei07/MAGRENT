@@ -32,32 +32,62 @@ if (isset($_POST['btn-signin'])) {
         if ($rowCount == 1) {
             $existingData = $stmt->fetch();
 
-            if ($existingData['user_type'] == 2) {
-                if ($agent->login($email, $upass)) {
-                    $_SESSION['status_title'] = "Hey !";
-                    $_SESSION['status'] = "Welcome back! ";
-                    $_SESSION['status_code'] = "success";
-                    $_SESSION['status_timer'] = 10000;
-                    header("Location: ../../agent/property");
+            if ($_SESSION['property_details'] == 1) {
+
+                if ($existingData['user_type'] == 2) {
+                    if ($agent->login($email, $upass)) {
+                        $_SESSION['status_title'] = "Hey !";
+                        $_SESSION['status'] = "Welcome back! ";
+                        $_SESSION['status_code'] = "success";
+                        $_SESSION['status_timer'] = 10000;
+                        header("Location: ../../agent/property");
+                        exit();
+                    }
+                } elseif ($existingData['user_type'] == 3) {
+                    if ($user->login($email, $upass)) {
+                        $_SESSION['status_title'] = "Hey !";
+                        $_SESSION['status'] = "Welcome back! ";
+                        $_SESSION['status_code'] = "success";
+                        $_SESSION['status_timer'] = 10000;
+                        unset($_SESSION['property_details']);
+                        header("Location: ../property-details");
+                        exit();
+                    }
+                } else {
+                    $_SESSION['status_titlek'] = "Sorry !";
+                    $_SESSION['status'] = "No account found";
+                    $_SESSION['status_code'] = "error";
+                    $_SESSION['status_timer'] = 10000000;
+                    header("Location: ../../../signin");
                     exit();
                 }
-            } elseif ($existingData['user_type'] == 3) {
-                if ($user->login($email, $upass)) {
-                    $_SESSION['status_title'] = "Hey !";
-                    $_SESSION['status'] = "Welcome back! ";
-                    $_SESSION['status_code'] = "success";
-                    $_SESSION['status_timer'] = 10000;
-                    header("Location: ../");
+            } else if ($_SESSION['property_details'] == NULL) {
+                if ($existingData['user_type'] == 2) {
+                    if ($agent->login($email, $upass)) {
+                        $_SESSION['status_title'] = "Hey !";
+                        $_SESSION['status'] = "Welcome back! ";
+                        $_SESSION['status_code'] = "success";
+                        $_SESSION['status_timer'] = 10000;
+                        header("Location: ../../agent/property");
+                        exit();
+                    }
+                } elseif ($existingData['user_type'] == 3) {
+                    if ($user->login($email, $upass)) {
+                        $_SESSION['status_title'] = "Hey !";
+                        $_SESSION['status'] = "Welcome back! ";
+                        $_SESSION['status_code'] = "success";
+                        $_SESSION['status_timer'] = 10000;
+                        header("Location: ../");
+                        exit();
+                    }
+                } else {
+                    $_SESSION['status_titlek'] = "Sorry !";
+                    $_SESSION['status'] = "No account found";
+                    $_SESSION['status_code'] = "error";
+                    $_SESSION['status_timer'] = 10000000;
+                    header("Location: ../../../signin");
                     exit();
                 }
-            }
-            else{
-                $_SESSION['status_titlek'] = "Sorry !";
-                $_SESSION['status'] = "No account found";
-                $_SESSION['status_code'] = "error";
-                $_SESSION['status_timer'] = 10000000;
-                header("Location: ../../../signin");
-                exit();
             }
         } else {
             $_SESSION['status_title'] = "Sorry !";

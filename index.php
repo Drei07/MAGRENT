@@ -88,7 +88,6 @@ include_once 'dashboard/user/authentication/user-forgot-password.php';
                                     <ul class="navigation clearfix">
                                         <li class="current"><a href=""><span>Home</span></a></li>
                                         <li class=""><a href="partners"><span>Became A Partner</span></a></li>
-                                        <li class=""><a href="find-home"><span>Find A Home</span></a></li>
                                         <li class=""><a href="about-us"><span>About Us</span></a></li>
                                         <li><a href="contact-us"><span>Contact Us</span></a></li>
                                     </ul>
@@ -116,6 +115,7 @@ include_once 'dashboard/user/authentication/user-forgot-password.php';
             </div>
         </header>
         <!-- main-header end -->
+
 
         <!-- Mobile Menu  -->
         <div class="mobile-menu">
@@ -156,340 +156,226 @@ include_once 'dashboard/user/authentication/user-forgot-password.php';
         </section>
         <!-- banner-section end -->
 
-
-        <!-- category-section -->
-        <!-- <section class="category-section centred">
+        <!--Page Title-->
+        <section class="page-title-two bg-color-1 centred">
+            <div class="pattern-layer">
+                <div class="pattern-1" style="background-image: url(src/images/shape/shape-9.png);"></div>
+                <div class="pattern-2" style="background-image: url(src/images/shape/shape-10.png);"></div>
+            </div>
             <div class="auto-container">
-                <div class="inner-container wow slideInLeft animated" data-wow-delay="00ms" data-wow-duration="1500ms">
-                    <ul class="category-list clearfix">
-                        <li>
-                            <div class="category-block-one">
-                                <div class="inner-box">
-                                    <div class="icon-box"><i class="icon-2"></i></div>
-                                    <h5><a href="">Apartment</a></h5>
-                                    <span>52</span>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="category-block-one">
-                                <div class="inner-box">
-                                    <div class="icon-box"><i class="icon-1"></i></div>
-                                    <h5><a href="">House</a></h5>
-                                    <span>20</span>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="category-block-one">
-                                <div class="inner-box">
-                                    <div class="icon-box"><i class="icon-3"></i></div>
-                                    <h5><a href="">Lady Bed Space</a></h5>
-                                    <span>35</span>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="category-block-one">
-                                <div class="inner-box">
-                                    <div class="icon-box"><i class="icon-4"></i></div>
-                                    <h5><a href="">Men Bed Space</a></h5>
-                                    <span>10</span>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
+                <div class="content-box clearfix">
+                    <h1>Find Home</h1>
                 </div>
             </div>
-        </section> -->
-        <!-- category-section end -->
+        </section>
+        <!--End Page Title-->
 
-
-        <!-- feature-section -->
-        <!-- <section class="feature-section sec-pad bg-color-1">
-            <div class="auto-container">
-                <div class="sec-title centred">
-                    <h5>Features</h5>
-                    <h2>Featured Property</h2>
-                    <p>Explore our curated selection of standout rental options handpicked by MagRent. Discover exquisite locations, exclusive offers, and the best of what we have to offer. Find your perfect getaway with MagRent today</p>
-                </div>
-                <div class="row clearfix">
-
-
-                    <div class="col-lg-4 col-md-6 col-sm-12 feature-block">
-                        <div class="feature-block-one wow fadeInUp animated" data-wow-delay="00ms" data-wow-duration="1500ms">
-                            <div class="inner-box">
-                                <div class="image-box">
-                                    <figure class="image"><img src="src/images/feature/feature-1.jpg" alt=""></figure>
-                                    <div class="batch"><i class="icon-11"></i></div>
-                                    <span class="category">Featured</span>
-                                </div>
-                                <div class="lower-content">
-                                    <div class="author-info clearfix">
-                                        <div class="author pull-left">
-                                            <figure class="author-thumb"><img src="src/images/feature/author-1.jpg" alt=""></figure>
-                                            <h6>Michael Bean</h6>
-                                        </div>
-                                        <div class="buy-btn pull-right"><a href="property-details.html">For Buy</a></div>
+        <div class="auto-container" style="padding-top: 3rem;">
+            <div class="inner-container">
+                <div class="search-field">
+                    <div class="tabs-box">
+                        <div class="tabs-content info-group">
+                            <div class="tab active-tab" id="tab-1">
+                                <div class="inner-box">
+                                    <div class="top-search">
+                                        <form action="" method="post" class="search-form">
+                                            <div class="row clearfix">
+                                                <div class="col-lg-4 col-md-12 col-sm-12 column">
+                                                    <div class="form-group">
+                                                        <label>Search Property Name</label>
+                                                        <div class="field-input">
+                                                            <i class="fas fa-search"></i>
+                                                            <input type="search" name="search-field" id="search-input-property" placeholder="Search Property Name..." required="">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4 col-md-6 col-sm-12 column">
+                                                    <div class="form-group">
+                                                        <label>Property Type</label>
+                                                        <div class="select-box">
+                                                            <select class="wide" name="property_type" id="property-type">
+                                                                <option value="">All Property Type</option>
+                                                                <option value="Apartment">Apartment</option>
+                                                                <option value="House">House</option>
+                                                                <option value="Lady's Bed Space">Lady's Bed Space</option>
+                                                                <option value="Men's Bed Space">Men's Bed Space</option>
+                                                                <option value="Dormitory">Dormitory</option>
+                                                                <option value="Transient">Transient</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4 col-md-6 col-sm-12 column">
+                                                    <div class="form-group">
+                                                        <label>Bedrooms</label>
+                                                        <div class="select-box">
+                                                            <select class="wide" name="bedrooms" id="bedrooms">
+                                                                <option value="">Max Rooms</option>
+                                                                <option value="1">One Rooms</option>
+                                                                <option value="2">Two Rooms</option>
+                                                                <option value="3">Three Rooms</option>
+                                                                <option value="4">Four Rooms</option>
+                                                                <option value="5">Five Rooms</option>
+                                                                <option value="6">Six Rooms</option>
+                                                                <option value="7">Seven Rooms</option>
+                                                                <option value="8">Eight Rooms</option>
+                                                                <option value="9">Nine Rooms</option>
+                                                                <option value="10">Ten Rooms</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="search-btn">
+                                                <button type="button" onclick="searchProperties()"><i class="fas fa-search"></i>Search</button>
+                                            </div>
+                                        </form>
                                     </div>
-                                    <div class="title-text">
-                                        <h4><a href="property-details.html">Villa on Grand Avenue</a></h4>
+                                    <div class="switch_btn_one ">
                                     </div>
-                                    <div class="price-box clearfix">
-                                        <div class="price-info pull-left">
-                                            <h6>Start From</h6>
-                                            <h4>$30,000.00</h4>
-                                        </div>
-                                        <ul class="other-option pull-right clearfix">
-                                            <li><a href="property-details.html"><i class="icon-12"></i></a></li>
-                                            <li><a href="property-details.html"><i class="icon-13"></i></a></li>
-                                        </ul>
-                                    </div>
-                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing sed.</p>
-                                    <ul class="more-details clearfix">
-                                        <li><i class="icon-14"></i>3 Beds</li>
-                                        <li><i class="icon-15"></i>2 Baths</li>
-                                        <li><i class="icon-16"></i>600 Sq Ft</li>
-                                    </ul>
-                                    <div class="btn-box"><a href="property-details.html" class="theme-btn btn-two">See Details</a></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-
-                    <div class="col-lg-4 col-md-6 col-sm-12 feature-block">
-                        <div class="feature-block-one wow fadeInUp animated" data-wow-delay="300ms" data-wow-duration="1500ms">
-                            <div class="inner-box">
-                                <div class="image-box">
-                                    <figure class="image"><img src="src/images/feature/feature-2.jpg" alt=""></figure>
-                                    <div class="batch"><i class="icon-11"></i></div>
-                                    <span class="category">Featured</span>
-                                </div>
-                                <div class="lower-content">
-                                    <div class="author-info clearfix">
-                                        <div class="author pull-left">
-                                            <figure class="author-thumb"><img src="src/images/feature/author-2.jpg" alt=""></figure>
-                                            <h6>Robert Niro</h6>
-                                        </div>
-                                        <div class="buy-btn pull-right"><a href="property-details.html">For Rent</a></div>
-                                    </div>
-                                    <div class="title-text">
-                                        <h4><a href="property-details.html">Contemporary Apartment</a></h4>
-                                    </div>
-                                    <div class="price-box clearfix">
-                                        <div class="price-info pull-left">
-                                            <h6>Start From</h6>
-                                            <h4>$45,000.00</h4>
-                                        </div>
-                                        <ul class="other-option pull-right clearfix">
-                                            <li><a href="property-details.html"><i class="icon-12"></i></a></li>
-                                            <li><a href="property-details.html"><i class="icon-13"></i></a></li>
-                                        </ul>
-                                    </div>
-                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing sed.</p>
-                                    <ul class="more-details clearfix">
-                                        <li><i class="icon-14"></i>3 Beds</li>
-                                        <li><i class="icon-15"></i>2 Baths</li>
-                                        <li><i class="icon-16"></i>600 Sq Ft</li>
-                                    </ul>
-                                    <div class="btn-box"><a href="property-details.html" class="theme-btn btn-two">See Details</a></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-sm-12 feature-block">
-                        <div class="feature-block-one wow fadeInUp animated" data-wow-delay="600ms" data-wow-duration="1500ms">
-                            <div class="inner-box">
-                                <div class="image-box">
-                                    <figure class="image"><img src="src/images/feature/feature-3.jpg" alt=""></figure>
-                                    <div class="batch"><i class="icon-11"></i></div>
-                                    <span class="category">Featured</span>
-                                </div>
-                                <div class="lower-content">
-                                    <div class="author-info clearfix">
-                                        <div class="author pull-left">
-                                            <figure class="author-thumb"><img src="src/images/feature/author-3.jpg" alt=""></figure>
-                                            <h6>Keira Mel</h6>
-                                        </div>
-                                        <div class="buy-btn pull-right"><a href="property-details.html">Sold Out</a></div>
-                                    </div>
-                                    <div class="title-text">
-                                        <h4><a href="property-details.html">Luxury Villa With Pool</a></h4>
-                                    </div>
-                                    <div class="price-box clearfix">
-                                        <div class="price-info pull-left">
-                                            <h6>Start From</h6>
-                                            <h4>$63,000.00</h4>
-                                        </div>
-                                        <ul class="other-option pull-right clearfix">
-                                            <li><a href="property-details.html"><i class="icon-12"></i></a></li>
-                                            <li><a href="property-details.html"><i class="icon-13"></i></a></li>
-                                        </ul>
-                                    </div>
-                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing sed.</p>
-                                    <ul class="more-details clearfix">
-                                        <li><i class="icon-14"></i>3 Beds</li>
-                                        <li><i class="icon-15"></i>2 Baths</li>
-                                        <li><i class="icon-16"></i>600 Sq Ft</li>
-                                    </ul>
-                                    <div class="btn-box"><a href="property-details.html" class="theme-btn btn-two">See Details</a></div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="more-btn centred"><a href="property" class="theme-btn btn-one">View All Listing</a></div>
             </div>
-        </section> -->
-        <!-- feature-section end -->
-
-        <!-- deals-section -->
-        <!-- <section class="deals-section sec-pad">
-            <div class="auto-container">
-                <div class="sec-title">
-                    <h5>Hot Property</h5>
-                    <h2>Our Best Deals</h2>
-                </div>
-
-                <div class="row clearfix">
-
-                    <div class="col-lg-4 col-md-6 col-sm-12 feature-block">
-                        <div class="feature-block-one wow fadeInUp animated" data-wow-delay="00ms" data-wow-duration="1500ms">
-                            <div class="inner-box">
-                                <div class="image-box">
-                                    <figure class="image"><img src="src/images/feature/feature-1.jpg" alt=""></figure>
-                                    <div class="batch"><i class="icon-11"></i></div>
-                                    <span class="category">Featured</span>
-                                </div>
-                                <div class="lower-content">
-                                    <div class="author-info clearfix">
-                                        <div class="author pull-left">
-                                            <figure class="author-thumb"><img src="src/images/feature/author-1.jpg" alt=""></figure>
-                                            <h6>Michael Bean</h6>
-                                        </div>
-                                        <div class="buy-btn pull-right"><a href="property-details.html">For Buy</a></div>
-                                    </div>
-                                    <div class="title-text">
-                                        <h4><a href="property-details.html">Villa on Grand Avenue</a></h4>
-                                    </div>
-                                    <div class="price-box clearfix">
-                                        <div class="price-info pull-left">
-                                            <h6>Start From</h6>
-                                            <h4>$30,000.00</h4>
-                                        </div>
-                                        <ul class="other-option pull-right clearfix">
-                                            <li><a href="property-details.html"><i class="icon-12"></i></a></li>
-                                            <li><a href="property-details.html"><i class="icon-13"></i></a></li>
-                                        </ul>
-                                    </div>
-
-                                    <ul class="more-details clearfix">
-                                        <li><i class="icon-14"></i>3 Beds</li>
-                                        <li><i class="icon-15"></i>2 Baths</li>
-                                        <li><i class="icon-16"></i>600 Sq Ft</li>
-                                    </ul>
-                                    <div class="btn-box"><a href="property-details.html" class="theme-btn btn-two">See Details</a></div>
-                                </div>
+            <div class="page-content clearfix">
+                <!-- deals-style-two -->
+                <section class="deals-style-two">
+                    <div class="auto-container">
+                        <div class="item-shorting clearfix">
+                            <div class="left-column pull-left" id="search-results-container">
+                                <h5 id="search-results"><span>Showing 0 of 0 Listings</span></h5>
                             </div>
                         </div>
-                    </div>
+                        <div class="wrapper list">
+                            <div class="deals-list-content list-item">
+                                <?php
+                                $stmt1 = $user->runQuery("SELECT * FROM property WHERE status=:status");
+                                $stmt1->execute(array(":status" => "available"));
+                                $propertyCount = $stmt1->rowCount();
 
+                                if ($stmt1->rowCount() >= 1) {
+                                    while ($property_data = $stmt1->fetch(PDO::FETCH_ASSOC)) {
+                                        extract($property_data);
 
+                                        $stmt2 = $user->runQuery("SELECT * FROM property_gallery WHERE property_id=:property_id");
+                                        $stmt2->execute(array(":property_id" => $property_data['id']));
+                                        $property_gallery_data = $stmt2->fetch(PDO::FETCH_ASSOC);
+                                ?>
+                                        <div class="deals-block-one">
+                                            <div class="inner-box">
+                                                <div class="image-box">
+                                                    <figure class="image"><img src="src/images/property_gallery/<?php echo $property_gallery_data['picture_1'] ?>" style="height: 100%;" alt=""></figure>
+                                                </div>
+                                                <div class="lower-content">
+                                                    <div class="title-text">
+                                                        <h4><a id="property_name" onclick="setSessionValues(<?php echo $property_data['id'] ?>)"><?php echo $property_data['property_name'] ?></a></h4>
+                                                    </div>
+                                                    <div class="price-box clearfix">
+                                                        <div class="price-info pull-left">
+                                                            <h6>Start From</h6>
+                                                            <h4>₱ <?php echo number_format($property_data['property_price']); ?></h4>
+                                                        </div>
+                                                    </div>
+                                                    <div class="lower-content">
+                                                        <h6 id="property_type" style="display: none;">
+                                                            <?php
+                                                            if ($property_data['property_type'] == 1) {
+                                                                echo "Apartment";
+                                                            } elseif ($property_data['property_type'] == 2) {
+                                                                echo "House";
+                                                            } elseif ($property_data['property_type'] == 3) {
+                                                                echo "Lady's Bed Space";
+                                                            } elseif ($property_data['property_type'] == 4) {
+                                                                echo "Men's Bed Space";
+                                                            } elseif ($property_data['property_type'] == 5) {
+                                                                echo "Dormitory";
+                                                            } elseif ($property_data['property_type'] == 5) {
+                                                                echo "Transient";
+                                                            } else {
+                                                                echo "";
+                                                            }
+                                                            ?>
+                                                        </h6>
+                                                        <h6>Property Type :
+                                                            <?php
+                                                            if ($property_data['property_type'] == 1) {
+                                                                echo "Apartment";
+                                                            } elseif ($property_data['property_type'] == 2) {
+                                                                echo "House";
+                                                            } elseif ($property_data['property_type'] == 3) {
+                                                                echo "Lady's Bed Space";
+                                                            } elseif ($property_data['property_type'] == 4) {
+                                                                echo "Men's Bed Space";
+                                                            } elseif ($property_data['property_type'] == 5) {
+                                                                echo "Dormitory";
+                                                            } elseif ($property_data['property_type'] == 5) {
+                                                                echo "Transient";
+                                                            } else {
+                                                                echo "";
+                                                            }
 
+                                                            ?>
+                                                        </h6>
+                                                    </div>
+                                                    <p><?php
+                                                        $description = $property_data['property_description'];
+                                                        $wordLimit = 20; // Set your desired word limit
 
-                    <div class="col-lg-4 col-md-6 col-sm-12 feature-block">
-                        <div class="feature-block-one wow fadeInUp animated" data-wow-delay="00ms" data-wow-duration="1500ms">
-                            <div class="inner-box">
-                                <div class="image-box">
-                                    <figure class="image"><img src="src/images/feature/feature-1.jpg" alt=""></figure>
-                                    <div class="batch"><i class="icon-11"></i></div>
-                                    <span class="category">Featured</span>
-                                </div>
-                                <div class="lower-content">
-                                    <div class="author-info clearfix">
-                                        <div class="author pull-left">
-                                            <figure class="author-thumb"><img src="src/images/feature/author-1.jpg" alt=""></figure>
-                                            <h6>Michael Bean</h6>
+                                                        // Explode the description into an array of words
+                                                        $words = explode(' ', $description);
+
+                                                        // Check if the number of words exceeds the limit
+                                                        if (count($words) > $wordLimit) {
+                                                            // Slice the array to get only the first $wordLimit words
+                                                            $shortDescription = implode(' ', array_slice($words, 0, $wordLimit));
+
+                                                            // Output the truncated description with "See more" link
+                                                            echo '<p>' . $shortDescription . '... <a onclick="setSessionValues(' . $property_data['id'] . ')" style="color: #2dbe6c;">See more</a></p>';
+                                                        } else {
+                                                            // If the description is within the word limit, display the full description
+                                                            echo '<p>' . $description . '</p>';
+                                                        }
+                                                        ?></p>
+
+                                                    <ul class="more-details clearfix">
+                                                        <li style="display: none;" id="bed_rooms"><?php echo $property_data['bedrooms'] ?></li>
+                                                        <li><i class="icon-14"></i><?php echo $property_data['bedrooms'] ?> Beds</li>
+                                                        <li><i class="icon-15"></i><?php echo $property_data['bathrooms'] ?> Baths</li>
+                                                    </ul>
+                                                    <div class="other-info-box clearfix" onclick="setSessionValues(<?php echo $property_data['id'] ?>)">
+                                                        <div class="btn-box pull-left"><a onclick="setSessionValues(<?php echo $property_data['id'] ?>)" class="theme-btn btn-two">See Details</a></div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="buy-btn pull-right"><a href="property-details.html">For Buy</a></div>
-                                    </div>
-                                    <div class="title-text">
-                                        <h4><a href="property-details.html">Villa on Grand Avenue</a></h4>
-                                    </div>
-                                    <div class="price-box clearfix">
-                                        <div class="price-info pull-left">
-                                            <h6>Start From</h6>
-                                            <h4>$30,000.00</h4>
-                                        </div>
-                                        <ul class="other-option pull-right clearfix">
-                                            <li><a href="property-details.html"><i class="icon-12"></i></a></li>
-                                            <li><a href="property-details.html"><i class="icon-13"></i></a></li>
-                                        </ul>
-                                    </div>
+                                    <?php
+                                    }
+                                } else {
+                                    ?>
+                                <?php
+                                }
 
-                                    <ul class="more-details clearfix">
-                                        <li><i class="icon-14"></i>3 Beds</li>
-                                        <li><i class="icon-15"></i>2 Baths</li>
-                                        <li><i class="icon-16"></i>600 Sq Ft</li>
-                                    </ul>
-                                    <div class="btn-box"><a href="property-details.html" class="theme-btn btn-two">See Details</a></div>
-                                </div>
+                                ?>
                             </div>
+
+                        </div>
+                        <div class="pagination-wrapper">
+                            <ul id="pagination" class="pagination clearfix">
+                                <li><a href="property-list.html" class="current">1</a></li>
+                                <li><a href="property-list.html">2</a></li>
+                                <li><a href="property-list.html">3</a></li>
+                                <li><a href="property-list.html"><i class="fas fa-angle-right"></i></a></li>
+                            </ul>
                         </div>
                     </div>
-
-
-                    <div class="col-lg-4 col-md-6 col-sm-12 feature-block">
-                        <div class="feature-block-one wow fadeInUp animated" data-wow-delay="00ms" data-wow-duration="1500ms">
-                            <div class="inner-box">
-                                <div class="image-box">
-                                    <figure class="image"><img src="src/images/feature/feature-1.jpg" alt=""></figure>
-                                    <div class="batch"><i class="icon-11"></i></div>
-                                    <span class="category">Featured</span>
-                                </div>
-                                <div class="lower-content">
-                                    <div class="author-info clearfix">
-                                        <div class="author pull-left">
-                                            <figure class="author-thumb"><img src="src/images/feature/author-1.jpg" alt=""></figure>
-                                            <h6>Michael Bean</h6>
-                                        </div>
-                                        <div class="buy-btn pull-right"><a href="property-details.html">For Buy</a></div>
-                                    </div>
-                                    <div class="title-text">
-                                        <h4><a href="property-details.html">Villa on Grand Avenue</a></h4>
-                                    </div>
-                                    <div class="price-box clearfix">
-                                        <div class="price-info pull-left">
-                                            <h6>Start From</h6>
-                                            <h4>$30,000.00</h4>
-                                        </div>
-                                        <ul class="other-option pull-right clearfix">
-                                            <li><a href="property-details.html"><i class="icon-12"></i></a></li>
-                                            <li><a href="property-details.html"><i class="icon-13"></i></a></li>
-                                        </ul>
-                                    </div>
-
-                                    <ul class="more-details clearfix">
-                                        <li><i class="icon-14"></i>3 Beds</li>
-                                        <li><i class="icon-15"></i>2 Baths</li>
-                                        <li><i class="icon-16"></i>600 Sq Ft</li>
-                                    </ul>
-                                    <div class="btn-box"><a href="property-details.html" class="theme-btn btn-two">See Details</a></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-
-
-
-
-                </div>
-
+                </section>
+                <!-- deals-style-two end -->
             </div>
-        </section> -->
-        <!-- deals-section end -->
+
+        </div>
+        <!-- page-content end -->
 
         <!-- main-footer -->
         <footer class="main-footer">
@@ -562,6 +448,63 @@ include_once 'dashboard/user/authentication/user-forgot-password.php';
 
     <!-- script -->
     <?php include_once 'configuration/footer.php'; ?>
+    <script>
+        function setSessionValues(propertyId) {
+            fetch('dashboard/user/property-details.php?index=1', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: 'property_id=' + encodeURIComponent(propertyId),
+                })
+                .then(response => {
+                    window.location.href = 'dashboard/user/property-details?index=1';
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        }
+
+        // Function to handle property search
+        function searchProperties() {
+            var searchInput = document.getElementById('search-input-property').value.trim();
+            var propertyType = document.getElementById('property-type').value;
+            var bedRooms = document.getElementById('bedrooms').value;
+            var propertyItems = document.querySelectorAll('.deals-block-one');
+
+            propertyItems.forEach(function(item) {
+                var propertyName = item.querySelector('#property_name').innerText.toLowerCase();
+                var propertyTypeText = item.querySelector('#property_type').innerText.toLowerCase();
+                var bedroomsTypeText = item.querySelector('#bed_rooms').innerText.toLowerCase();
+
+
+
+                // Check if the property name and type match the search criteria
+                var matchesSearch = propertyName.includes(searchInput.toLowerCase()) && (propertyType === '' || propertyTypeText.includes(propertyType.toLowerCase())) && (bedRooms === '' || bedroomsTypeText.includes(bedRooms.toLowerCase()));
+
+                // Toggle the visibility of the property item based on the search result
+                item.style.display = matchesSearch ? 'block' : 'none';
+            });
+
+            updateSearchResults();
+
+        }
+
+        function updateSearchResults() {
+            var visibleListings = document.querySelectorAll('.deals-block-one:not([style*="display: none"])').length;
+            var totalListings = document.querySelectorAll('.deals-block-one').length;
+
+            var searchResultsContainer = document.getElementById('search-results-container');
+            var searchResultsElement = document.getElementById('search-results');
+
+            searchResultsElement.innerText = 'Showing ' + visibleListings + ' of ' + totalListings + ' Listings';
+        }
+
+        // Call the updateSearchResults function once the page loads and property list is displayed
+        window.onload = function() {
+            updateSearchResults();
+        }
+    </script>
     <?php include_once 'configuration/sweetalert.php'; ?>
 
 </body><!-- End of .page_wrapper -->

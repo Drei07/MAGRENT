@@ -87,7 +87,6 @@
                                     <ul class="navigation clearfix">
                                         <li class=""><a href="./"><span>Home</span></a></li>
                                         <li class="current"><a href="partners"><span>Became A Partner</span></a></li>
-                                        <li class=""><a href="find-home"><span>Find A Home</span></a></li>
                                         <li class=""><a href="about-us"><span>About Us</span></a></li>
                                         <li><a href="contact-us"><span>Contact Us</span></a></li>
                                     </ul>
@@ -166,12 +165,12 @@
             <div class="auto-container">
                 <div class="tabs-box">
                     <ul class="tab-btns tab-buttons clearfix">
-                        <li class="tab-btn active-btn" data-tab="#tab-1"><span>1</span>General Information</li>
+                        <li class="tab-btn active-btn" data-tab="#tab-1"><span>1</span>Agent Information</li>
                     </ul>
                     <div class="tabs-content">
                         <div class="tab active-tab" id="tab-1">
                             <div class="gallery-box">
-                                <h4><i class="icon-42"></i>General Information:</h4>
+                                <h4><i class="icon-42"></i>Agent Information:</h4>
                                 <form action="dashboard/agent/authentication/agent-signup.php" method="POST" class="needs-validation" novalidate enctype="multipart/form-data">
                                     <div class="inner-box default-form">
                                         <div class="row clearfix">

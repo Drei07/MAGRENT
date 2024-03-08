@@ -1,6 +1,7 @@
 <?php
 include_once 'header.php';
 
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Retrieve the values from the POST request
     $propertyId = isset($_POST['property_id']) ? $_POST['property_id'] : '';
@@ -110,7 +111,21 @@ $property_viewing_time_data = $stmt->fetch(PDO::FETCH_ASSOC);
                 <div class="top-inner clearfix">
                     <div class="left-column pull-left">
                         <ul class="info clearfix">
-                            <li><i class="far fa-clock"></i>Mon - Sat 9.00 - 18.00</li>
+                            <li><i class="far fa-calendar"></i>
+                                <?php
+                                $day_count = count($all_days);
+                                foreach ($all_days as $key => $day) {
+                                    // Extract the first three characters of the day name
+                                    $short_day_name = substr($day['day'], 0, 3);
+                                    echo $short_day_name;
+                                    // Add "-" if it's not the last day
+                                    if ($key < $day_count - 1) {
+                                        echo '-';
+                                    }
+                                }
+                                ?>
+                            </li>
+                            <li><i class="far fa-clock"></i><?php echo date("h:i A", strtotime($visitation_hours_from)); ?> - <?php echo date("h:i A", strtotime($visitation_hours_to)); ?></li>
                             <li><i class="far fa-phone"></i><a href="tel:2512353256"><?php echo $config->getSystemNumber() ?></a></li>
                         </ul>
                     </div>
@@ -225,28 +240,35 @@ $property_viewing_time_data = $stmt->fetch(PDO::FETCH_ASSOC);
         <section class="property-details property-details-one">
             <div class="auto-container">
                 <div class="top-details clearfix">
-                <div class="left-column pull-left clearfix">
+                    <div class="left-column pull-left clearfix">
+                        <?php
+                        if ($property_data['status'] == "available") {
+                            $status = "<span style='color: green;'>Available</span>";
+                        } else if ($property_data['status'] == "not_available") {
+                            $status = "<span style='color: green;'>Available</span>";
+                        }
+                        ?>
                         <h3><?php echo $property_data['property_name'] ?></h3>
                         <?php
-                            if ($property_data['units'] == !null) {
-                                $stmt_property_reservation = $user->runQuery('SELECT COUNT(*) as available_units FROM property_reservation WHERE property_id=:property_id AND status=:status');
-                                $stmt_property_reservation->execute(array(":property_id" => $propertyId, ":status" => "accept"));
-                                $property_reservation_data = $stmt_property_reservation->fetch(PDO::FETCH_ASSOC);
+                        if ($property_data['units'] == !null) {
+                            $stmt_property_reservation = $user->runQuery('SELECT COUNT(*) as available_units FROM property_reservation WHERE property_id=:property_id AND status=:status');
+                            $stmt_property_reservation->execute(array(":property_id" => $propertyId, ":status" => "accept"));
+                            $property_reservation_data = $stmt_property_reservation->fetch(PDO::FETCH_ASSOC);
 
-                                $available_units = $property_data['units'] - $property_reservation_data['available_units'];
+                            $available_units = $property_data['units'] - $property_reservation_data['available_units'];
 
-                            ?>
-                                <div class="author-info clearfix">
-                                    <div class="author-box pull-left">
-                                        <h6>Available Unit's</h6>
-                                    </div>
-                                    <ul class="rating clearfix pull-left">
-                                        <li><?php echo $available_units ?></li>
-                                    </ul>
+                        ?>
+                            <div class="author-info clearfix">
+                                <div class="author-box pull-left">
+                                    <h6>Available Unit's</h6>
                                 </div>
-                            <?php
-                            }
-                            ?>
+                                <ul class="rating clearfix pull-left">
+                                    <li><?php echo $available_units ?></li>
+                                </ul>
+                            </div>
+                        <?php
+                        }
+                        ?>
                     </div>
                     <div class="right-column pull-right clearfix">
                         <div class="price-inner clearfix">
@@ -499,6 +521,7 @@ $property_viewing_time_data = $stmt->fetch(PDO::FETCH_ASSOC);
                                     </div>
                                 </div>
                             </div>
+
                         </div>
                     </div>
 
@@ -624,107 +647,106 @@ $property_viewing_time_data = $stmt->fetch(PDO::FETCH_ASSOC);
                 });
         }
 
-            //Rating and Review
-            load_rating_data();
+        //Rating and Review
+        load_rating_data();
 
-            function load_rating_data() {
+        function load_rating_data() {
 
-                var property_id = <?php echo $propertyId ?>; // Assuming $propertyId is defined in your PHP code
-                var user_id = <?php  echo $user_id?>
+            var property_id = <?php echo $propertyId ?>; // Assuming $propertyId is defined in your PHP code
+            var user_id = <?php echo $user_id ?>
 
-                $.ajax({
-                    url: "rating-data.php",
-                    method: "POST",
-                    data: {
-                        action: 'load_data',
-                        property_id: property_id,
-                        user_id: user_id
+            $.ajax({
+                url: "rating-data.php",
+                method: "POST",
+                data: {
+                    action: 'load_data',
+                    property_id: property_id,
+                    user_id: user_id
 
-                    },
-                    dataType: "JSON",
-                    success: function(data) {
-                        $('#average_rating').text(data.average_rating);
-                        $('#total_review').text(data.total_review);
+                },
+                dataType: "JSON",
+                success: function(data) {
+                    $('#average_rating').text(data.average_rating);
+                    $('#total_review').text(data.total_review);
 
-                        var count_star = 0;
+                    var count_star = 0;
 
-                        $('.main_star').each(function() {
-                            count_star++;
-                            if (Math.ceil(data.average_rating) >= count_star) {
-                                $(this).addClass('text-warning');
-                                $(this).addClass('star-light');
-                            }
-                        });
+                    $('.main_star').each(function() {
+                        count_star++;
+                        if (Math.ceil(data.average_rating) >= count_star) {
+                            $(this).addClass('text-warning');
+                            $(this).addClass('star-light');
+                        }
+                    });
 
-                        $('#total_five_star_review').text(data.five_star_review);
+                    $('#total_five_star_review').text(data.five_star_review);
 
-                        $('#total_four_star_review').text(data.four_star_review);
+                    $('#total_four_star_review').text(data.four_star_review);
 
-                        $('#total_three_star_review').text(data.three_star_review);
+                    $('#total_three_star_review').text(data.three_star_review);
 
-                        $('#total_two_star_review').text(data.two_star_review);
+                    $('#total_two_star_review').text(data.two_star_review);
 
-                        $('#total_one_star_review').text(data.one_star_review);
+                    $('#total_one_star_review').text(data.one_star_review);
 
-                        $('#five_star_progress').css('width', (data.five_star_review / data.total_review) * 100 + '%');
+                    $('#five_star_progress').css('width', (data.five_star_review / data.total_review) * 100 + '%');
 
-                        $('#four_star_progress').css('width', (data.four_star_review / data.total_review) * 100 + '%');
+                    $('#four_star_progress').css('width', (data.four_star_review / data.total_review) * 100 + '%');
 
-                        $('#three_star_progress').css('width', (data.three_star_review / data.total_review) * 100 + '%');
+                    $('#three_star_progress').css('width', (data.three_star_review / data.total_review) * 100 + '%');
 
-                        $('#two_star_progress').css('width', (data.two_star_review / data.total_review) * 100 + '%');
+                    $('#two_star_progress').css('width', (data.two_star_review / data.total_review) * 100 + '%');
 
-                        $('#one_star_progress').css('width', (data.one_star_review / data.total_review) * 100 + '%');
+                    $('#one_star_progress').css('width', (data.one_star_review / data.total_review) * 100 + '%');
 
-                        if (data.review_data.length > 0) {
-                            var html = '';
+                    if (data.review_data.length > 0) {
+                        var html = '';
 
-                            for (var count = 0; count < data.review_data.length; count++) {
-                                html += '<div class="row mb-3">';
+                        for (var count = 0; count < data.review_data.length; count++) {
+                            html += '<div class="row mb-3">';
 
-                                html += '<div class="col-sm-1"><div class="rounded-circle bg-danger text-white pt-2 pb-2"><h3 class="text-center">' + data.review_data[count].char_user_name.charAt(0) + '</h3></div></div>';
+                            html += '<div class="col-sm-1"><div class="rounded-circle bg-danger text-white pt-2 pb-2"><h3 class="text-center">' + data.review_data[count].char_user_name.charAt(0) + '</h3></div></div>';
 
-                                html += '<div class="col-sm-11">';
+                            html += '<div class="col-sm-11">';
 
-                                html += '<div class="card">';
+                            html += '<div class="card">';
 
-                                html += '<div class="card-header"><b>' + data.review_data[count].user_name + '</b></div>';
+                            html += '<div class="card-header"><b>' + data.review_data[count].user_name + '</b></div>';
 
-                                html += '<div class="card-body">';
+                            html += '<div class="card-body">';
 
-                                for (var star = 1; star <= 5; star++) {
-                                    var class_name = '';
+                            for (var star = 1; star <= 5; star++) {
+                                var class_name = '';
 
-                                    if (data.review_data[count].rating >= star) {
-                                        class_name = 'text-warning';
-                                    } else {
-                                        class_name = 'star-light';
-                                    }
-
-                                    html += '<i class="fas fa-star ' + class_name + ' mr-1"></i>';
+                                if (data.review_data[count].rating >= star) {
+                                    class_name = 'text-warning';
+                                } else {
+                                    class_name = 'star-light';
                                 }
 
-                                html += '<br />';
-
-                                html += data.review_data[count].user_review;
-
-                                html += '</div>';
-
-                                html += '<div class="card-footer text-right">On ' + data.review_data[count].datetime + '</div>';
-
-                                html += '</div>';
-
-                                html += '</div>';
-
-                                html += '</div>';
+                                html += '<i class="fas fa-star ' + class_name + ' mr-1"></i>';
                             }
 
-                            $('#review_content').html(html);
-                        }
-                    }
-                })
-            }
+                            html += '<br />';
 
+                            html += data.review_data[count].user_review;
+
+                            html += '</div>';
+
+                            html += '<div class="card-footer text-right">On ' + data.review_data[count].datetime + '</div>';
+
+                            html += '</div>';
+
+                            html += '</div>';
+
+                            html += '</div>';
+                        }
+
+                        $('#review_content').html(html);
+                    }
+                }
+            })
+        }
     </script>
     <?php include_once '../../configuration/sweetalert.php'; ?>
 

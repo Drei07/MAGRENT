@@ -83,7 +83,6 @@
                                     <ul class="navigation clearfix">
                                         <li class=""><a href="./"><span>Home</span></a></li>
                                         <li class=""><a href="partners"><span>Became A Partner</span></a></li>
-                                        <li class=""><a href="find-home"><span>Find A Home</span></a></li>
                                         <li class=""><a href="about-us"><span>About Us</span></a></li>
                                         <li class="current"><a href="contact-us"><span>Contact Us</span></a></li>
                                     </ul>

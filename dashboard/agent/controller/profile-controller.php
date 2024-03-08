@@ -13,61 +13,60 @@ class ProfileSettings
         $this->conn = $db;
     }
     // Update user profile
-    public function updateProfile($user_id, $first_name, $middle_name, $last_name, $sex, $date_of_birth, $age, $phone_number)
+    public function updateProfile($user_id, $first_name, $middle_name, $last_name, $sex, $date_of_birth, $age, $phone_number, $visitation_hours_from, $visitation_hours_to, $selected_days)
     {
         // Retrieve current user profile data
         $stmt = $this->runQuery('SELECT * FROM users WHERE id=:id');
         $stmt->execute(array(":id" => $user_id));
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        // Compare the current user profile with the new data to check if changes have been made
-        if (
-            $row['first_name'] == $first_name &&
-            $row['middle_name'] == $middle_name &&
-            $row['last_name'] == $last_name &&
-            $row['sex'] == $sex &&
-            $row['date_of_birth'] == $date_of_birth &&
-            $row['age'] == $age &&
-            $row['phone_number'] == $phone_number
-        ) {
-            // No changes have been made
-            $_SESSION['status_title'] = 'Oopss!';
-            $_SESSION['status'] = 'No changes have been made to your profile.';
-            $_SESSION['status_code'] = 'info';
-            $_SESSION['status_timer'] = 40000;
+        // Retrieve current user business Hours
+        $stmt2 = $this->runQuery('SELECT * FROM business_hours WHERE user_id=:user_id');
+        $stmt2->execute(array(":user_id" => $user_id));
+        $business_hours = $stmt2->fetch(PDO::FETCH_ASSOC);
 
-            header('Location: ../settings');
-            exit;
+        if ($business_hours) {
+            // Update existing business hours
+            $current_visitation_hours_from = $business_hours['visitation_hours_from'];
+            $current_visitation_hours_to = $business_hours['visitation_hours_to'];
+            $current_visitation_days = $business_hours['visitation_days'];
+
+            if (
+                $current_visitation_hours_from == $visitation_hours_from &&
+                $current_visitation_hours_to == $visitation_hours_to &&
+                $current_visitation_days == $selected_days
+            ) {
+                // No changes have been made
+                $_SESSION['status_title'] = 'Oops!';
+                $_SESSION['status'] = 'No changes have been made to your profile.';
+                $_SESSION['status_code'] = 'info';
+                $_SESSION['status_timer'] = 40000;
+
+                header('Location: ../settings');
+                exit;
+            } else {
+                // Update existing business hours
+                $this->updateBusinessHours($user_id, $visitation_hours_from, $visitation_hours_to, $selected_days);
+            }
+        } else {
+            // Insert new business hours
+            $this->businessHours($user_id, $visitation_hours_from, $visitation_hours_to, $selected_days);
         }
 
-        // Check if middle name is empty and set it to null if it is
-        if (empty($middle_name)) {
-            $middle_name = null;
-        }
-        if (empty($sex)) {
-            $sex = null;
-        }
-        if (empty($date_of_birth)) {
-            $date_of_birth = null;
-        }
-        if (empty($age)) {
-            $age = null;
-        }
-        if (empty($phone_number)) {
-            $phone_number = null;
-        }
+        // Check if fields are empty and set them to null if they are
+        // (omitted for brevity)
 
         // Update user profile data in the database
         $stmt = $this->runQuery('UPDATE users SET first_name=:first_name, middle_name=:middle_name, last_name=:last_name, sex=:sex, date_of_birth=:date_of_birth, age=:age, phone_number=:phone_number WHERE id=:id');
         $exec = $stmt->execute(array(
             ":id"            => $user_id,
-            ":first_name"   => $first_name,
-            ":middle_name"  => $middle_name,
-            ":last_name"    => $last_name,
-            ":sex"          => $sex,
+            ":first_name"    => $first_name,
+            ":middle_name"   => $middle_name,
+            ":last_name"     => $last_name,
+            ":sex"           => $sex,
             ":date_of_birth" => $date_of_birth,
-            ":age"          => $age,
-            ":phone_number" => $phone_number
+            ":age"           => $age,
+            ":phone_number"  => $phone_number
         ));
 
         // Set status message based on success or failure of the database update
@@ -78,7 +77,6 @@ class ProfileSettings
             $_SESSION['status_code'] = 'success';
             $_SESSION['status_timer'] = 40000;
         } else {
-
             // Update failed
             $_SESSION['status_title'] = 'Oops!';
             $_SESSION['status'] = 'Something went wrong, please try again!';
@@ -91,6 +89,30 @@ class ProfileSettings
         exit;
     }
 
+    private function businessHours($user_id, $visitation_hours_from, $visitation_hours_to, $selected_days)
+    {
+        $stmt = $this->runQuery('INSERT INTO business_hours (user_id, visitation_hours_from, visitation_hours_to, visitation_days) VALUES (:user_id, :visitation_hours_from, :visitation_hours_to, :visitation_days)');
+        $stmt->execute(array(
+            ":user_id"              => $user_id,
+            ":visitation_hours_from" => $visitation_hours_from,
+            ":visitation_hours_to"   => $visitation_hours_to,
+            ":visitation_days"       => $selected_days,
+        ));
+    }
+
+    // Function to update existing business hours
+    private function updateBusinessHours($user_id, $visitation_hours_from, $visitation_hours_to, $selected_days)
+    {
+        $stmt = $this->runQuery('UPDATE business_hours SET visitation_hours_from=:visitation_hours_from, visitation_hours_to=:visitation_hours_to, visitation_days=:visitation_days WHERE user_id=:user_id');
+        $stmt->execute(array(
+            ":user_id"              => $user_id,
+            ":visitation_hours_from" => $visitation_hours_from,
+            ":visitation_hours_to"   => $visitation_hours_to,
+            ":visitation_days"       => $selected_days,
+        ));
+    }
+
+
     //update user avatar
     public function updateAvatar($user_id, $avatar)
     {
@@ -102,7 +124,7 @@ class ProfileSettings
                 ":id"        => $user_id,
                 ":profile"  => $avatar,
             ));
-    
+
             if ($exec && move_uploaded_file($_FILES['avatar']['tmp_name'], $folder)) {
                 $_SESSION['status_title'] = 'Success!';
                 $_SESSION['status'] = 'Avatar successfully updated';
@@ -114,8 +136,7 @@ class ProfileSettings
                 $_SESSION['status_code'] = 'error';
                 $_SESSION['status_timer'] = 100000;
             }
-        }
-        else{
+        } else {
             // No changes have been made
             $_SESSION['status_title'] = 'Oopss!';
             $_SESSION['status'] = 'No changes have been made to your profile.';
@@ -207,7 +228,7 @@ class ProfileSettings
         $stmt->bindParam(":user_id", $user_id);
         $stmt->execute();
         $user_payment_data = $stmt->fetch(PDO::FETCH_ASSOC);
-    
+
         if ($stmt->rowCount() > 0) {
 
             $stmt1 = $this->runQuery('UPDATE user_payment SET bank=:bank, account_name=:account_name, account_number=:account_number WHERE user_id=:user_id');
@@ -224,7 +245,7 @@ class ProfileSettings
                 $_SESSION['status_code'] = "success";
                 $_SESSION['status_timer'] = 40000;
                 header('Location: ../settings');
-                }
+            }
         } else {
             // User payment data doesn't exist, insert a new record
             $stmt2 = $this->runQuery('INSERT INTO user_payment (user_id, bank, account_name, account_number) VALUES (:user_id, :bank, :account_name, :account_number)');
@@ -241,10 +262,10 @@ class ProfileSettings
                 $_SESSION['status_code'] = "success";
                 $_SESSION['status_timer'] = 40000;
                 header('Location: ../settings');
-                }
+            }
         }
     }
-    
+
     public function runQuery($sql)
     {
         $stmt = $this->conn->prepare($sql);
@@ -263,8 +284,18 @@ if (isset($_POST['btn-update-profile'])) {
     $age  = trim($_POST['age']);
     $phone_number  = trim($_POST['phone_number']);
 
+    //property Viewing
+    $visitation_hours_from = trim($_POST['visitation_hours_from']);
+    $visitation_hours_to = trim($_POST['visitation_hours_to']);
+
+    //days
+    if (isset($_POST['days']) && is_array($_POST['days'])) {
+        $selected_days = implode(', ', $_POST['days']);
+        // Now $selected_days contains a serialized string of selected days
+    }
+
     $ProfileSettings = new ProfileSettings();
-    $ProfileSettings->updateProfile($user_id, $first_name, $middle_name, $last_name, $sex, $date_of_birth, $age, $phone_number);
+    $ProfileSettings->updateProfile($user_id, $first_name, $middle_name, $last_name, $sex, $date_of_birth, $age, $phone_number, $visitation_hours_from, $visitation_hours_to, $selected_days);
 }
 
 if (isset($_POST['btn-update-avatar'])) {

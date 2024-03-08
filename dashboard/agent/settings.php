@@ -258,6 +258,43 @@ include_once 'header.php';
                                                 </div>
                                             </div>
                                         </div>
+                                        <h6>What's your business hours <span style="font-size:17px; margin-top: 2rem; color:red; opacity:0.8;">*</span></h6>
+                                        <div class="col-lg-12 col-md-12 col-sm-12 column">
+                                            <div class="field-input">
+
+                                                <label>From<span style="font-size:17px; margin-top: 2rem; color:red; opacity:0.8;">*</span></label>
+                                                <input type="time" class="form-control" autocomplete="off" name="visitation_hours_from" value="<?php echo $visitation_hours_from ?>" required>
+                                                <div class="invalid-feedback">
+                                                    Please provide visiting time from.
+                                                </div>
+
+                                                </br>
+
+                                                <label>To<span style="font-size:17px; margin-top: 2rem; color:red; opacity:0.8;">*</span></label>
+                                                <input type="time" class="form-control" autocomplete="off" name="visitation_hours_to" value="<?php echo $visitation_hours_to ?>" required>
+                                                <div class="invalid-feedback">
+                                                    Please provide visiting time to.
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <h6>What's your availability Day's <span style="font-size:17px; margin-top: 2rem; color:red; opacity:0.8;">*</span></h6>
+                                        <ul class="other-option clearfix">
+                                            <?php
+                                            // Loop through all amenities and create checkboxes
+                                            foreach ($all_days as $days) {
+                                                $daysID = $days['id'];
+                                                $days_names = $days['day'];
+                                                $isChecked = in_array($daysID, $selected_days) ? 'checked' : '';
+                                            ?>
+                                                <li>
+                                                    <div class="radio-box">
+                                                        <input type="checkbox" name="days[]" value="<?php echo $daysID; ?>" id="days<?php echo $daysID; ?>" <?php echo $isChecked; ?>>
+                                                        <label for="days<?php echo $daysID; ?>"><?php echo $days_names; ?></label>
+                                                    </div>
+                                                </li>
+                                            <?php } ?>
+                                        </ul>
+
                                     </div>
                                     <button type="submit" class="theme-btn btn-one" name="btn-update-profile" onclick="submitForm()">Update</button>
                                 </div>
@@ -337,68 +374,68 @@ include_once 'header.php';
                         </form>
 
                         <form action="controller/profile-controller.php?id=<?php echo $user_id ?>" id="propertyForm" method="POST" class="needs-validation" novalidate enctype="multipart/form-data">
-                        <div class="tab" id="tab-4">
-                            <div class="property-details">
-                                <h4><i class='bx bxs-credit-card'></i>Payment Setup</h4>
-                                <div class="inner-box default-form">
-                                    <div class="row clearfix">
-                                        <div class="col-lg-12 col-md-6 col-sm-12 column">
-                                            <div class="field-input">
-                                                <label>Select Bank</label>
-                                                <div class="select-box">
-                                                    <select class="wide" name="bank" required>
-                                                        <option value="<?php echo $bank ?>"><?php echo $bank ?></option>
-                                                        <option value="BDO (Banco de Oro)">BDO (Banco de Oro)</option>
-                                                        <option value="BPI (Bank of the Philippine Islands)">BPI (Bank of the Philippine Islands)</option>
-                                                        <option value="Metrobank">Metrobank</option>
-                                                        <option value="LandBank">LandBank</option>
-                                                        <option value="PNB (Philippine National Bank)">PNB (Philippine National Bank)</option>
-                                                        <option value="Security Bank">Security Bank</option>
-                                                        <option value="UnionBank">UnionBank</option>
-                                                        <option value="RCBC (Rizal Commercial Banking Corporation)">RCBC (Rizal Commercial Banking Corporation)</option>
-                                                        <option value="EastWest Bank">EastWest Bank</option>
-                                                        <option value="Chinabank">Chinabank</option>
-                                                        <option value="PSBank (Philippine Savings Bank)">PSBank (Philippine Savings Bank)</option>
-                                                        <option value="UCPB (United Coconut Planters Bank)">UCPB (United Coconut Planters Bank)</option>
-                                                        <option value="DBP (Development Bank of the Philippines)">DBP (Development Bank of the Philippines)</option>
-                                                        <option value="Maybank">Maybank</option>
-                                                        <option value="ING Bank">ING Bank</option>
-                                                        <option value="HSBC">HSBC</option>
-                                                        <option value="GCash">GCash</option>
-                                                        <option value="PayMaya">PayMaya</option>
-                                                        <option value="Paypal">Paypal</option>
-                                                    </select>
-                                                    <div class="invalid-feedback">
-                                                        Please select a bank.
+                            <div class="tab" id="tab-4">
+                                <div class="property-details">
+                                    <h4><i class='bx bxs-credit-card'></i>Payment Setup</h4>
+                                    <div class="inner-box default-form">
+                                        <div class="row clearfix">
+                                            <div class="col-lg-12 col-md-6 col-sm-12 column">
+                                                <div class="field-input">
+                                                    <label>Select Bank</label>
+                                                    <div class="select-box">
+                                                        <select class="wide" name="bank" required>
+                                                            <option value="<?php echo $bank ?>"><?php echo $bank ?></option>
+                                                            <option value="BDO (Banco de Oro)">BDO (Banco de Oro)</option>
+                                                            <option value="BPI (Bank of the Philippine Islands)">BPI (Bank of the Philippine Islands)</option>
+                                                            <option value="Metrobank">Metrobank</option>
+                                                            <option value="LandBank">LandBank</option>
+                                                            <option value="PNB (Philippine National Bank)">PNB (Philippine National Bank)</option>
+                                                            <option value="Security Bank">Security Bank</option>
+                                                            <option value="UnionBank">UnionBank</option>
+                                                            <option value="RCBC (Rizal Commercial Banking Corporation)">RCBC (Rizal Commercial Banking Corporation)</option>
+                                                            <option value="EastWest Bank">EastWest Bank</option>
+                                                            <option value="Chinabank">Chinabank</option>
+                                                            <option value="PSBank (Philippine Savings Bank)">PSBank (Philippine Savings Bank)</option>
+                                                            <option value="UCPB (United Coconut Planters Bank)">UCPB (United Coconut Planters Bank)</option>
+                                                            <option value="DBP (Development Bank of the Philippines)">DBP (Development Bank of the Philippines)</option>
+                                                            <option value="Maybank">Maybank</option>
+                                                            <option value="ING Bank">ING Bank</option>
+                                                            <option value="HSBC">HSBC</option>
+                                                            <option value="GCash">GCash</option>
+                                                            <option value="PayMaya">PayMaya</option>
+                                                            <option value="Paypal">Paypal</option>
+                                                        </select>
+                                                        <div class="invalid-feedback">
+                                                            Please select a bank.
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
 
-                                        <div class="col-lg-6 col-md-6 col-sm-12 column">
-                                            <div class="field-input">
-                                                <label>Account Name<span style="font-size:17px; margin-top: 2rem; color:red; opacity:0.8;">*</span></label>
-                                                <input type="text" class="form-control" name="account_name" value="<?php echo $account_name  ?>" required>
-                                                <div class="invalid-feedback">
-                                                    Please provide an Account Name .
+                                            <div class="col-lg-6 col-md-6 col-sm-12 column">
+                                                <div class="field-input">
+                                                    <label>Account Name<span style="font-size:17px; margin-top: 2rem; color:red; opacity:0.8;">*</span></label>
+                                                    <input type="text" class="form-control" name="account_name" value="<?php echo $account_name  ?>" required>
+                                                    <div class="invalid-feedback">
+                                                        Please provide an Account Name .
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="col-lg-6 col-md-6 col-sm-12 column">
-                                            <div class="field-input">
-                                                <label>Account Number<span style="font-size:17px; margin-top: 2rem; color:red; opacity:0.8;">*</span></label>
-                                                <input type="text" class="form-control" name="account_number" value="<?php echo $account_number  ?>" required>
-                                                <div class="invalid-feedback">
-                                                    Please provide an Account Number .
+                                            <div class="col-lg-6 col-md-6 col-sm-12 column">
+                                                <div class="field-input">
+                                                    <label>Account Number<span style="font-size:17px; margin-top: 2rem; color:red; opacity:0.8;">*</span></label>
+                                                    <input type="text" class="form-control" name="account_number" value="<?php echo $account_number  ?>" required>
+                                                    <div class="invalid-feedback">
+                                                        Please provide an Account Number .
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
 
+                                        </div>
                                     </div>
+                                    <button type="submit" class="theme-btn btn-one" name="btn-update-payment" onclick="submitForm()">Update</button>
                                 </div>
-                                <button type="submit" class="theme-btn btn-one" name="btn-update-payment" onclick="submitForm()">Update</button>
                             </div>
-                        </div>
                         </form>
 
                         <div class="tab" id="tab-5">

@@ -90,7 +90,6 @@ if ($_SESSION['OTP'] === NULL) {
                                 <div class="collapse navbar-collapse show clearfix" id="navbarSupportedContent">
                                     <ul class="navigation clearfix">
                                         <li class=""><a href="./"><span>Home</span></a></li>
-                                        <li class=""><a href="find-home"><span>Find A Home</span></a></li>
                                         <li class=""><a href="about-us"><span>About Us</span></a></li>
                                         <li><a href="contact-us"><span>Contact Us</span></a></li>
                                     </ul>

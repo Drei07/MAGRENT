@@ -7,10 +7,24 @@ include_once '../../configuration/settings-configuration.php';
 $config = new SystemConfig();
 $user = new USER();
 
-if(!$user->isUserLoggedIn())
-{
- $user->redirect('../../signin');
+if (isset($_GET['index'])) {
+    if ($_SESSION['user_session'] == NULL) {
+        $_SESSION['property_details'] = 1;
+        $_SESSION['status_title'] = 'Oops!';
+        $_SESSION['status'] = 'Please sign in or create an account! to view property details!';
+        $_SESSION['status_code'] = 'error';
+        $_SESSION['status_timer'] = 100000;
+        header('Location: ../../signin');
+        exit();
+    }
+} else {
+    if (!$user->isUserLoggedIn()) {
+        header('Location: ../../signin');
+        exit();
+    }
 }
+
+
 
 // retrieve user data
 $stmt = $user->runQuery("SELECT * FROM users WHERE id=:uid");
