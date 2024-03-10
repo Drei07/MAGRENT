@@ -243,12 +243,12 @@ $property_viewing_time_data = $stmt->fetch(PDO::FETCH_ASSOC);
                     <div class="left-column pull-left clearfix">
                         <?php
                         if ($property_data['status'] == "available") {
-                            $status = "<span style='color: green;'>Available</span>";
+                            $status = "<span style='color: green; font-size: 15px;'>Available</span>";
                         } else if ($property_data['status'] == "not_available") {
-                            $status = "<span style='color: green;'>Available</span>";
+                            $status = "<span style='color: red; font-size: 15px;'>Not Available</span>";
                         }
                         ?>
-                        <h3><?php echo $property_data['property_name'] ?></h3>
+                        <h3><?php echo $property_data['property_name'] ?> - <?php echo $status?></h3>
                         <?php
                         if ($property_data['units'] == !null) {
                             $stmt_property_reservation = $user->runQuery('SELECT COUNT(*) as available_units FROM property_reservation WHERE property_id=:property_id AND status=:status');

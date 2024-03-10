@@ -270,6 +270,15 @@ include_once 'header.php';
                                                         <div class="price-info pull-left">
                                                             <h6>Start From</h6>
                                                             <h4>₱ <?php echo number_format($property_data['property_price']); ?></h4>
+                                                            <?php
+                                                                if($property_data['status'] == "available"){
+                                                                    $status = "<span style='color: green;'>Available</span>";
+                                                                }
+                                                                else if ($property_data['status'] == "not_available"){
+                                                                    $status = "<span style='color: red;'>Not Available</span>";
+                                                                }
+                                                            ?>
+                                                            <h6>Status: <?php echo $status?></h6>
                                                         </div>
                                                     </div>
                                                     <div class="lower-content">
@@ -338,6 +347,7 @@ include_once 'header.php';
                                                         <li><i class="icon-14"></i><?php echo $property_data['bedrooms'] ?> Beds</li>
                                                         <li><i class="icon-15"></i><?php echo $property_data['bathrooms'] ?> Baths</li>
                                                     </ul>
+
                                                     <div class="other-info-box clearfix" onclick="setSessionValues(<?php echo $property_data['id'] ?>)">
                                                         <div class="btn-box pull-left"><a  onclick="setSessionValues(<?php echo $property_data['id'] ?>)" class="theme-btn btn-two">See Details</a></div>
                                                     </div>

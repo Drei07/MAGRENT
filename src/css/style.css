@@ -863,6 +863,7 @@ img {
   text-align:center;
   font-size:17px;
   line-height:30px;
+  text-decoration: none;
   font-weight:500;
   opacity:1;
   color: #2d2929;
