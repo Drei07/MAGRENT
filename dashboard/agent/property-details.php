@@ -518,6 +518,24 @@ $property_viewing_time_data = $stmt->fetch(PDO::FETCH_ASSOC);
                                             <li><i class="fas fa-map-marker-alt"></i><?php echo $property_location_data['address'] ?></li>
                                             <li><i class="fas fa-phone"></i><a href="tel:03030571965"><?php echo $user_phone_number ?></a></li>
                                         </ul>
+                                        <h4>Business Hour's</h4>
+                                        <ul class="info clearfix">
+                                            <li><i class="far fa-calendar"></i>
+                                                <?php
+                                                $day_count = count($all_days);
+                                                foreach ($all_days as $key => $day) {
+                                                    // Extract the first three characters of the day name
+                                                    $short_day_name = substr($day['day'], 0, 3);
+                                                    echo $short_day_name;
+                                                    // Add "-" if it's not the last day
+                                                    if ($key < $day_count - 1) {
+                                                        echo '-';
+                                                    }
+                                                }
+                                                ?>
+                                            </li>
+                                            <li><i class="far fa-clock"></i><?php echo date("h:i A", strtotime($visitation_hours_from)); ?> - <?php echo date("h:i A", strtotime($visitation_hours_to)); ?></li>
+                                        </ul>
                                     </div>
                                 </div>
                             </div>

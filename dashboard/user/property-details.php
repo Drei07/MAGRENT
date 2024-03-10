@@ -51,6 +51,24 @@ $stmt = $user->runQuery("SELECT * FROM property_viewing_time WHERE property_id=:
 $stmt->execute(array(":id" => $propertyId));
 $property_viewing_time_data = $stmt->fetch(PDO::FETCH_ASSOC);
 
+
+// retrieve user business hours
+$stmt2 = $user->runQuery("SELECT * FROM business_hours WHERE user_id=:user_id");
+$stmt2->execute(array(":user_id"=> $property_data['user_id']));
+$business_hours = $stmt2->fetch(PDO::FETCH_ASSOC);
+
+$visitation_hours_to =  $business_hours['visitation_hours_to'];
+$visitation_hours_from =  $business_hours['visitation_hours_from'];
+
+// Convert the string of days IDs into an array
+$selected_days = explode(',', $business_hours['visitation_days']);
+
+// Fetch days data
+$stmt_all_days = $user->runQuery("SELECT * FROM day");
+$stmt_all_days->execute();
+$all_days = $stmt_all_days->fetchAll(PDO::FETCH_ASSOC);
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -123,7 +141,6 @@ $property_viewing_time_data = $stmt->fetch(PDO::FETCH_ASSOC);
                 <div class="top-inner clearfix">
                     <div class="left-column pull-left">
                         <ul class="info clearfix">
-                            <li><i class="far fa-clock"></i>Mon - Sat 9.00 - 18.00</li>
                             <li><i class="far fa-phone"></i><a href="tel:2512353256"><?php echo $config->getSystemNumber() ?></a></li>
                         </ul>
                     </div>
@@ -500,6 +517,24 @@ $property_viewing_time_data = $stmt->fetch(PDO::FETCH_ASSOC);
                                         <ul class="info clearfix">
                                             <li><i class="fas fa-map-marker-alt"></i><?php echo $property_location_data['address'] ?></li>
                                             <li><i class="fas fa-phone"></i><a href="tel:03030571965"><?php echo $contact_number ?></a></li>
+                                        </ul>
+                                        <h4>Business Hour's</h4>
+                                        <ul class="info clearfix">
+                                            <li><i class="far fa-calendar"></i>
+                                                <?php
+                                                $day_count = count($all_days);
+                                                foreach ($all_days as $key => $day) {
+                                                    // Extract the first three characters of the day name
+                                                    $short_day_name = substr($day['day'], 0, 3);
+                                                    echo $short_day_name;
+                                                    // Add "-" if it's not the last day
+                                                    if ($key < $day_count - 1) {
+                                                        echo '-';
+                                                    }
+                                                }
+                                                ?>
+                                            </li>
+                                            <li><i class="far fa-clock"></i><?php echo date("h:i A", strtotime($visitation_hours_from)); ?> - <?php echo date("h:i A", strtotime($visitation_hours_to)); ?></li>
                                         </ul>
                                     </div>
                                 </div>

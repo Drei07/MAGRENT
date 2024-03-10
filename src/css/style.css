@@ -2554,6 +2554,7 @@ div#mCSB_1_container{
 .deals-block-one .inner-box .lower-content .title-text h4 a{
   display: inline-block;
   color: #2d2929;
+  cursor: pointer;
 }
 
 .deals-block-one .inner-box .lower-content .title-text h4 a:hover{

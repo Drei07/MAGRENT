@@ -53,7 +53,6 @@ include_once 'header.php';
                 <div class="top-inner clearfix">
                     <div class="left-column pull-left">
                         <ul class="info clearfix">
-                            <li><i class="far fa-clock"></i>Mon - Sat 9.00 - 18.00</li>
                             <li><i class="far fa-phone"></i><a href="tel:2512353256"><?php echo $config->getSystemNumber() ?></a></li>
                         </ul>
                     </div>
