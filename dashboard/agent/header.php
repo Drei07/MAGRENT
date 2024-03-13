@@ -70,12 +70,6 @@ if ($business_hours) {
     $selected_days = []; // Initialize as an empty array
 }
 
-// Fetch days data only if business hours data is available
-if ($business_hours) {
     $stmt_all_days = $user->runQuery("SELECT * FROM day");
     $stmt_all_days->execute();
     $all_days = $stmt_all_days->fetchAll(PDO::FETCH_ASSOC);
-} else {
-    // Provide a default value for $all_days if there's no business hours data
-    $all_days = [];
-}
