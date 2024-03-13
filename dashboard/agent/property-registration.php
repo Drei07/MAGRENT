@@ -26,6 +26,37 @@ if($stmt_property_post->rowCount() >= $number_of_post){
     header('Location: package');
     exit();
 }
+
+// retrieve user business hours
+$stmt2 = $user->runQuery("SELECT * FROM business_hours WHERE user_id=:user_id");
+$stmt2->execute(array(":user_id" => $user_id));
+$business_hours = $stmt2->fetch(PDO::FETCH_ASSOC);
+
+// check if payment method also added
+$stmt3 = $user->runQuery("SELECT * FROM user_payment WHERE user_id=:user_id");
+$stmt3->execute(array(":user_id" => $user_id));
+$payment = $stmt3->fetch(PDO::FETCH_ASSOC);
+
+
+// Check if business hours data is available
+if (empty($business_hours) || empty($payment)) {
+    // No business hours found, trigger SweetAlert using JavaScript
+    // Use $row instead of $row->rowCount()
+    $_SESSION['status_title'] = "Oops!";
+    $_SESSION['status'] = "You have a to add business hours or payment method to register a property";
+    $_SESSION['status_code'] = "error";
+    $_SESSION['status_timer'] = 100000;
+    header('Location: settings');
+    exit();
+}
+
+// If business hours are available, continue processing
+$visitation_hours_to = $business_hours['visitation_hours_to'];
+$visitation_hours_from = $business_hours['visitation_hours_from'];
+
+// Convert the string of days IDs into an array
+$selected_days = explode(',', $business_hours['visitation_days']);
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
