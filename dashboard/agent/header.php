@@ -51,18 +51,31 @@ if ($stmt1) {
     }
 }
 
-// retrieve user business hours
+// Retrieve user business hours
 $stmt2 = $user->runQuery("SELECT * FROM business_hours WHERE user_id=:user_id");
-$stmt2->execute(array(":user_id"=>$_SESSION['agent_session']));
+$stmt2->execute(array(":user_id" => $_SESSION['agent_session']));
 $business_hours = $stmt2->fetch(PDO::FETCH_ASSOC);
 
-$visitation_hours_to =  $business_hours['visitation_hours_to'];
-$visitation_hours_from =  $business_hours['visitation_hours_from'];
+// Check if business hours data is available
+if ($business_hours) {
+    $visitation_hours_to = $business_hours['visitation_hours_to'];
+    $visitation_hours_from = $business_hours['visitation_hours_from'];
 
-// Convert the string of days IDs into an array
-$selected_days = explode(',', $business_hours['visitation_days']);
+    // Convert the string of days IDs into an array
+    $selected_days = explode(',', $business_hours['visitation_days']);
+} else {
+    // Handle case when there's no business hours data
+    $visitation_hours_to = null;
+    $visitation_hours_from = null;
+    $selected_days = []; // Initialize as an empty array
+}
 
-// Fetch days data
-$stmt_all_days = $user->runQuery("SELECT * FROM day");
-$stmt_all_days->execute();
-$all_days = $stmt_all_days->fetchAll(PDO::FETCH_ASSOC);
+// Fetch days data only if business hours data is available
+if ($business_hours) {
+    $stmt_all_days = $user->runQuery("SELECT * FROM day");
+    $stmt_all_days->execute();
+    $all_days = $stmt_all_days->fetchAll(PDO::FETCH_ASSOC);
+} else {
+    // Provide a default value for $all_days if there's no business hours data
+    $all_days = [];
+}
