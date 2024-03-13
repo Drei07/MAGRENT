@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Dec 11, 2023 at 12:37 AM
+-- Generation Time: Mar 13, 2024 at 05:12 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.0.28
 
@@ -51,6 +51,29 @@ INSERT INTO `amenities` (`id`, `amenities`, `created_at`, `updated_at`) VALUES
 (10, 'Closet', '2023-12-04 04:07:18', '2023-12-04 04:09:04'),
 (11, 'Dining Table', '2023-12-04 04:07:09', '2023-12-04 04:09:11'),
 (12, 'Smart TV', '2023-12-04 04:07:18', '2023-12-04 04:09:17');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `business_hours`
+--
+
+CREATE TABLE `business_hours` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `visitation_hours_from` time DEFAULT NULL,
+  `visitation_hours_to` time DEFAULT NULL,
+  `visitation_days` varchar(145) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `business_hours`
+--
+
+INSERT INTO `business_hours` (`id`, `user_id`, `visitation_hours_from`, `visitation_hours_to`, `visitation_days`, `created_at`, `updated_at`) VALUES
+(1, 17, '13:08:00', '00:03:00', '1, 2, 3, 5', '2024-03-08 02:04:15', '2024-03-08 02:23:42');
 
 -- --------------------------------------------------------
 
@@ -164,7 +187,87 @@ INSERT INTO `logs` (`id`, `user_id`, `activity`, `created_at`, `updated_at`) VAL
 (3, 1, 'Has successfully signed in', '2023-12-01 12:36:26', NULL),
 (4, 13, 'Has successfully signed in', '2023-12-04 05:33:35', NULL),
 (5, 1, 'Has successfully signed in', '2023-12-07 06:29:35', NULL),
-(6, 1, 'Has successfully signed in', '2023-12-09 12:37:19', NULL);
+(6, 1, 'Has successfully signed in', '2023-12-09 12:37:19', NULL),
+(7, 13, 'Has successfully signed in', '2023-12-12 14:31:00', NULL),
+(8, 13, 'Has successfully signed in', '2023-12-12 14:41:17', NULL),
+(9, 13, 'Has successfully signed in', '2023-12-12 23:21:09', NULL),
+(10, 13, 'Has successfully signed in', '2023-12-14 03:45:44', NULL),
+(11, 13, 'Has successfully signed in', '2023-12-14 03:52:29', NULL),
+(12, 13, 'Has successfully signed in', '2023-12-14 10:06:52', NULL),
+(13, 12, 'Has successfully signed in', '2023-12-15 02:38:33', NULL),
+(14, 1, 'Has successfully signed in', '2023-12-16 13:58:54', NULL),
+(15, 13, 'Has successfully signed in', '2023-12-16 14:39:10', NULL),
+(16, 15, 'Has successfully signed in', '2023-12-17 14:23:35', NULL),
+(17, 16, 'Has successfully signed in', '2023-12-18 04:23:10', NULL),
+(18, 16, 'Has successfully signed in', '2023-12-18 04:25:12', NULL),
+(19, 15, 'Has successfully signed in', '2023-12-18 04:27:11', NULL),
+(20, 16, 'Has successfully signed in', '2023-12-19 06:52:44', NULL),
+(21, 1, 'Has successfully signed in', '2023-12-19 23:55:05', NULL),
+(22, 16, 'Has successfully signed in', '2023-12-20 00:01:56', NULL),
+(23, 16, 'Has successfully signed in', '2024-01-21 10:51:09', NULL),
+(24, 17, 'Has successfully signed in', '2024-01-21 10:52:47', NULL),
+(25, 1, 'Has successfully signed in', '2024-01-22 02:19:03', NULL),
+(26, 1, 'Has successfully signed in', '2024-01-27 06:02:28', NULL),
+(27, 1, 'Has successfully signed in', '2024-02-05 13:22:11', NULL),
+(28, 1, 'Has successfully signed in', '2024-02-08 12:59:39', NULL),
+(29, 1, 'Has successfully signed in', '2024-02-09 03:32:29', NULL),
+(30, 16, 'Has successfully signed in', '2024-03-02 00:40:41', NULL),
+(31, 1, 'Has successfully signed in', '2024-03-02 00:40:54', NULL),
+(32, 16, 'Has successfully signed in', '2024-03-02 01:16:46', NULL),
+(33, 16, 'Has successfully signed in', '2024-03-02 01:56:49', NULL),
+(34, 16, 'Has successfully signed in', '2024-03-02 04:10:58', NULL),
+(35, 16, 'Has successfully signed in', '2024-03-02 04:11:11', NULL),
+(36, 16, 'Has successfully signed in', '2024-03-02 04:11:27', NULL),
+(37, 15, 'Has successfully signed in', '2024-03-02 04:11:45', NULL),
+(38, 17, 'Has successfully signed in', '2024-03-03 01:48:46', NULL),
+(39, 17, 'Has successfully signed in', '2024-03-07 07:00:05', NULL),
+(40, 16, 'Has successfully signed in', '2024-03-09 00:55:43', NULL),
+(41, 17, 'Has successfully signed in', '2024-03-10 02:00:24', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `package`
+--
+
+CREATE TABLE `package` (
+  `id` int(11) NOT NULL,
+  `package` varchar(145) DEFAULT NULL,
+  `price` varchar(145) DEFAULT NULL,
+  `number_of_post` varchar(145) DEFAULT NULL,
+  `status` enum('active','disabled') NOT NULL DEFAULT 'active',
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `package`
+--
+
+INSERT INTO `package` (`id`, `package`, `price`, `number_of_post`, `status`, `created_at`, `updated_at`) VALUES
+(1, 'Basic', '0', '3', 'active', '2023-12-15 13:57:20', '2024-01-22 06:41:32'),
+(2, 'Bronze', '399', '5', 'active', '2023-12-15 13:57:20', NULL),
+(3, 'Silver', '699', '10', 'active', '2023-12-15 13:57:20', '2023-12-15 13:58:24'),
+(4, 'Gold', '999', '20', 'active', '2023-12-15 13:57:20', '2023-12-17 04:57:19');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `payment`
+--
+
+CREATE TABLE `payment` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `package_id` int(11) DEFAULT NULL,
+  `reference_number` varchar(145) DEFAULT NULL,
+  `proof_of_payment` varchar(145) DEFAULT NULL,
+  `start_date` varchar(145) DEFAULT NULL,
+  `end_date` varchar(145) DEFAULT NULL,
+  `status` enum('accept','decline','pending') NOT NULL DEFAULT 'pending',
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -176,6 +279,7 @@ CREATE TABLE `property` (
   `id` int(14) NOT NULL,
   `user_id` int(14) DEFAULT NULL,
   `property_name` varchar(145) DEFAULT NULL,
+  `units` int(14) DEFAULT NULL,
   `property_price` varchar(145) DEFAULT NULL,
   `property_contact_details` varchar(145) DEFAULT NULL,
   `bedrooms` int(11) DEFAULT NULL,
@@ -184,19 +288,13 @@ CREATE TABLE `property` (
   `parking` int(11) DEFAULT NULL,
   `property_size` varchar(145) DEFAULT NULL,
   `garage_size` varchar(145) DEFAULT NULL,
+  `allowed_pets` varchar(145) DEFAULT NULL,
   `property_description` longtext DEFAULT NULL,
   `amenities` varchar(145) DEFAULT NULL,
-  `status` enum('active','disable') NOT NULL DEFAULT 'active',
+  `status` enum('available','not_available','disabled') NOT NULL DEFAULT 'available',
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `property`
---
-
-INSERT INTO `property` (`id`, `user_id`, `property_name`, `property_price`, `property_contact_details`, `bedrooms`, `bathrooms`, `property_type`, `parking`, `property_size`, `garage_size`, `property_description`, `amenities`, `status`, `created_at`, `updated_at`) VALUES
-(1, 1, 'JULIUS DORMITORY', '2000', '09776621925', 1, 1, 1, 2, '1000', '200', 'Introducing an exceptional opportunity for female residents seeking a comfortable and budget-friendly living arrangement in the heart of Alegria, San Francisco, Agusan del Sur. Nestled within the esteemed Padilla Delos Reyes Building, Room 642 offers an inviting and secure environment for discerning individuals in search of a well-appointed bed spacer.ddd', '1, 2, 3, 4', 'active', '2023-12-03 12:10:17', '2023-12-10 11:05:34');
 
 -- --------------------------------------------------------
 
@@ -213,13 +311,6 @@ CREATE TABLE `property_floor_plan` (
   `created_at` timestamp NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `property_floor_plan`
---
-
-INSERT INTO `property_floor_plan` (`id`, `property_id`, `first_floor`, `second_floor`, `third_floor`, `created_at`, `updated_at`) VALUES
-(1, 1, '384551403_308574592143937_4922595560698870182_n.jpg', '', '', '2023-12-03 12:10:17', '2023-12-10 23:37:39');
 
 -- --------------------------------------------------------
 
@@ -239,13 +330,6 @@ CREATE TABLE `property_gallery` (
   `updated_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `property_gallery`
---
-
-INSERT INTO `property_gallery` (`id`, `property_id`, `picture_1`, `picture_2`, `picture_3`, `picture_4`, `picture_5`, `created_at`, `updated_at`) VALUES
-(1, 1, '1.jpeg', '2.jpeg', '3.jpeg', '4.jpeg', '5.jpeg', '2023-12-03 12:10:17', '2023-12-10 22:52:10');
-
 -- --------------------------------------------------------
 
 --
@@ -262,12 +346,44 @@ CREATE TABLE `property_location` (
   `updated_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+-- --------------------------------------------------------
+
 --
--- Dumping data for table `property_location`
+-- Table structure for table `property_rating`
 --
 
-INSERT INTO `property_location` (`id`, `property_id`, `address`, `latitude`, `longitude`, `created_at`, `updated_at`) VALUES
-(1, 1, 'G233+6X3, Karaos - Lapag - Alegria Rd, San Francisco, Agusan del Sur, Philippines', '8.503328527667376', '126.00527476375122', '2023-12-03 12:10:17', '2023-12-10 13:20:59');
+CREATE TABLE `property_rating` (
+  `id` int(11) NOT NULL,
+  `user_id` int(14) DEFAULT NULL,
+  `property_id` int(11) DEFAULT NULL,
+  `rating` varchar(145) DEFAULT NULL,
+  `review` varchar(145) DEFAULT NULL,
+  `datetime` varchar(145) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `property_reservation`
+--
+
+CREATE TABLE `property_reservation` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `agent_id` int(14) DEFAULT NULL,
+  `property_id` int(11) DEFAULT NULL,
+  `user_name` varchar(145) DEFAULT NULL,
+  `user_phone_number` varchar(145) DEFAULT NULL,
+  `booking_start_date` date DEFAULT NULL,
+  `booking_end_date` date DEFAULT NULL,
+  `message` longtext DEFAULT NULL,
+  `status` enum('pending','accept','send_email','decline','waiting') NOT NULL DEFAULT 'pending',
+  `accept_date` datetime DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -285,13 +401,6 @@ CREATE TABLE `property_viewing_time` (
   `created_at` timestamp NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `property_viewing_time`
---
-
-INSERT INTO `property_viewing_time` (`id`, `property_id`, `visiting_rules`, `visitation_hours_from`, `visitation_hours_to`, `visitation_days`, `created_at`, `updated_at`) VALUES
-(1, 1, 'NO rules', '09:00:00', '17:00:00', '1, 2, 3, 4, 5, 6, 7', '2023-12-03 12:10:17', '2023-12-10 13:17:03');
 
 -- --------------------------------------------------------
 
@@ -319,7 +428,7 @@ CREATE TABLE `system_config` (
 --
 
 INSERT INTO `system_config` (`id`, `system_name`, `system_phone_number`, `system_email`, `system_logo`, `system_favicon`, `system_address`, `system_facebook`, `system_instagram`, `system_copy_right`, `created_at`, `updated_at`) VALUES
-(1, 'MAGRENT', '+639126842485', 'magrentofficial@gmail.com', 'logo.png', 'favicon.ico', 'Brgy. San Isidro, Safragemc Village, San Francisco, Agusan Del Sur, 8501', 'https://www.facebook.com/rhey.timario', 'https://www.facebook.com/rhey.timario', 'COPYRIGHT © 2023 - MAGRENT. ALL RIGHTS RESERVED.', '2023-11-19 13:03:25', '2023-11-19 13:10:16');
+(1, 'MAGRENT', '+639126842485', 'magrentofficial@gmail.com', '', 'favicon.ico', 'Brgy. San Isidro, Safragemc Village, San Francisco, Agusan Del Sur, 8501', 'https://www.facebook.com/rhey.timario', 'https://www.facebook.com/rhey.timario', 'COPYRIGHT © 2023 - MAGRENT. ALL RIGHTS RESERVED.', '2023-11-19 13:03:25', '2023-12-12 14:54:47');
 
 -- --------------------------------------------------------
 
@@ -341,10 +450,11 @@ CREATE TABLE `users` (
   `password` varchar(145) DEFAULT NULL,
   `profile` varchar(1145) NOT NULL DEFAULT 'profile.png',
   `valid_id` varchar(1500) DEFAULT NULL,
-  `status` enum('Y','N') DEFAULT 'N',
+  `package_id` int(20) DEFAULT NULL,
+  `status` enum('Y','N','D') DEFAULT 'N',
   `tokencode` varchar(145) DEFAULT NULL,
   `account_status` enum('active','disabled') NOT NULL DEFAULT 'active',
-  `user_type` varchar(14) DEFAULT NULL COMMENT 'superadmin=0,\r\nadmin=1,\r\nsub-admin=2,\r\nuser=3',
+  `user_type` varchar(14) DEFAULT NULL COMMENT 'superadmin=0,\r\nadmin=1,\r\nagent=2,\r\nuser=3',
   `created_at` timestamp NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -353,10 +463,25 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `first_name`, `middle_name`, `last_name`, `sex`, `date_of_birth`, `age`, `civil_status`, `phone_number`, `email`, `password`, `profile`, `valid_id`, `status`, `tokencode`, `account_status`, `user_type`, `created_at`, `updated_at`) VALUES
-(1, 'Andrei', 'SUPERADMIN', 'SUPERADMIN', 'MALE', NULL, NULL, NULL, NULL, 'andrei.m.viscayno@gmail.coms', '24b35e91f6650c460b66bceaa1590664', 'profile.png', NULL, 'Y', '174b66675b0e6170e83b8f4fbd7ba02f', 'active', '2', '2023-11-20 04:14:08', '2023-12-10 23:35:10'),
-(12, 'ANDREI', 'MALANSAN', 'VISCAYNO', NULL, NULL, NULL, NULL, NULL, 'andrei.m.viscayno@gmail.com', 'add484c80a6aea49893d9e1601699490', 'profile.png', '370223302_323647357055512_8090533492567327622_n.jpg', 'Y', 'ff556245e16913f8ce1185c73cf9d975', 'active', '2', '2023-11-25 05:00:38', '2023-12-04 05:42:58'),
-(13, 'ANDREI', 'MANALA', 'VISCAYNO', NULL, NULL, NULL, NULL, NULL, 'sir.viscayno@gmail.com', '708792fe14671ee816a1a16e1bcaadcd', 'profile.png', NULL, 'Y', '804bd882e689f11f5f880d25008cbff7', 'active', '3', '2023-12-04 05:30:48', '2023-12-04 05:39:46');
+INSERT INTO `users` (`id`, `first_name`, `middle_name`, `last_name`, `sex`, `date_of_birth`, `age`, `civil_status`, `phone_number`, `email`, `password`, `profile`, `valid_id`, `package_id`, `status`, `tokencode`, `account_status`, `user_type`, `created_at`, `updated_at`) VALUES
+(1, 'Rhey', 'Timario', 'Timario', 'MALE', NULL, NULL, NULL, '9776621929', 'magrent2023@gmail.com', '42f749ade7f9e195bf475f37a44cafcb', 'profile.png', NULL, NULL, 'Y', '174b66675b0e6170e83b8f4fbd7ba02f', 'active', '1', '2023-11-20 04:14:08', '2023-12-17 13:44:25'),
+(17, 'Andrei', 'Timario', 'Viscayno', 'MALE', '', '', NULL, '9776621929', 'masgrent20w23@gmail.com', '42f749ade7f9e195bf475f37a44cafcb', 'profile.png', '61k+xMg3I7L.jpg', 1, 'Y', '174b66675b0e6170e83b8f4fbd7ba02f', 'active', '2', '2023-11-20 04:14:08', '2024-03-08 02:04:15');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_payment`
+--
+
+CREATE TABLE `user_payment` (
+  `id` int(14) NOT NULL,
+  `user_id` int(14) NOT NULL,
+  `bank` varchar(145) DEFAULT NULL,
+  `account_name` varchar(145) DEFAULT NULL,
+  `account_number` varchar(145) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Indexes for dumped tables
@@ -367,6 +492,13 @@ INSERT INTO `users` (`id`, `first_name`, `middle_name`, `last_name`, `sex`, `dat
 --
 ALTER TABLE `amenities`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `business_hours`
+--
+ALTER TABLE `business_hours`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_id` (`user_id`);
 
 --
 -- Indexes for table `day`
@@ -399,6 +531,20 @@ ALTER TABLE `logs`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `package`
+--
+ALTER TABLE `package`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `payment`
+--
+ALTER TABLE `payment`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `package_id` (`package_id`);
+
+--
 -- Indexes for table `property`
 --
 ALTER TABLE `property`
@@ -427,6 +573,23 @@ ALTER TABLE `property_location`
   ADD KEY `property_id` (`property_id`);
 
 --
+-- Indexes for table `property_rating`
+--
+ALTER TABLE `property_rating`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `property_id` (`property_id`),
+  ADD KEY `user_id` (`user_id`);
+
+--
+-- Indexes for table `property_reservation`
+--
+ALTER TABLE `property_reservation`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `property_id` (`property_id`),
+  ADD KEY `agent_id` (`agent_id`);
+
+--
 -- Indexes for table `property_viewing_time`
 --
 ALTER TABLE `property_viewing_time`
@@ -443,7 +606,15 @@ ALTER TABLE `system_config`
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `package_id` (`package_id`);
+
+--
+-- Indexes for table `user_payment`
+--
+ALTER TABLE `user_payment`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_id` (`user_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -454,6 +625,12 @@ ALTER TABLE `users`
 --
 ALTER TABLE `amenities`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT for table `business_hours`
+--
+ALTER TABLE `business_hours`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `day`
@@ -483,37 +660,61 @@ ALTER TABLE `google_recaptcha_api`
 -- AUTO_INCREMENT for table `logs`
 --
 ALTER TABLE `logs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+
+--
+-- AUTO_INCREMENT for table `package`
+--
+ALTER TABLE `package`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `payment`
+--
+ALTER TABLE `payment`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `property`
 --
 ALTER TABLE `property`
-  MODIFY `id` int(14) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(14) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `property_floor_plan`
 --
 ALTER TABLE `property_floor_plan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `property_gallery`
 --
 ALTER TABLE `property_gallery`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `property_location`
 --
 ALTER TABLE `property_location`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `property_rating`
+--
+ALTER TABLE `property_rating`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `property_reservation`
+--
+ALTER TABLE `property_reservation`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `property_viewing_time`
 --
 ALTER TABLE `property_viewing_time`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `system_config`
@@ -525,11 +726,30 @@ ALTER TABLE `system_config`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+
+--
+-- AUTO_INCREMENT for table `user_payment`
+--
+ALTER TABLE `user_payment`
+  MODIFY `id` int(14) NOT NULL AUTO_INCREMENT;
 
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `business_hours`
+--
+ALTER TABLE `business_hours`
+  ADD CONSTRAINT `business_hours_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+
+--
+-- Constraints for table `payment`
+--
+ALTER TABLE `payment`
+  ADD CONSTRAINT `payment_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
+  ADD CONSTRAINT `payment_ibfk_2` FOREIGN KEY (`package_id`) REFERENCES `package` (`id`);
 
 --
 -- Constraints for table `property`
@@ -556,10 +776,37 @@ ALTER TABLE `property_location`
   ADD CONSTRAINT `property_location_ibfk_1` FOREIGN KEY (`property_id`) REFERENCES `property` (`id`);
 
 --
+-- Constraints for table `property_rating`
+--
+ALTER TABLE `property_rating`
+  ADD CONSTRAINT `property_rating_ibfk_2` FOREIGN KEY (`property_id`) REFERENCES `property` (`id`),
+  ADD CONSTRAINT `property_rating_ibfk_3` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+
+--
+-- Constraints for table `property_reservation`
+--
+ALTER TABLE `property_reservation`
+  ADD CONSTRAINT `property_reservation_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
+  ADD CONSTRAINT `property_reservation_ibfk_2` FOREIGN KEY (`property_id`) REFERENCES `property` (`id`),
+  ADD CONSTRAINT `property_reservation_ibfk_3` FOREIGN KEY (`agent_id`) REFERENCES `users` (`id`);
+
+--
 -- Constraints for table `property_viewing_time`
 --
 ALTER TABLE `property_viewing_time`
   ADD CONSTRAINT `property_viewing_time_ibfk_1` FOREIGN KEY (`property_id`) REFERENCES `property` (`id`);
+
+--
+-- Constraints for table `users`
+--
+ALTER TABLE `users`
+  ADD CONSTRAINT `users_ibfk_1` FOREIGN KEY (`package_id`) REFERENCES `package` (`id`);
+
+--
+-- Constraints for table `user_payment`
+--
+ALTER TABLE `user_payment`
+  ADD CONSTRAINT `user_payment_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
