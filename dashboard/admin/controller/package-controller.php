@@ -37,7 +37,7 @@ class PackageController
 
         if ($exec) {
             $_SESSION['status_title'] = "Success!";
-            $_SESSION['status'] = "Package addes successfully!";
+            $_SESSION['status'] = "Package added successfully!";
             $_SESSION['status_code'] = "success";
             $_SESSION['status_timer'] = 40000;
         } else {

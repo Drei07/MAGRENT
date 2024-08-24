@@ -25,6 +25,6 @@
 	<script src="src/node_modules/jquery/dist/jquery.min.js"></script>
 
     <!-- map script -->
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA-CE0deH3Jhj6GN4YvdCFZS7DpbXexzGU"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=<?php echo $config->getGoogleMapsAPI() ?>"></script>
     <script src="src/js/gmaps.js"></script>
     <script src="src/js/map-helper.js"></script>
