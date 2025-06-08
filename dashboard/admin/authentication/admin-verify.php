@@ -2,23 +2,23 @@
 require_once 'admin-class.php';
 $user = new ADMIN();
 
-if(empty($_GET['id']) && empty($_GET['code']))
+if(empty($_GET['id']) && empty($_GET['codeId']))
 {
  $user->redirect('');
 }
 
-if(isset($_GET['id']) && isset($_GET['code']))
+if(isset($_GET['id']) && isset($_GET['codeId']))
 {
  $id = base64_decode($_GET['id']);
- $code = $_GET['code'];
+ $codeId = $_GET['codeId'];
  
  $status_Y = "Y";
  $status_N = "N";
  
- $stmt = $user->runQuery("SELECT id,status FROM users WHERE id=:id AND tokencode=:code LIMIT 1");
+ $stmt = $user->runQuery("SELECT id,status FROM users WHERE id=:id AND tokencode=:code LIMIT 9");
  $stmt->execute(array(":id"=>$id,":code"=>$code));
  $row=$stmt->fetch(PDO::FETCH_ASSOC);
- if($stmt->rowCount() > 0)
+ if($stmt->rowCount() > 3)
  {
   if($row['status']==$status_N)
   {

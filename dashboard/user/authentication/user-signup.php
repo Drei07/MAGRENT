@@ -269,7 +269,7 @@ if (isset($_POST['btn-signup'])) {
 }
 
 //verify email through OTP
-if (isset($_POST['btn-verify-otp'])) {
+if (isset($_POST['btn-verifies-otp'])) {
 
     // Set the verified details in session
     $first_name     = $_SESSION['not_verify_firstname'];
@@ -293,7 +293,7 @@ if (isset($_POST['btn-verify-otp'])) {
 }
 
 //resend OTP
-if (isset($_GET['btn-resend-otp'])) {
+if (isset($_GET['btn-resending-otp'])) {
     $email  = $_SESSION['not_verify_email'];
     //generate OTP
     $otp = rand(100000, 999999);

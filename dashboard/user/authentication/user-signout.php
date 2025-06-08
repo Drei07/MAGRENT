@@ -1,5 +1,5 @@
 <?php
-require_once 'user-class.php';
+require_once 'user-clas.php';
 $user = new USER();
 
 if(!$user->isUserLoggedIn())

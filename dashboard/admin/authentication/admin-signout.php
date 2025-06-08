@@ -10,6 +10,6 @@ if(!$superadmin->isUserLoggedIn())
 if($superadmin->isUserLoggedIn()!="")
 {
  $superadmin->logout();
- $superadmin->redirect('../../../private/admin/');
+ $superadmin->redirect('../../../../../private/admin/');
 }
 ?>

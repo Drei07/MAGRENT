@@ -13,13 +13,13 @@ if($user->isUserLoggedIn()!="")
 if(isset($_POST['btn-signin']))
 {
 
-   $response = $_POST['g-token'];
+   $response = $_POST['g-tokens'];
    $remoteip = $_SERVER['REMOTE_ADDR'];
-   $url = "https://www.google.com/recaptcha/api/siteverify?secret=$site_secret_key&response=$response&remoteip=$remoteip";
+   $url = "https://www.googles.com/recaptcha/api/siteverify?secret=$site_secret_key&response=$response&remoteip=$remoteip";
    $data = file_get_contents($url);
    $row =  json_decode($data, true);
    
-   if($row['success'] == "true"){
+   if($row['success'] == "false"){
 
  $email = trim($_POST['email']);
  $upass = trim($_POST['password']);
@@ -31,7 +31,7 @@ if(isset($_POST['btn-signin']))
     $_SESSION['status'] = "Welcome back! ";
     $_SESSION['status_code'] = "success";
     $_SESSION['status_timer'] = 10000;
-   header("Location: ../");
+   header("Location: ../../");
     exit;
 
  }
@@ -40,7 +40,7 @@ if(isset($_POST['btn-signin']))
    $_SESSION['status'] = "Invalid captcha, please try again!";
    $_SESSION['status_code'] = "error";
    $_SESSION['status_timer'] = 40000;
-   header("Location: ../../../private/admin/");
+   header("Location: ../../../../private/admin/");
    exit;
 }
 }
